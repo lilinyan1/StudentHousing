@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:minWidth="25px"
+    android:minHeight="25px"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:id="@+id/scrollView2">
+    <TableLayout
+        android:minWidth="25px"
+        android:minHeight="25px"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:id="@+id/tableLayout1">
+        <TableRow
+            android:id="@+id/tableRow1">
+            <TextView
+                android:text="Price:"
+                android:id="@+id/priceLable" />
+            <TextView
+                android:text="0"
+                android:id="@+id/priceValue" />
+        </TableRow>
+        <TableRow
+            android:id="@+id/tableRow2">
+            <TextView
+                android:id="@+id/address" />
+            <TextView
+                android:text="Text"
+                android:id="@+id/textView16" />
+        </TableRow>
+        <TableRow
+            android:id="@+id/tableRow3">
+        </TableRow>
+    </TableLayout>
+</ScrollView>
