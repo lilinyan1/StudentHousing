@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Data;
+using System.IO;
 
 namespace StudentHousing.DAL
 {
@@ -183,24 +185,49 @@ namespace StudentHousing.DAL
 			return 0;
 		}
 
-		// not sure what to do for below functions
-		public int GetRating()
+        // didn't test this but no reason it shouldn't work
+        // Returns average rating of Property {id}
+		public int GetRating(int id)
 		{
+            // select * from rating where propertyid = id
+            DataTable datatable = DAL.SelectFrom("*", "PropertyRating", "[propertyID]", id);
+
+            if (datatable != null)
+            {
+                int ratingSum = 0;
+                // sum up all ratings for the property
+                foreach (DataRow row in datatable.Rows)
+                {
+                    // property rating is in the 4th column of the table
+                    ratingSum += Convert.ToInt32(row[3].ToString());
+                }
+                // divide the sum of ratings by the number of rows
+                return ratingSum / datatable.Rows.Count;
+            }
+            // no rows returned
+			return -1;
+		}
+
+        // If this works, needs to be public byte[] and return img
+		public int GetImage(int id)
+		{
+            byte[] img = DAL.GetImage(id);
+
+            //Uncomment below line to test
+            //File.WriteAllBytes("test.img", img);
+
 			return 0;
 		}
 
-		public int GetImage()
+		public int AttachImage(byte[] img)
 		{
+            // insert byte array to db
 			return 0;
 		}
 
-		public int AttachImage()
+		public int DeleteImage(int id)
 		{
-			return 0;
-		}
-
-		public int DeleteImage()
-		{
+            DAL.UpdateSet("propertyimage = null", "Property", "PropertyID", id);
 			return 0;
 		}
 

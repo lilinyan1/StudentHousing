@@ -89,6 +89,25 @@ namespace StudentHousing.DAL
 			}
 		}
 
+        public static byte[] GetImage(int id)
+        {
+            using (SqlConnection conn = new SqlConnection())
+            {
+                try
+                {
+                    conn.ConnectionString = CONNECTION_STRING;
+                    conn.Open();
+                    SqlCommand cmd = new SqlCommand("SELECT propertyimage FROM Property WHERE PropertyID = " + id, conn);
+                    byte[] img = (byte[])cmd.ExecuteScalar();
+                    return img;
+                }
+                catch (Exception e)
+                {
+                    Logging.Log("DAL", "GetImage", e.Message, false);
+                }
+                return null;
+            }
+        }
 
 	}
 }
