@@ -8,56 +8,23 @@ using System.IO;
 
 namespace StudentHousing.DAL
 {
-	public class Property
+	public class Property:Dto.PropertyDto
 	{
-		public int ID = int.MinValue;
-		public string pAddress = string.Empty;
-		public int Price = int.MinValue;
-		public double Latitude = float.MinValue;
-		public double Longitude = float.MinValue;
-		public string School = string.Empty;
-		public string City = string.Empty;
-		public string Province = string.Empty;
-		public string Country = string.Empty;
-		public string PostalCode = string.Empty;
-		public string PropertyDescription = string.Empty;
-		public DateTime OccupancyDate = DateTime.MinValue;
-		public int PostedBy = int.MinValue;
-		public int StatusID = int.MinValue;
-		public bool IsAirConditioning = false;
-        public bool IsBusroute = false;
-        public bool IsDishwasher = false;
-        public bool IsParking = false;
-        public bool IsDryer = false;
-        public bool IsFurnished = false;
-		public bool IsLaundry = false;
-		public bool IsStove = false;
-		public bool IsWheelChair = false;
-		public bool IsPetFriendly = false;
-		public string Comment = string.Empty;
-
 		public static Property GetByID(int id)
 		{
-			// 25 fields in total (including the ID)
-			string[] tbFieldsName = {"id","pAddress","price","latitude","longitude","school",
-										"City","Province","Country","PostalCode","PropertyDescription",
-										"OccupancyDate","PostedBy","StatusID","IsAirConditioning","IsBusroute",
-										"IsDishwasher","IsParking","IsDryer","IsFurnished","IsLaundry",
-										"IsStove","IsWheelChair","IsPetFriendly","Comment"};
-			
-			string fieldsName = string.Empty;
+			var fieldsName = string.Empty;
+			var prop = new Property();
 
-			foreach (string fn in tbFieldsName)
+			foreach (var p in prop.GetType().GetProperties())
 			{
-				fieldsName += "[" + fn + "]";
-				if (fn != tbFieldsName.Last())
+				fieldsName += "[" + p.Name + "]";
+				if (p.Name != "Comment")
 				{
 					fieldsName += ",";
 				}
 			}
 
 			var dataTable = DAL.SelectFrom(fieldsName, "Property", "[id]", id);
-
 
 			if (dataTable != null)
 			{
@@ -100,89 +67,65 @@ namespace StudentHousing.DAL
 
 		public int Create()
 		{
-			// 24 fields in total (without the ID)
-			string[] tbFieldsName = {"pAddress","price","latitude","longitude","school",
-										"City","Province","Country","PostalCode","PropertyDescription",
-										"OccupancyDate","PostedBy","StatusID","IsAirConditioning","IsBusroute",
-										"IsDishwasher","IsParking","IsDryer","IsFurnished","IsLaundry",
-										"IsStove","IsWheelChair","IsPetFriendly","Comment"};
+			var fieldsValue = string.Empty;
+			var fieldsName = string.Empty;
 
-			int attriCount = 24;
-			string fieldsValue = string.Empty;
-			string fieldsName = string.Empty;
-
-			foreach (string fn in tbFieldsName)
+			foreach (var p in this.GetType().GetProperties())
 			{
-				fieldsName += "[" + fn + "]";
-				if (fn != tbFieldsName.Last())
+				if (p.Name != "ID")
 				{
-					fieldsName += ",";
-				}
-			}
+					fieldsName += "[" + p.Name + "]";
 
-			var property = new Property();
+					var tmp = p.GetValue(this, null).ToString();
 
-			foreach (var attribute in property.GetType().GetProperties().Where(attribute => attribute.GetGetMethod().GetParameters().Count() == 0))
-			{
-				foreach (string fn in tbFieldsName)
-				{
-					if (string.Equals(fn, attribute.Name, StringComparison.OrdinalIgnoreCase))
-					{ 
-						fieldsValue += attribute.GetValue(property, null).ToString();
-
-						if (attriCount != 1)
-						{
-							fieldsValue += ",";
-						}
+					// what if the value is number's minvalue or date's minvalue
+					if (tmp == string.Empty)
+					{
+						tmp = "null";
 					}
 
-				}
+					fieldsValue += tmp;
 
-				attriCount--;
+					if (p.Name != "Comment")
+					{
+						fieldsName += ",";
+						fieldsValue += ",";
+					}
+				}
 			}
 
 			var ret = DAL.InsertInto(fieldsName, "Property", fieldsValue);
 
-			return 0;
+			return ret;
 		}
 
 		public int Update()
 		{
-			// 24 fields in total (without the ID
-			string[] tbFieldsName = {"pAddress","price","latitude","longitude","school",
-										"City","Province","Country","PostalCode","PropertyDescription",
-										"OccupancyDate","PostedBy","StatusID","IsAirConditioning","IsBusroute",
-										"IsDishwasher","IsParking","IsDryer","IsFurnished","IsLaundry",
-										"IsStove","IsWheelChair","IsPetFriendly","Comment"};
-			
-			string updateValues = string.Empty;
+			var updateValues = string.Empty;
 
-			int attriCount = 24;
-
-			var property = new Property();
-
-			foreach (var attribute in property.GetType().GetProperties().Where(attribute => attribute.GetGetMethod().GetParameters().Count() == 0))
+			foreach (var p in this.GetType().GetProperties())
 			{
-				foreach (string fn in tbFieldsName)
+				if (p.Name != "ID")
 				{
-					if (string.Equals(fn, attribute.Name, StringComparison.OrdinalIgnoreCase))
-					{
-						updateValues += fn + "=" + attribute.GetValue(property, null).ToString();
+					var tmp = p.GetValue(this, null).ToString();
 
-						if (attriCount != 1)
-						{
-							updateValues += ",";
-						}
+					if (tmp == string.Empty)
+					{
+						tmp = "null";
 					}
 
-				}
+					updateValues += p.Name + "=" + tmp;
 
-				attriCount--;
+					if (p.Name != "Comment")
+					{
+						updateValues += ",";
+					}
+				}
 			}
 
 			int ret = DAL.UpdateSet(updateValues, "Property", "[id]", ID);
 
-			return 0;
+			return ret;
 		}
 
         // didn't test this but no reason it shouldn't work

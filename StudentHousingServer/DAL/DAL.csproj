@@ -49,6 +49,8 @@
     <Compile Include="DAL.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Property.cs" />
+    <Compile Include="User.cs" />
+    <Compile Include="Bookmark.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />

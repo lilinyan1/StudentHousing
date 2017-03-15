@@ -51,7 +51,7 @@ namespace StudentHousing.DAL
 				{
 					conn.ConnectionString = CONNECTION_STRING;
 					conn.Open();
-					SqlCommand command = new SqlCommand(string.Format("INSERT INTO {0} [{1}] VALUES [{2}]", tableName, insertFields, fieldsValue), conn);
+					SqlCommand command = new SqlCommand(string.Format("INSERT INTO {0} ({1}) VALUES ({2})", tableName, insertFields, fieldsValue), conn);
             		command.ExecuteNonQuery();
 					return 0;
 				}
@@ -74,7 +74,7 @@ namespace StudentHousing.DAL
 				{
 					conn.ConnectionString = CONNECTION_STRING;
 					conn.Open();
-					SqlCommand command = new SqlCommand(string.Format("UPDATE {0} SET [{1}] WHERE {2} = @CONDITION_VALUE", tableName, updateValues, conditionColumnName), conn);
+					SqlCommand command = new SqlCommand(string.Format("UPDATE {0} SET ({1}) WHERE {2} = @CONDITION_VALUE", tableName, updateValues, conditionColumnName), conn);
 					command.Parameters.Add(new SqlParameter("CONDITION_VALUE", conditionValue));
 					command.ExecuteNonQuery();
 					return 0;
