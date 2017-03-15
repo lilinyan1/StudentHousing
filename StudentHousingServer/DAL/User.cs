@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Data;
+using StudentHousing.Dto;
 
 namespace StudentHousing.DAL
 {
@@ -97,7 +98,16 @@ namespace StudentHousing.DAL
 
 			DateTime today = DateTime.Today;
 
-			fieldsName = "[UserID],[propertyID],[bookmarkDate],[comment]";
+			foreach (var property in typeof(BookmarkDto).GetProperties())
+			{
+				fieldsName += string.Format("[{0}],", property.Name);
+			}
+			if (fieldsName != string.Empty)
+			{
+				fieldsName.TrimEnd(',');
+			}
+
+			//fieldsName = "[UserID],[propertyID],[bookmarkDate],[comment]";
 			fieldsValue = string.Format("{0},{1},{2},{3}", this.ID, propertyID, today.ToString("D"), comment);
 
 			var ret = DAL.InsertInto(fieldsName, "Bookmark", fieldsValue);
@@ -105,9 +115,7 @@ namespace StudentHousing.DAL
 			return ret;
 		}
 
-		// not quite sure what data type (for the bookmark) to return here
-		// not sure where to put the bookmark object
-		public List<Bookmark> GetBookmark()
+		public List<BookmarkDto> GetBookmark()
 		{
 			var fieldsName = string.Empty;
 
@@ -117,11 +125,11 @@ namespace StudentHousing.DAL
 
 			if (dataTable != null)
 			{
-				List<Bookmark> bmlist = new List<Bookmark>();
+				List<BookmarkDto> bmlist = new List<BookmarkDto>();
 
 				foreach (DataRow row in dataTable.Rows)
 				{
-					var bookmark = new Bookmark
+					var bookmark = new BookmarkDto
 					{
 						userID = (int)row["ID"],
 						propertyID = (int)row["propertyID"],
