@@ -44,7 +44,6 @@
     <Compile Include="PropertyDto.cs" />
     <Compile Include="UserDto.cs" />
     <Compile Include="BookmarkDto.cs" />
-    <Compile Include="Properties\testDto.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
