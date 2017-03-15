@@ -16,8 +16,14 @@ namespace WebAPI4
             routes.MapRoute(
                 name: "Default",
                 url: "{controller}/{action}/{id}",
-                defaults: new { controller = "Home", action = "Index", id = UrlParameter.Optional }
+                defaults: new { controller = "Home", action = "Index", id = "" }
             );
+
+            routes.MapRoute(
+            "Default2",                                              // Route name
+            "{controller}/{action}/{paramOne:double}/{paramTwo:double}",                           // URL with parameters
+            new { controller = "Home", action = "Index"}  // Parameter defaults
+        );
         }
     }
 }

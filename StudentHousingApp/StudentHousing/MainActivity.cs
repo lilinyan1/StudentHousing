@@ -10,6 +10,7 @@ using Android.Locations;
 using System.Collections.Generic;
 using Android.Content;
 using System.Linq;
+using Newtonsoft.Json;
 
 namespace StudentHousing
 {
@@ -56,12 +57,14 @@ namespace StudentHousing
 
             googleMap.InfoWindowClick += MapOnInfoWindowClick;
 
-            var properties = GetPropertiesCloseBy();
+            var response = WebApi.SendRequest(WebApi.SEARCH_CLOSE_BY_PROPERTIES, "");
+            var properties = JsonConvert.DeserializeObject<List<PropertyDto>>(response.Result);
+
             foreach (var property in properties)
             {
                 googleMap.AddMarker(new MarkerOptions()
                 .SetPosition(new LatLng(property.Latitude, property.Longitude))
-                .SetTitle(property.Address)
+                .SetTitle(property.pAddress)
                 .SetSnippet(string.Format("$ {0}", property.Price))).Tag = property.ID;
             }
         }
@@ -83,7 +86,7 @@ namespace StudentHousing
                 Latitude = 43.471487,
                 Longitude = -80.599914,
                 Price = 500,
-                Address = "990 Creekside Dr, Waterloo, ON N2V 2W3"
+                pAddress = "990 Creekside Dr, Waterloo, ON N2V 2W3"
             });
             properties.Add(new PropertyDto
             {
@@ -91,7 +94,7 @@ namespace StudentHousing
                 Latitude = 43.391943,
                 Longitude = -80.408000,
                 Price = 510,
-                Address = "5 Orchard Mill Crescent, Kitchener, ON N2P 1T2"
+                pAddress = "5 Orchard Mill Crescent, Kitchener, ON N2P 1T2"
             });        
             return properties;
         }

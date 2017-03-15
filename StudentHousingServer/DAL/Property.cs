@@ -6,97 +6,62 @@ using System.Threading.Tasks;
 
 namespace StudentHousing.DAL
 {
-	public class Property
+	public class Property : Dto.PropertyDto
 	{
-		public int ID = int.MinValue;
-		public string pAddress = string.Empty;
-		public int Price = int.MinValue;
-		public double Latitude = float.MinValue;
-		public double Longitude = float.MinValue;
-		public string School = string.Empty;
-		public string City = string.Empty;
-		public string Province = string.Empty;
-		public string Country = string.Empty;
-		public string PostalCode = string.Empty;
-		public string PropertyDescription = string.Empty;
-		public DateTime OccupancyDate = DateTime.MinValue;
-		public int PostedBy = int.MinValue;
-		public int StatusID = int.MinValue;
-		public bool IsAirConditioning = false;
-        public bool IsBusroute = false;
-        public bool IsDishwasher = false;
-        public bool IsParking = false;
-        public bool IsDryer = false;
-        public bool IsFurnished = false;
-		public bool IsLaundry = false;
-		public bool IsStove = false;
-		public bool IsWheelChair = false;
-		public bool IsPetFriendly = false;
-		public string Comment = string.Empty;
-
-		public static Property GetByID(int id)
+        public static Property GetByID(int id)
 		{
-			// 25 fields in total (including the ID)
-			string[] tbFieldsName = {"id","pAddress","price","latitude","longitude","school",
-										"City","Province","Country","PostalCode","PropertyDescription",
-										"OccupancyDate","PostedBy","StatusID","IsAirConditioning","IsBusroute",
-										"IsDishwasher","IsParking","IsDryer","IsFurnished","IsLaundry",
-										"IsStove","IsWheelChair","IsPetFriendly","Comment"};
-			
-			string fieldsName = string.Empty;
+            string fieldsName = GetFields();
+			var dataRows = DAL.SelectFrom(fieldsName, "Property", string.Format("[id] = {0}", id));
 
-			foreach (string fn in tbFieldsName)
-			{
-				fieldsName += "[" + fn + "]";
-				if (fn != tbFieldsName.Last())
-				{
-					fieldsName += ",";
-				}
-			}
-
-			var dataTable = DAL.SelectFrom(fieldsName, "Property", "[id]", id);
-
-
-			if (dataTable != null)
-			{
-				var row = dataTable.Select()[0];
-                var property = new Property
-                {
-                    ID = id,
-                    pAddress = (string)row["pAddress"],
-                    Price = (int)row["price"],
-                    Latitude = (double)row["Latitude"],
-                    Longitude = (double)row["Longitude"],
-                    School = (string)row["School"],
-                    City = (string)row["City"],
-                    Province = (string)row["Province"],
-                    Country = (string)row["Country"],
-                    PostalCode = (string)row["PostalCode"],
-                    PropertyDescription = (string)row["PropertyDescription"],
-                    OccupancyDate = (DateTime)row["OccupancyDate"],
-                    PostedBy = row["PostedBy"] == DBNull.Value ? int.MinValue : (int)row["PostedBy"],
-                    StatusID = row["StatusID"] == DBNull.Value ? int.MinValue : (int)row["StatusID"],
-                    IsAirConditioning = (bool)row["IsAirConditioning"],
-					IsBusroute = (bool)row["IsBusroute"],
-					IsDishwasher = (bool)row["IsDishwasher"],
-					IsParking = (bool)row["IsParking"],
-					IsDryer = (bool)row["IsDryer"],
-					IsFurnished = (bool)row["IsFurnished"],
-					IsLaundry = (bool)row["IsLaundry"],
-					IsStove = (bool)row["IsStove"],
-					IsWheelChair = (bool)row["IsWheelChair"],
-					IsPetFriendly = (bool)row["IsPetFriendly"],
-					Comment = (string)row["Comment"]
-				};
-				return property;
-			}
-			else
+			if (dataRows != null && dataRows.Any())
+            {
+                var row = dataRows.First();
+                return LoadProperty(row);
+            }
+            else
 			{
 				return null;
 			}
 		}
 
-		public int Create()
+        private static Property LoadProperty(System.Data.DataRow row)
+        {
+            return new Property
+            {
+                ID = (int) row["id"],
+                pAddress = (string)row["pAddress"],
+                Price = DAL.ToInt(row["Price"]),
+                Latitude = (double)row["Latitude"],
+                Longitude = (double)row["Longitude"],
+                School = (string)row["School"],
+                City = (string)row["City"],
+                Province = (string)row["Province"],
+                Country = (string)row["Country"],
+                PostalCode = (string)row["PostalCode"],
+                PropertyDescription = DAL.ToString(row["PropertyDescription"]),
+                OccupancyDate = DAL.ToDateTime(row["OccupancyDate"]),
+                PostedBy = DAL.ToInt(row["PostedBy"]),
+                StatusID = DAL.ToInt(row["StatusID"]),
+                IsAirConditioning = (bool)row["IsAirConditioning"],
+                IsBusroute = (bool)row["IsBusroute"],
+                IsDishwasher = (bool)row["IsDishwasher"],
+                IsParking = (bool)row["IsParking"],
+                IsDryer = (bool)row["IsDryer"],
+                IsFurnished = (bool)row["IsFurnished"],
+                IsLaundry = (bool)row["IsLaundry"],
+                IsStove = (bool)row["IsStove"],
+                IsWheelChair = (bool)row["IsWheelChair"],
+                IsPetFriendly = (bool)row["IsPetFriendly"],
+                Comment = DAL.ToString(row["Comment"])
+            };
+        }
+
+        static string GetFields()
+        {
+            return "[id],[pAddress],[price],[latitude],[longitude],[school],[City],[Province],[Country],[PostalCode],[PropertyDescription], [OccupancyDate],[PostedBy]," +
+                "[StatusID],[IsAirConditioning],[IsBusroute], [IsDishwasher],[IsParking],[IsDryer],[IsFurnished],[IsLaundry], [IsStove],[IsWheelChair],[IsPetFriendly],[Comment]";
+        }
+        public int Create()
 		{
 			// 24 fields in total (without the ID)
 			string[] tbFieldsName = {"pAddress","price","latitude","longitude","school",
@@ -204,10 +169,24 @@ namespace StudentHousing.DAL
 			return 0;
 		}
 
-		public int SearchCloseToLocation(double latitude, double longitude)
+		public static List<Property> SearchCloseByProperties(double latitude, double longitude)
 		{
-			return 0;
-		}
+            var adjustment = 0.3;
+            var latitudeMin = latitude - adjustment;
+            var latitudeMax = latitude + adjustment;
+            var longitudeMin = longitude - adjustment;
+            var longitudeMax = longitude + adjustment;
+            var condition = string.Format("[Latitude] >= {0} AND [Latitude] < {1} AND [Longitude] >= {2} AND [Longitude] < {3}", latitudeMin, latitudeMax, longitudeMin, longitudeMax);
+            var dataRows = DAL.SelectFrom(GetFields(), "Property", condition);
+
+            var properties = new List<Property>();
+            foreach (System.Data.DataRow row in dataRows)
+            {
+                var property = LoadProperty(row);
+                properties.Add(property);
+            }
+            return properties;
+        }
 
 	}
 }

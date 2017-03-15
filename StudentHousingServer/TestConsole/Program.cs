@@ -22,6 +22,8 @@ namespace TestConsole
                 {
                     Console.WriteLine("{0} = {1}", prop.Name, prop.GetValue(property));
                 }
+
+                var properties = Property.SearchCloseByProperties(43.471487, -80.599914);
             }
             catch (Exception e)
             {
