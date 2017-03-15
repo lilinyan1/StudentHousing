@@ -3,7 +3,6 @@ namespace StudentHousing.Dto
 {
 	public class BookmarkDto
 	{
-		// test new
 		public int userID { get; set; } = int.MinValue;
 		public int propertyID { get; set; } = int.MinValue;
 		public DateTime bookmarkDate { get; set; } = DateTime.MinValue;
