@@ -14,14 +14,31 @@ namespace TestConsole
 			// test
             Console.WriteLine("Property ID: ");
             var id = Convert.ToInt32(Console.ReadLine());
+            var email = "test@test.com";
+            var pass = "password";
+
             //var id = 1;
             try
             {
-                var property = Property.GetByID(id);
-                foreach (var prop in typeof(Property).GetFields())
+                var user = new User
                 {
-                    Console.WriteLine("{0} = {1}", prop.Name, prop.GetValue(property));
-                }
+                    firstName = "Becky",
+                    //ID = 1,
+                    email = email,
+                    pass = pass
+                };
+                var userRet = user.Create();
+
+                var ret = user.CreateBookmark(1, "Test comment");
+                var userLogin = User.Login(email, pass);
+                
+
+                    
+                //    Property.GetByID(id);
+                //foreach (var prop in typeof(Property).GetFields())
+                //{
+                //    Console.WriteLine("{0} = {1}", prop.Name, prop.GetValue(property));
+                //}
             }
             catch (Exception e)
             {
