@@ -19,6 +19,12 @@ namespace WebApi
                 routeTemplate: "api/{controller}/{id}",
                 defaults: new { id = RouteParameter.Optional }
             );
+
+            config.Routes.MapHttpRoute(
+                name: "DefaultApi2",
+                routeTemplate: "api/{controller}/{lat}/{lng}",
+                defaults: new { lat = RouteParameter.Optional, lng = RouteParameter.Optional }
+            );
         }
     }
 }

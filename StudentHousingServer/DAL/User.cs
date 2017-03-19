@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Data;
+using System.Linq;
 
 namespace StudentHousing.DAL
 {
@@ -56,11 +57,11 @@ namespace StudentHousing.DAL
 				}
 			}
 
-			var dataTable = DAL.SelectFrom(fieldsName, "Users", "[email]", inEmail);
+			var dataRows = DAL.SelectFrom(fieldsName, "Users", string.Format("[email] = {0}", inEmail));
 
-			if (dataTable != null)
+            if (dataRows != null && dataRows.Any())
 			{
-				var row = dataTable.Select()[0];
+				var row = dataRows.First();
 				var user = new User
 				{
 					ID = (int)row["ID"],
@@ -113,13 +114,13 @@ namespace StudentHousing.DAL
 
 			fieldsName = "*";
 
-			var dataTable = DAL.SelectFrom(fieldsName, "Bookmark", "[UserID]", this.ID);
+			var dataRows = DAL.SelectFrom(fieldsName, "Bookmark", string.Format("[UserID] = {0}", this.ID));
 
-			if (dataTable != null)
+			if (dataRows != null)
 			{
 				List<Bookmark> bmlist = new List<Bookmark>();
 
-				foreach (DataRow row in dataTable.Rows)
+				foreach (DataRow row in dataRows)
 				{
 					var bookmark = new Bookmark
 					{

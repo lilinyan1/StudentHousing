@@ -31,14 +31,14 @@ namespace TestConsole
 
                 var ret = user.CreateBookmark(1, "Test comment");
                 var userLogin = User.Login(email, pass);
-                
-
                     
                 //    Property.GetByID(id);
                 //foreach (var prop in typeof(Property).GetFields())
                 //{
                 //    Console.WriteLine("{0} = {1}", prop.Name, prop.GetValue(property));
                 //}
+
+                var properties = Property.SearchCloseByProperties(43.471487, -80.599914);
             }
             catch (Exception e)
             {
