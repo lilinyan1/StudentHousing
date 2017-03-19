@@ -1,7 +1,7 @@
 ﻿using System;
-namespace StudentHousing.DAL
+namespace StudentHousing.Dto
 {
-	public class Bookmark
+	public class BookmarkDto
 	{
 		public int userID { get; set; } = int.MinValue;
 		public int propertyID { get; set; } = int.MinValue;

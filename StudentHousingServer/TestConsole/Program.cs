@@ -11,7 +11,6 @@ namespace TestConsole
     {
         static void Main(string[] args)
         {
-			// test
             Console.WriteLine("Property ID: ");
             var id = Convert.ToInt32(Console.ReadLine());
             var email = "test@test.com";
