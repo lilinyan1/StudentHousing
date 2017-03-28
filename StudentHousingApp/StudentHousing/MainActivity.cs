@@ -57,9 +57,9 @@ namespace StudentHousing
 
             googleMap.InfoWindowClick += MapOnInfoWindowClick;
 
-            var response = WebApi.SendRequest("property", "43e471487/-80e599914");
-            var properties = JsonConvert.DeserializeObject<List<PropertyDto>>(response);
-
+            //var response = WebApi.SendRequest("property", "43e471487/-80e599914");
+            //var properties = JsonConvert.DeserializeObject<List<PropertyDto>>(response);
+            var properties = GetPropertiesCloseBy();
             foreach (var property in properties)
             {
                 googleMap.AddMarker(new MarkerOptions()
