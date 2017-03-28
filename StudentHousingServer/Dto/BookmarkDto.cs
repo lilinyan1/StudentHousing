@@ -1,4 +1,5 @@
 ﻿using System;
+
 namespace StudentHousing.Dto
 {
 	public class BookmarkDto

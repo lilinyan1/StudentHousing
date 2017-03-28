@@ -6,7 +6,7 @@ using System.Linq;
 
 namespace StudentHousing.DAL
 {
-	public class User:Dto.UserDto
+	public class User : Dto.UserDto
 	{
 		public int Create()
 		{
@@ -15,9 +15,10 @@ namespace StudentHousing.DAL
 
 			foreach (var p in this.GetType().GetProperties())
 			{
-				if (p.Name != "ID")
+				// manually inserting id at the moment
+				//if (p.Name != "ID")
 				{
-					fieldsName += "[" + p.Name + "]";
+					fieldsName += "[" + p.Name + "],";
 
 					var tmp = p.GetValue(this, null).ToString();
 
@@ -27,14 +28,18 @@ namespace StudentHousing.DAL
 						tmp = "null";
 					}
 
-					fieldsValue += tmp;
-
-					if (p.Name != "pass")
-					{
-						fieldsName += ",";
-						fieldsValue += ",";
-					}
+					fieldsValue += "'" + tmp + "',";
 				}
+			}
+
+			if (fieldsName != string.Empty)
+			{
+				fieldsName = fieldsName.TrimEnd(',');
+			}
+
+			if (fieldsValue != string.Empty)
+			{
+				fieldsValue = fieldsValue.TrimEnd(',');
 			}
 
 			var ret = DAL.InsertInto(fieldsName, "Users", fieldsValue);
@@ -51,22 +56,23 @@ namespace StudentHousing.DAL
 			//fieldsName = "*";
 			foreach (var p in ur.GetType().GetProperties())
 			{
-				fieldsName += "[" + p.Name + "]";
-				if (p.Name != "pass")
-				{
-					fieldsName += ",";
-				}
+				fieldsName += "[" + p.Name + "],";
 			}
 
-			var dataRows = DAL.SelectFrom(fieldsName, "Users", string.Format("[email] = {0}", inEmail));
+			if (fieldsName != string.Empty)
+			{
+				fieldsName = fieldsName.TrimEnd(',');
+			}
 
-            if (dataRows != null && dataRows.Any())
+			var dataRows = DAL.SelectFrom(fieldsName, "Users", string.Format("[email] = '{0}'", inEmail));
+
+			if (dataRows != null && dataRows.Any())
 			{
 				var row = dataRows.First();
 				var user = new User
 				{
 					ID = (int)row["ID"],
-					roldID = (int)row["roldID"],
+					roleID = (int)row["roleID"],
 					firstName = (string)row["firstName"],
 					lastName = (string)row["lastName"],
 					phone = (string)row["phone"],
@@ -98,18 +104,19 @@ namespace StudentHousing.DAL
 			var fieldsName = string.Empty;
 
 			DateTime today = DateTime.Today;
+			string sqlFormattedDate = today.ToString("yyyy-MM-dd HH:mm:ss.fff");
 
 			foreach (var property in typeof(BookmarkDto).GetProperties())
 			{
 				fieldsName += string.Format("[{0}],", property.Name);
 			}
+
 			if (fieldsName != string.Empty)
 			{
-				fieldsName.TrimEnd(',');
+				fieldsName = fieldsName.TrimEnd(',');
 			}
 
-			//fieldsName = "[UserID],[propertyID],[bookmarkDate],[comment]";
-			fieldsValue = string.Format("{0},{1},{2},{3}", this.ID, propertyID, today.ToString("D"), comment);
+			fieldsValue = string.Format("'{0}','{1}','{2}','{3}'", this.ID, propertyID, sqlFormattedDate, comment);
 
 			var ret = DAL.InsertInto(fieldsName, "Bookmark", fieldsValue);
 
@@ -122,7 +129,7 @@ namespace StudentHousing.DAL
 
 			fieldsName = "*";
 
-			var dataRows = DAL.SelectFrom(fieldsName, "Bookmark", string.Format("[UserID] = {0}", this.ID));
+			var dataRows = DAL.SelectFrom(fieldsName, "Bookmark", string.Format("[UserID] = '{0}'", this.ID));
 
 			if (dataRows != null)
 			{
@@ -132,7 +139,7 @@ namespace StudentHousing.DAL
 				{
 					var bookmark = new BookmarkDto
 					{
-						userID = (int)row["ID"],
+						userID = (int)row["userID"],
 						propertyID = (int)row["propertyID"],
 						bookmarkDate = (DateTime)row["bookmarkDate"],
 						comment = (string)row["comment"]
