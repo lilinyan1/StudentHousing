@@ -96,6 +96,30 @@ namespace StudentHousing.DAL
 			else
 				return (string)obj;
 		}
+
+        public static int AddImage(int id, byte[] img)
+        {
+            using (SqlConnection conn = new SqlConnection())
+            {
+                try
+                {
+                    conn.ConnectionString = CONNECTION_STRING;
+                    conn.Open();
+                    SqlCommand cmd = new SqlCommand("UPDATE property SET propertyimage = (@img) WHERE id = " + id, conn);
+                    cmd.Parameters.AddWithValue("@img", img);
+                    conn.Open();
+                    cmd.ExecuteNonQuery();
+                    conn.Close();
+                    return 0;
+                }
+                catch (Exception e)
+                {
+                    Logging.Log("DAL", "GetImage", e.Message, false);
+                }
+                return 1;
+            }
+        }
+
 		public static byte[] GetImage(int id)
 		{
 			using (SqlConnection conn = new SqlConnection())
@@ -105,8 +129,18 @@ namespace StudentHousing.DAL
 					conn.ConnectionString = CONNECTION_STRING;
 					conn.Open();
 					SqlCommand cmd = new SqlCommand("SELECT propertyimage FROM Property WHERE PropertyID = " + id, conn);
-					byte[] img = (byte[])cmd.ExecuteScalar();
-					return img;
+                    SqlDataReader dr = cmd.ExecuteReader();
+
+                    if (dr.HasRows)
+                    {
+                        dr.Read();
+                        byte[] imgOut = (byte[])dr["propertyimage"];
+                        return imgOut;
+                    }
+                    else
+                    {
+                        return null;
+                    }               
 				}
 				catch (Exception e)
 				{
