@@ -2,13 +2,18 @@
 using System.Collections.Generic;
 using StudentHousing.DAL;
 using StudentHousing.Dto;
-
+using System.IO;
 namespace TestConsole
 {
 	class Program
 	{
         static void Main(string[] args)
         {
+            byte[] img = File.ReadAllBytes("heart.png");
+            DAL.AddImage(1, img);
+
+            byte[] outImg = DAL.GetImage(1);
+            File.WriteAllBytes("new.png", outImg);
             var property = Property.GetByID(1);
 
         }

@@ -104,8 +104,7 @@ namespace StudentHousing.DAL
                 try
                 {
                     conn.ConnectionString = CONNECTION_STRING;
-                    conn.Open();
-                    SqlCommand cmd = new SqlCommand("UPDATE property SET propertyimage = (@img) WHERE id = " + id, conn);
+                    SqlCommand cmd = new SqlCommand("UPDATE property SET img = (@img) WHERE id = " + id, conn);
                     cmd.Parameters.AddWithValue("@img", img);
                     conn.Open();
                     cmd.ExecuteNonQuery();
@@ -128,13 +127,13 @@ namespace StudentHousing.DAL
 				{
 					conn.ConnectionString = CONNECTION_STRING;
 					conn.Open();
-					SqlCommand cmd = new SqlCommand("SELECT propertyimage FROM Property WHERE PropertyID = " + id, conn);
+					SqlCommand cmd = new SqlCommand("SELECT img FROM Property WHERE id = " + id, conn);
                     SqlDataReader dr = cmd.ExecuteReader();
 
                     if (dr.HasRows)
                     {
                         dr.Read();
-                        byte[] imgOut = (byte[])dr["propertyimage"];
+                        byte[] imgOut = (byte[])dr["img"];
                         return imgOut;
                     }
                     else
