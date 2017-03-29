@@ -9,9 +9,9 @@ namespace StudentHousing.DAL
 	public class DAL
 	{
 		//private const string CONNECTION_STRING = @"Server=localhost;Database=StudentHousing;User Id=admin;Password=admin2017;";
-		private const string CONNECTION_STRING = @"Server=tcp:cstudenthousing.database.windows.net,1433;Initial Catalog=StudentHousing;Persist Security Info=False;User ID=mcocca;Password=Conestoga1;MultipleActiveResultSets=False;Encrypt=True;TrustServerCertificate=False;Connection Timeout=30;";
+		private const string CONNECTION_STRING = @"Server=tcp:studenthousingdb.database.windows.net,1433;Initial Catalog = StudentHousingDB; Persist Security Info=False;User ID = HouseAdmin; Password=Secret@5; MultipleActiveResultSets=False;Encrypt=True;TrustServerCertificate=False;Connection Timeout = 30;";
 
-		public static EnumerableRowCollection<DataRow> SelectFrom(string selectFields, string tableName, string condition)
+        public static EnumerableRowCollection<DataRow> SelectFrom(string selectFields, string tableName, string condition)
 		{
 			using (SqlConnection conn = new SqlConnection())
 			{

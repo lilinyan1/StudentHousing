@@ -178,94 +178,103 @@ namespace StudentHousing
 			public const int ac = 2130837504;
 			
 			// aapt resource value: 0x7f020001
-			public const int bus = 2130837505;
+			public const int blank_heart = 2130837505;
 			
 			// aapt resource value: 0x7f020002
-			public const int common_full_open_on_phone = 2130837506;
+			public const int bookmarkButton = 2130837506;
 			
 			// aapt resource value: 0x7f020003
-			public const int common_google_signin_btn_icon_dark = 2130837507;
+			public const int bus = 2130837507;
 			
 			// aapt resource value: 0x7f020004
-			public const int common_google_signin_btn_icon_dark_disabled = 2130837508;
+			public const int common_full_open_on_phone = 2130837508;
 			
 			// aapt resource value: 0x7f020005
-			public const int common_google_signin_btn_icon_dark_focused = 2130837509;
+			public const int common_google_signin_btn_icon_dark = 2130837509;
 			
 			// aapt resource value: 0x7f020006
-			public const int common_google_signin_btn_icon_dark_normal = 2130837510;
+			public const int common_google_signin_btn_icon_dark_disabled = 2130837510;
 			
 			// aapt resource value: 0x7f020007
-			public const int common_google_signin_btn_icon_dark_pressed = 2130837511;
+			public const int common_google_signin_btn_icon_dark_focused = 2130837511;
 			
 			// aapt resource value: 0x7f020008
-			public const int common_google_signin_btn_icon_light = 2130837512;
+			public const int common_google_signin_btn_icon_dark_normal = 2130837512;
 			
 			// aapt resource value: 0x7f020009
-			public const int common_google_signin_btn_icon_light_disabled = 2130837513;
+			public const int common_google_signin_btn_icon_dark_pressed = 2130837513;
 			
 			// aapt resource value: 0x7f02000a
-			public const int common_google_signin_btn_icon_light_focused = 2130837514;
+			public const int common_google_signin_btn_icon_light = 2130837514;
 			
 			// aapt resource value: 0x7f02000b
-			public const int common_google_signin_btn_icon_light_normal = 2130837515;
+			public const int common_google_signin_btn_icon_light_disabled = 2130837515;
 			
 			// aapt resource value: 0x7f02000c
-			public const int common_google_signin_btn_icon_light_pressed = 2130837516;
+			public const int common_google_signin_btn_icon_light_focused = 2130837516;
 			
 			// aapt resource value: 0x7f02000d
-			public const int common_google_signin_btn_text_dark = 2130837517;
+			public const int common_google_signin_btn_icon_light_normal = 2130837517;
 			
 			// aapt resource value: 0x7f02000e
-			public const int common_google_signin_btn_text_dark_disabled = 2130837518;
+			public const int common_google_signin_btn_icon_light_pressed = 2130837518;
 			
 			// aapt resource value: 0x7f02000f
-			public const int common_google_signin_btn_text_dark_focused = 2130837519;
+			public const int common_google_signin_btn_text_dark = 2130837519;
 			
 			// aapt resource value: 0x7f020010
-			public const int common_google_signin_btn_text_dark_normal = 2130837520;
+			public const int common_google_signin_btn_text_dark_disabled = 2130837520;
 			
 			// aapt resource value: 0x7f020011
-			public const int common_google_signin_btn_text_dark_pressed = 2130837521;
+			public const int common_google_signin_btn_text_dark_focused = 2130837521;
 			
 			// aapt resource value: 0x7f020012
-			public const int common_google_signin_btn_text_light = 2130837522;
+			public const int common_google_signin_btn_text_dark_normal = 2130837522;
 			
 			// aapt resource value: 0x7f020013
-			public const int common_google_signin_btn_text_light_disabled = 2130837523;
+			public const int common_google_signin_btn_text_dark_pressed = 2130837523;
 			
 			// aapt resource value: 0x7f020014
-			public const int common_google_signin_btn_text_light_focused = 2130837524;
+			public const int common_google_signin_btn_text_light = 2130837524;
 			
 			// aapt resource value: 0x7f020015
-			public const int common_google_signin_btn_text_light_normal = 2130837525;
+			public const int common_google_signin_btn_text_light_disabled = 2130837525;
 			
 			// aapt resource value: 0x7f020016
-			public const int common_google_signin_btn_text_light_pressed = 2130837526;
+			public const int common_google_signin_btn_text_light_focused = 2130837526;
 			
 			// aapt resource value: 0x7f020017
-			public const int dishwasher = 2130837527;
+			public const int common_google_signin_btn_text_light_normal = 2130837527;
 			
 			// aapt resource value: 0x7f020018
-			public const int furnished = 2130837528;
+			public const int common_google_signin_btn_text_light_pressed = 2130837528;
 			
 			// aapt resource value: 0x7f020019
-			public const int ic_menu_moreoverflow_normal_holo_light = 2130837529;
+			public const int dishwasher = 2130837529;
 			
 			// aapt resource value: 0x7f02001a
-			public const int laundry = 2130837530;
+			public const int furnished = 2130837530;
 			
 			// aapt resource value: 0x7f02001b
-			public const int parking = 2130837531;
+			public const int heart = 2130837531;
 			
 			// aapt resource value: 0x7f02001c
-			public const int petFriendly = 2130837532;
+			public const int ic_menu_moreoverflow_normal_holo_light = 2130837532;
 			
 			// aapt resource value: 0x7f02001d
-			public const int stove = 2130837533;
+			public const int laundry = 2130837533;
 			
 			// aapt resource value: 0x7f02001e
-			public const int wheelChair = 2130837534;
+			public const int parking = 2130837534;
+			
+			// aapt resource value: 0x7f02001f
+			public const int petFriendly = 2130837535;
+			
+			// aapt resource value: 0x7f020020
+			public const int stove = 2130837536;
+			
+			// aapt resource value: 0x7f020021
+			public const int wheelChair = 2130837537;
 			
 			static Drawable()
 			{
@@ -310,6 +319,9 @@ namespace StudentHousing
 			// aapt resource value: 0x7f08000a
 			public const int auto = 2131230730;
 			
+			// aapt resource value: 0x7f080019
+			public const int bookmark = 2131230745;
+			
 			// aapt resource value: 0x7f08000b
 			public const int dark = 2131230731;
 			
@@ -330,6 +342,9 @@ namespace StudentHousing
 			
 			// aapt resource value: 0x7f08000c
 			public const int light = 2131230732;
+			
+			// aapt resource value: 0x7f080017
+			public const int linearLayout2 = 2131230743;
 			
 			// aapt resource value: 0x7f08000d
 			public const int linearLayout4 = 2131230733;
@@ -364,6 +379,9 @@ namespace StudentHousing
 			// aapt resource value: 0x7f080018
 			public const int propertyMap = 2131230744;
 			
+			// aapt resource value: 0x7f08001b
+			public const int ratingBar = 2131230747;
+			
 			// aapt resource value: 0x7f080003
 			public const int satellite = 2131230723;
 			
@@ -375,15 +393,6 @@ namespace StudentHousing
 			
 			// aapt resource value: 0x7f080008
 			public const int standard = 2131230728;
-			
-			// aapt resource value: 0x7f080017
-			public const int tableLayout1 = 2131230743;
-			
-			// aapt resource value: 0x7f08001b
-			public const int tableRow1 = 2131230747;
-			
-			// aapt resource value: 0x7f080019
-			public const int tableRow2 = 2131230745;
 			
 			// aapt resource value: 0x7f080004
 			public const int terrain = 2131230724;

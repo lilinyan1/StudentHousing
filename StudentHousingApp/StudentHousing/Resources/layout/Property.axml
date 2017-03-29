@@ -5,98 +5,118 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:id="@+id/scrollView2">
-    <TableLayout
+    <LinearLayout
+        android:orientation="vertical"
         android:minWidth="25px"
         android:minHeight="25px"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:id="@+id/tableLayout1">
+        android:id="@+id/linearLayout2"
+        android:gravity="center">
         <fragment
             android:id="@+id/propertyMap"
             android:layout_width="match_parent"
             android:layout_height="300px"
             class="com.google.android.gms.maps.MapFragment" />
-        <TableRow
-            android:id="@+id/tableRow2"
-            android:paddingTop="20px"
-            android:paddingLeft="30px"
-            android:paddingRight="30px"
-            android:gravity="center">
-            <TextView
-                android:id="@+id/address"
-                android:text="{address}"
-                android:layout_width="match_parent" />
-        </TableRow>
-        <TableRow
-            android:id="@+id/tableRow1"
-            android:paddingTop="20px"
-            android:paddingLeft="30px"
-            android:paddingRight="30px"
-            android:gravity="center">
-            <TextView
-                android:text="Price"
-                android:id="@+id/priceLable" />
-            <TextView
-                android:text="$ 0"
-                android:id="@+id/priceValue" />
-        </TableRow>
-        <TableRow
-            android:id="@+id/tableRow1"
-            android:paddingTop="20px"
-            android:paddingLeft="30px"
-            android:paddingRight="30px"
-            android:gravity="center">
-            <TextView
-                android:text="Occupancy Date"
-                android:id="@+id/occupancyDateLabel" />
-            <TextView
-                android:text="yyyy/m/d"
-                android:id="@+id/occupancyDate" />
-        </TableRow>
-        <TableRow
-            android:id="@+id/tableRow2"
-            android:paddingTop="20px"
-            android:paddingLeft="30px"
-            android:paddingRight="30px"
-            android:gravity="center">
-            <TextView
-                android:id="@+id/descriptionLabel"
-                android:text="Description" />
-        </TableRow>
-        <TableRow
-            android:id="@+id/tableRow2"
-            android:paddingTop="20px"
-            android:paddingLeft="30px"
-            android:paddingRight="30px"
-            android:gravity="center">
-            <TextView
-                android:id="@+id/description"
-                android:paddingLeft="20px"
-                android:text="{descriptions}" />
-        </TableRow>
-        <TableRow
-            android:id="@+id/tableRow1"
-            android:paddingTop="20px"
-            android:paddingLeft="30px"
-            android:paddingRight="30px"
-            android:gravity="center">
-            <TextView
-                android:text="Amentities"
-                android:id="@+id/amentityLabel" />
+        <ToggleButton
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/bookmark"
+            android:textOn="Bookmarked"
+            android:textOff="Not Bookmarked" />
+        <TextView
+            android:id="@+id/address"
+            android:text="{address}"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10px" />
+        <RatingBar
+            android:id="@+id/ratingBar"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:numStars="5"
+            android:stepSize="1.0"
+            android:layout_marginTop="10px" />
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/linearLayout2">
             <LinearLayout
                 android:orientation="horizontal"
-                android:id="@+id/amentities" />
-        </TableRow>
-        <TableRow
-            android:id="@+id/tableRow2"
-            android:paddingTop="20px"
-            android:paddingLeft="30px"
-            android:paddingRight="30px"
-            android:gravity="center">
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/linearLayout2"
+                android:layout_marginTop="10px">
+                <TextView
+                    android:text="Price"
+                    android:id="@+id/priceLable"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:minWidth="400px" />
+                <TextView
+                    android:text="$ 0"
+                    android:id="@+id/priceValue"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="20px" />
+            </LinearLayout>
+            <LinearLayout
+                android:orientation="horizontal"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/linearLayout2"
+                android:layout_marginTop="10px">
+                <TextView
+                    android:text="Occupancy Date"
+                    android:id="@+id/occupancyDateLabel"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:minWidth="400px" />
+                <TextView
+                    android:text="yyyy/m/d"
+                    android:id="@+id/occupancyDate"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="20px" />
+            </LinearLayout>
+            <LinearLayout
+                android:orientation="horizontal"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/linearLayout2"
+                android:layout_marginTop="10px">
+                <TextView
+                    android:id="@+id/descriptionLabel"
+                    android:text="Description"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:minWidth="400px" />
+                <TextView
+                    android:id="@+id/description"
+                    android:text="{descriptions}"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="20px" />
+            </LinearLayout>
+            <TextView
+                android:text="Amentities"
+                android:id="@+id/amentityLabel"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10px" />
+            <LinearLayout
+                android:orientation="horizontal"
+                android:id="@+id/amentities"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10px" />
             <TextView
                 android:id="@+id/notes"
-                android:paddingLeft="20px"
-                android:text="{notes}" />
-        </TableRow>
-    </TableLayout>
+                android:text="{notes}"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="20px" />
+        </LinearLayout>
+    </LinearLayout>
 </ScrollView>

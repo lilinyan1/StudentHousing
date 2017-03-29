@@ -18,9 +18,9 @@ namespace WebApi.Controllers
         }
 
         // GET: api/Db/5
-        public string Get(int id)
+        public Property Get(int id)
         {
-            return "Some Property";
+            return Property.GetByID(id);
         }
 
         public List<Property> Get(string lat, string lng)

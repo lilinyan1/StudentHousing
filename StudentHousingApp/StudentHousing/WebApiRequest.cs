@@ -26,7 +26,7 @@ namespace StudentHousing
             try
             {
                 //var request = HttpWebRequest.Create(string.Format(@"http://10.10.0.226:5657/api/{0}/{1}", webApiName, param));
-                var request = HttpWebRequest.Create(string.Format(@"http://studenthousingapi.azurewebsites.net/api/{0}/{1}", webApiName, param));
+                var request = HttpWebRequest.Create(string.Format(@"http://studenthousingapi2.azurewebsites.net/api/{0}/{1}", webApiName, param));
                 request.ContentType = "application/json";
                 request.Method = "GET";
 
