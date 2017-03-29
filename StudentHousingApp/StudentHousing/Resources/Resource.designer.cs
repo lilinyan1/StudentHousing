@@ -289,14 +289,14 @@ namespace StudentHousing
 		public partial class Id
 		{
 			
-			// aapt resource value: 0x7f08000e
-			public const int actionPenal = 2131230734;
+			// aapt resource value: 0x7f08000f
+			public const int actionPenal = 2131230735;
 			
-			// aapt resource value: 0x7f08001a
-			public const int address = 2131230746;
+			// aapt resource value: 0x7f08001c
+			public const int address = 2131230748;
 			
-			// aapt resource value: 0x7f080010
-			public const int addressInput = 2131230736;
+			// aapt resource value: 0x7f080011
+			public const int addressInput = 2131230737;
 			
 			// aapt resource value: 0x7f080005
 			public const int adjust_height = 2131230725;
@@ -304,35 +304,38 @@ namespace StudentHousing
 			// aapt resource value: 0x7f080006
 			public const int adjust_width = 2131230726;
 			
-			// aapt resource value: 0x7f080012
-			public const int advancePanel = 2131230738;
+			// aapt resource value: 0x7f080013
+			public const int advancePanel = 2131230739;
 			
-			// aapt resource value: 0x7f080014
-			public const int advanceSearchButton = 2131230740;
+			// aapt resource value: 0x7f080015
+			public const int advanceSearchButton = 2131230741;
 			
-			// aapt resource value: 0x7f080023
-			public const int amentities = 2131230755;
+			// aapt resource value: 0x7f080025
+			public const int amentities = 2131230757;
 			
-			// aapt resource value: 0x7f080022
-			public const int amentityLabel = 2131230754;
+			// aapt resource value: 0x7f080024
+			public const int amentityLabel = 2131230756;
 			
 			// aapt resource value: 0x7f08000a
 			public const int auto = 2131230730;
 			
-			// aapt resource value: 0x7f080019
-			public const int bookmark = 2131230745;
+			// aapt resource value: 0x7f08001b
+			public const int bookmark = 2131230747;
 			
 			// aapt resource value: 0x7f08000b
 			public const int dark = 2131230731;
 			
-			// aapt resource value: 0x7f080021
-			public const int description = 2131230753;
+			// aapt resource value: 0x7f080023
+			public const int description = 2131230755;
 			
-			// aapt resource value: 0x7f080020
-			public const int descriptionLabel = 2131230752;
+			// aapt resource value: 0x7f080022
+			public const int descriptionLabel = 2131230754;
 			
-			// aapt resource value: 0x7f080011
-			public const int goButton = 2131230737;
+			// aapt resource value: 0x7f08000d
+			public const int drawer_layout = 2131230733;
+			
+			// aapt resource value: 0x7f080012
+			public const int goButton = 2131230738;
 			
 			// aapt resource value: 0x7f080000
 			public const int hybrid = 2131230720;
@@ -340,20 +343,23 @@ namespace StudentHousing
 			// aapt resource value: 0x7f080007
 			public const int icon_only = 2131230727;
 			
+			// aapt resource value: 0x7f080017
+			public const int left_drawer = 2131230743;
+			
 			// aapt resource value: 0x7f08000c
 			public const int light = 2131230732;
 			
-			// aapt resource value: 0x7f080017
-			public const int linearLayout2 = 2131230743;
+			// aapt resource value: 0x7f080019
+			public const int linearLayout2 = 2131230745;
 			
-			// aapt resource value: 0x7f08000d
-			public const int linearLayout4 = 2131230733;
+			// aapt resource value: 0x7f08000e
+			public const int linearLayout4 = 2131230734;
 			
-			// aapt resource value: 0x7f080015
-			public const int map = 2131230741;
+			// aapt resource value: 0x7f080016
+			public const int map = 2131230742;
 			
-			// aapt resource value: 0x7f08000f
-			public const int menuButton = 2131230735;
+			// aapt resource value: 0x7f080010
+			public const int menuButton = 2131230736;
 			
 			// aapt resource value: 0x7f080001
 			public const int none = 2131230721;
@@ -361,35 +367,35 @@ namespace StudentHousing
 			// aapt resource value: 0x7f080002
 			public const int normal = 2131230722;
 			
-			// aapt resource value: 0x7f080024
-			public const int notes = 2131230756;
+			// aapt resource value: 0x7f080026
+			public const int notes = 2131230758;
 			
-			// aapt resource value: 0x7f08001f
-			public const int occupancyDate = 2131230751;
+			// aapt resource value: 0x7f080021
+			public const int occupancyDate = 2131230753;
+			
+			// aapt resource value: 0x7f080020
+			public const int occupancyDateLabel = 2131230752;
 			
 			// aapt resource value: 0x7f08001e
-			public const int occupancyDateLabel = 2131230750;
+			public const int priceLable = 2131230750;
 			
-			// aapt resource value: 0x7f08001c
-			public const int priceLable = 2131230748;
+			// aapt resource value: 0x7f08001f
+			public const int priceValue = 2131230751;
+			
+			// aapt resource value: 0x7f08001a
+			public const int propertyMap = 2131230746;
 			
 			// aapt resource value: 0x7f08001d
-			public const int priceValue = 2131230749;
-			
-			// aapt resource value: 0x7f080018
-			public const int propertyMap = 2131230744;
-			
-			// aapt resource value: 0x7f08001b
-			public const int ratingBar = 2131230747;
+			public const int ratingBar = 2131230749;
 			
 			// aapt resource value: 0x7f080003
 			public const int satellite = 2131230723;
 			
-			// aapt resource value: 0x7f080016
-			public const int scrollView2 = 2131230742;
+			// aapt resource value: 0x7f080018
+			public const int scrollView2 = 2131230744;
 			
-			// aapt resource value: 0x7f080013
-			public const int space1 = 2131230739;
+			// aapt resource value: 0x7f080014
+			public const int space1 = 2131230740;
 			
 			// aapt resource value: 0x7f080008
 			public const int standard = 2131230728;
@@ -430,10 +436,13 @@ namespace StudentHousing
 		{
 			
 			// aapt resource value: 0x7f040000
-			public const int Main = 2130968576;
+			public const int drawer_list_item = 2130968576;
 			
 			// aapt resource value: 0x7f040001
-			public const int Property = 2130968577;
+			public const int Main = 2130968577;
+			
+			// aapt resource value: 0x7f040002
+			public const int Property = 2130968578;
 			
 			static Layout()
 			{

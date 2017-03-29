@@ -191,21 +191,19 @@ namespace StudentHousing.DAL
 			return -1;
 		}
 
-		// If this works, needs to be public byte[] and return img
-		public int GetImage(int id)
+		public byte[] GetImage(int id)
 		{
-			//byte[] img = DAL.GetImage(id);
+			byte[] img = DAL.GetImage(id);
 
 			//Uncomment below line to test
 			//File.WriteAllBytes("test.img", img);
 
-			return 0;
+			return img;
 		}
 
-		public int AttachImage(byte[] img)
+		public int AttachImage(int id, byte[] img)
 		{
-			// insert byte array to db
-			return 0;
+            return DAL.AddImage(id, img);
 		}
 
 		public int DeleteImage(int id)

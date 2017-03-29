@@ -5,6 +5,7 @@ using System;
 using StudentHousing.Dto;
 using Android.Gms.Maps;
 using Android.Support.V4.App;
+using Android.Support.V4.Widget;
 using Android.Gms.Maps.Model;
 using Android.Locations;
 using System.Collections.Generic;
@@ -21,6 +22,9 @@ namespace StudentHousing
         Location _currentLocation;
         LocationManager _locationManager;
         string _locationProvider;
+        String[] menuItems = { "Hello world", "Click me!" };
+        DrawerLayout mDrawerLayout;
+        ListView mDrawerList;
 
         protected override void OnCreate(Bundle savedInstanceState)
         {
@@ -30,6 +34,14 @@ namespace StudentHousing
             {
                 // Set our view from the "main" layout resource
                 SetContentView(Resource.Layout.Main);
+                // get the drawer and list layouts
+                mDrawerLayout = (DrawerLayout)FindViewById(Resource.Id.drawer_layout);
+                mDrawerList = (ListView)FindViewById(Resource.Id.left_drawer);
+                // populate the items inside the drawer
+                mDrawerList.SetAdapter(new ArrayAdapter<String>(this,
+                    Resource.Layout.drawer_list_item, menuItems));
+                // set on click handler
+                mDrawerList.ItemClick += mDrawerClick;
             }
             catch (Exception e)
             {
@@ -38,6 +50,13 @@ namespace StudentHousing
 
             MapFragment mapFrag = (MapFragment)FragmentManager.FindFragmentById(Resource.Id.map);
             mapFrag.GetMapAsync(this);
+        }
+
+        // drawer item on click handler
+        void mDrawerClick(object sender, AdapterView.ItemClickEventArgs e)
+        {
+            String[] nmenuItems = { "New stuff", "Wow!" };
+            mDrawerList.SetAdapter(new ArrayAdapter<String>(this, Resource.Layout.drawer_list_item, nmenuItems));
         }
 
         public void OnMapReady(GoogleMap googleMap)
