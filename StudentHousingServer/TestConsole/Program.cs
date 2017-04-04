@@ -9,11 +9,24 @@ namespace TestConsole
 	{
         static void Main(string[] args)
         {
-            byte[] img = File.ReadAllBytes("heart.png");
-            DAL.AddImage(1, img);
+            //Property.AddRating(1, 1, 5, "Pretty cool place.");
+            //Property.AddRating(2, 1, 4, "Pretty cool place.");
+            //Property.AddRating(1, 1, 3, "Pretty cool place.");
+            //Property.AddRating(2, 1, 1, "Pretty cool place.");
 
-            byte[] outImg = DAL.GetImage(1);
-            File.WriteAllBytes("new.png", outImg);
+
+            //Console.WriteLine(Property.GetRating(1));
+            //Console.ReadLine();
+            byte[] img = File.ReadAllBytes("test1.png");
+            DAL.AddImage(1, "test!", img);
+            img = File.ReadAllBytes("test2.jpg");
+            DAL.AddImage(1, "testing!", img);
+
+            List<byte[]> outImg = DAL.GetImage(1);
+            for(int i = 0; i < outImg.Count; i++)
+            {
+                File.WriteAllBytes("testOut" + i + ".jpg", outImg[i]);
+            }
             var property = Property.GetByID(1);
 
         }
