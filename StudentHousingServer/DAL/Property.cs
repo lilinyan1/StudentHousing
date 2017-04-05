@@ -168,32 +168,49 @@ namespace StudentHousing.DAL
 			return ret;
 		}
 
-		// didn't test this but no reason it shouldn't work
+        public static void AddRating(int uid, int pid, int rating, string comment)
+        {
+            string values = string.Format("'{0}'" + ", " + "'{1}'" + ", " + "'{2}'" + ", " + "'{3}'", uid, pid, rating, comment);
+            var dataRows = DAL.SelectFrom("userid, propertyid", "PropertyRating", string.Format("[propertyID] = {0} AND [userID] = {1}", pid, uid));
+            int i = dataRows.Count();
+            // if a user has set a rating for this property already, update it
+            if (i > 0)
+            {
+                values = string.Format("rating = {0}", rating);
+                DAL.UpdateSet(values, "PropertyRating", "[userID]", uid);
+            }
+            // if no rating for property by user, add it
+            else
+            {
+                DAL.InsertInto("userid, propertyid, rating, comment", "PropertyRating", values);
+            }           
+        }
+
 		// Returns average rating of Property {id}
-		public int GetRating(int id)
+		public static double GetRating(int id)
 		{
 			// select * from rating where propertyid = id
 			var dataRows = BaseDAL.SelectFrom("*", "PropertyRating", string.Format("[propertyID] = {0}", id));
 
 			if (dataRows != null && dataRows.Any())
 			{
-				int ratingSum = 0;
+				double ratingSum = 0;
 				// sum up all ratings for the property
 				foreach (DataRow row in dataRows)
 				{
 					// property rating is in the 4th column of the table
-					ratingSum += Convert.ToInt32(row[3].ToString());
+					ratingSum += Convert.ToDouble(row[3].ToString());
 				}
 				// divide the sum of ratings by the number of rows
-				return ratingSum / dataRows.Count();
+				return (double) ratingSum / dataRows.Count();
 			}
 			// no rows returned
 			return -1;
 		}
 
-		public byte[] GetImage(int id)
+		public static List<byte[]> GetImage(int id)
 		{
-			byte[] img = BaseDAL.GetImage(id);
+			List<byte[]> img = DAL.GetImage(id);
 
 			//Uncomment below line to test
 			//File.WriteAllBytes("test.img", img);
@@ -201,12 +218,12 @@ namespace StudentHousing.DAL
 			return img;
 		}
 
-		public int AttachImage(int id, byte[] img)
+		public static int AttachImage(int id, string description, byte[] img)
 		{
-            return BaseDAL.AddImage(id, img);
+            return DAL.AddImage(id, description, img);
 		}
 
-		public int DeleteImage(int id)
+		public static int DeleteImage(int id)
 		{
 			BaseDAL.UpdateSet("propertyimage = null", "Property", "PropertyID", id);
 			return 0;

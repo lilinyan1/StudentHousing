@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Data;
 using System.Data.SqlClient;
 using System.Linq;
@@ -132,14 +133,16 @@ namespace StudentHousing.DAL
 				return (string)obj;
 		}
 
-        public static int AddImage(int id, byte[] img)
+        public static int AddImage(int id, string description, byte[] img)
         {
             using (SqlConnection conn = new SqlConnection())
             {
                 try
                 {
                     conn.ConnectionString = CONNECTION_STRING;
-                    SqlCommand cmd = new SqlCommand("UPDATE property SET img = (@img) WHERE id = " + id, conn);
+                    string str = string.Format("INSERT INTO images (propertyID, imageDescription, img) VALUES ('{0}', '{1}', (@img))", id, description);
+                    SqlCommand cmd = new SqlCommand(str);
+                    cmd.Connection = conn;
                     cmd.Parameters.AddWithValue("@img", img);
                     conn.Open();
                     cmd.ExecuteNonQuery();
@@ -154,7 +157,7 @@ namespace StudentHousing.DAL
             }
         }
 
-		public static byte[] GetImage(int id)
+		public static List<byte[]> GetImage(int id)
 		{
 			using (SqlConnection conn = new SqlConnection())
 			{
@@ -162,14 +165,17 @@ namespace StudentHousing.DAL
 				{
 					conn.ConnectionString = CONNECTION_STRING;
 					conn.Open();
-					SqlCommand cmd = new SqlCommand("SELECT img FROM Property WHERE id = " + id, conn);
+					SqlCommand cmd = new SqlCommand("SELECT img FROM images WHERE propertyID = " + id, conn);
                     SqlDataReader dr = cmd.ExecuteReader();
-
+                    List<byte[]> images = new List<byte[]>();
                     if (dr.HasRows)
                     {
-                        dr.Read();
-                        byte[] imgOut = (byte[])dr["img"];
-                        return imgOut;
+                        while (dr.Read())
+                        {
+                            byte[] imgOut = (byte[])dr["img"];
+                            images.Add(imgOut);
+                        }                   
+                        return images;
                     }
                     else
                     {
