@@ -171,18 +171,18 @@ namespace StudentHousing.DAL
         public static void AddRating(int uid, int pid, int rating, string comment)
         {
             string values = string.Format("'{0}'" + ", " + "'{1}'" + ", " + "'{2}'" + ", " + "'{3}'", uid, pid, rating, comment);
-            var dataRows = DAL.SelectFrom("userid, propertyid", "PropertyRating", string.Format("[propertyID] = {0} AND [userID] = {1}", pid, uid));
+			var dataRows = BaseDAL.SelectFrom("userid, propertyid", "PropertyRating", string.Format("[propertyID] = {0} AND [userID] = {1}", pid, uid));
             int i = dataRows.Count();
             // if a user has set a rating for this property already, update it
             if (i > 0)
             {
                 values = string.Format("rating = {0}", rating);
-                DAL.UpdateSet(values, "PropertyRating", "[userID]", uid);
+				BaseDAL.UpdateSet(values, "PropertyRating", "[userID]", uid);
             }
             // if no rating for property by user, add it
             else
             {
-                DAL.InsertInto("userid, propertyid, rating, comment", "PropertyRating", values);
+				BaseDAL.InsertInto("userid, propertyid, rating, comment", "PropertyRating", values);
             }           
         }
 
@@ -210,7 +210,7 @@ namespace StudentHousing.DAL
 
 		public static List<byte[]> GetImage(int id)
 		{
-			List<byte[]> img = DAL.GetImage(id);
+			List<byte[]> img = BaseDAL.GetImage(id);
 
 			//Uncomment below line to test
 			//File.WriteAllBytes("test.img", img);
@@ -220,7 +220,7 @@ namespace StudentHousing.DAL
 
 		public static int AttachImage(int id, string description, byte[] img)
 		{
-            return DAL.AddImage(id, description, img);
+			return BaseDAL.AddImage(id, description, img);
 		}
 
 		public static int DeleteImage(int id)
