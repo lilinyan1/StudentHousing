@@ -15,6 +15,7 @@ namespace StudentHousing.DAL
 
         public static bool IsBookmarked(int userId, int propertyId)
         {
+            var dataRows = BaseDAL.SelectFrom("[userID],[propertyID]", "Bookmark", string.Format("[userID] = {0} AND [propertyID] = {1}", userId, propertyId));
             if (dataRows.Any())
             {
                 return true;
