@@ -10,9 +10,9 @@ namespace TestConsole
         static void Main(string[] args)
         {
             byte[] img = File.ReadAllBytes("heart.png");
-            DAL.AddImage(1, img);
+            BaseDAL.AddImage(1, img);
 
-            byte[] outImg = DAL.GetImage(1);
+            byte[] outImg = BaseDAL.GetImage(1);
             File.WriteAllBytes("new.png", outImg);
             var property = Property.GetByID(1);
 

@@ -11,11 +11,6 @@ namespace WebApi.Controllers
 {
     public class PropertyController : ApiController
     {
-        // GET: api/Db
-        public IEnumerable<string> Get()
-        {
-            return new string[] { "person1", "person2" };
-        }
 
         // GET: api/Db/5
         public Property Get(int id)
@@ -40,9 +35,5 @@ namespace WebApi.Controllers
         {
         }
 
-        // DELETE: api/Db/5
-        public void Delete(int id)
-        {
-        }
     }
 }

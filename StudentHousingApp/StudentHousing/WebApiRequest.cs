@@ -20,13 +20,22 @@ namespace StudentHousing
 {
     class WebApi
     {
+        static string URL = @"http://studenthousingapi2.azurewebsites.net/api/{0}/{1}";
+        HttpClient client;
+
+        public WebApi()
+        {
+            client = new HttpClient();
+            client.MaxResponseContentBufferSize = 256000;
+        }
+
         //This one should talk to the database
-        public static string SendRequest(string webApiName, string param)
+        public string GetItem(string webApiName, string param)
         {
             try
             {
                 //var request = HttpWebRequest.Create(string.Format(@"http://10.10.0.226:5657/api/{0}/{1}", webApiName, param));
-                var request = HttpWebRequest.Create(string.Format(@"http://studenthousingapi2.azurewebsites.net/api/{0}/{1}", webApiName, param));
+                var request = HttpWebRequest.Create(string.Format(URL, webApiName, param));
                 request.ContentType = "application/json";
                 request.Method = "GET";
 
@@ -56,6 +65,30 @@ namespace StudentHousing
             }
 
             return string.Empty;
+        }
+
+        public async Task SaveAsync(string webApiName, string param)
+        {
+            var uri = new Uri(string.Format(URL, webApiName, param));
+            //var content = new StringContent(json, Encoding.UTF8, "application/json");
+            var content = new StringContent(string.Empty);
+            HttpResponseMessage response = null;
+            response = await client.PostAsync(uri, content);
+
+            if (response.IsSuccessStatusCode)
+            {
+                Console.WriteLine(@"            Item successfully saved.");
+            }
+        }
+
+        public async Task DeleteAsync(string webApiName, string param)
+        {
+            var uri = new Uri(string.Format(URL, webApiName, param));
+            var response = await client.DeleteAsync(uri);
+            if (response.IsSuccessStatusCode)
+            {
+                Console.WriteLine(@"            Item successfully deleted.");
+            }
         }
     }
 }

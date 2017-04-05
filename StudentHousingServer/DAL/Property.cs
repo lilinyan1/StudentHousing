@@ -10,7 +10,7 @@ namespace StudentHousing.DAL
 		public static Property GetByID(int id)
 		{
 			string fieldsName = GetFields();
-			var dataRows = DAL.SelectFrom(fieldsName, "Property", string.Format("[id] = {0}", id));
+			var dataRows = BaseDAL.SelectFrom(fieldsName, "Property", string.Format("[id] = {0}", id));
 
 			if (dataRows != null && dataRows.Any())
 			{
@@ -29,7 +29,7 @@ namespace StudentHousing.DAL
 			{
 				ID = (int)row["id"],
 				pAddress = (string)row["pAddress"],
-				Price = DAL.ToInt(row["Price"]),
+				Price = BaseDAL.ToInt(row["Price"]),
 				Latitude = (double)row["Latitude"],
 				Longitude = (double)row["Longitude"],
 				School = (string)row["School"],
@@ -37,10 +37,10 @@ namespace StudentHousing.DAL
 				Province = (string)row["Province"],
 				Country = (string)row["Country"],
 				PostalCode = (string)row["PostalCode"],
-				PropertyDescription = DAL.ToString(row["PropertyDescription"]),
-				OccupancyDate = DAL.ToDateTime(row["OccupancyDate"]),
-				PostedBy = DAL.ToInt(row["PostedBy"]),
-				StatusID = DAL.ToInt(row["StatusID"]),
+				PropertyDescription = BaseDAL.ToString(row["PropertyDescription"]),
+				OccupancyDate = BaseDAL.ToDateTime(row["OccupancyDate"]),
+				PostedBy = BaseDAL.ToInt(row["PostedBy"]),
+				StatusID = BaseDAL.ToInt(row["StatusID"]),
 				IsAirConditioning = (bool)row["IsAirConditioning"],
 				IsBusroute = (bool)row["IsBusroute"],
 				IsDishwasher = (bool)row["IsDishwasher"],
@@ -51,7 +51,7 @@ namespace StudentHousing.DAL
 				IsStove = (bool)row["IsStove"],
 				IsWheelChair = (bool)row["IsWheelChair"],
 				IsPetFriendly = (bool)row["IsPetFriendly"],
-				Comment = DAL.ToString(row["Comment"])
+				Comment = BaseDAL.ToString(row["Comment"])
 			};
 		}
 
@@ -135,7 +135,7 @@ namespace StudentHousing.DAL
 				fieldsValue = fieldsValue.TrimEnd(',');
 			}
 
-			var ret = DAL.InsertInto(fieldsName, "Property", fieldsValue);
+			var ret = BaseDAL.InsertInto(fieldsName, "Property", fieldsValue);
 
 			return ret;
 		}
@@ -163,7 +163,7 @@ namespace StudentHousing.DAL
 				updateValues = updateValues.TrimEnd(',');
 			}
 
-			int ret = DAL.UpdateSet(updateValues, "Property", "[id]", ID);
+			int ret = BaseDAL.UpdateSet(updateValues, "Property", "[id]", ID);
 
 			return ret;
 		}
@@ -173,7 +173,7 @@ namespace StudentHousing.DAL
 		public int GetRating(int id)
 		{
 			// select * from rating where propertyid = id
-			var dataRows = DAL.SelectFrom("*", "PropertyRating", string.Format("[propertyID] = {0}", id));
+			var dataRows = BaseDAL.SelectFrom("*", "PropertyRating", string.Format("[propertyID] = {0}", id));
 
 			if (dataRows != null && dataRows.Any())
 			{
@@ -193,7 +193,7 @@ namespace StudentHousing.DAL
 
 		public byte[] GetImage(int id)
 		{
-			byte[] img = DAL.GetImage(id);
+			byte[] img = BaseDAL.GetImage(id);
 
 			//Uncomment below line to test
 			//File.WriteAllBytes("test.img", img);
@@ -203,12 +203,12 @@ namespace StudentHousing.DAL
 
 		public int AttachImage(int id, byte[] img)
 		{
-            return DAL.AddImage(id, img);
+            return BaseDAL.AddImage(id, img);
 		}
 
 		public int DeleteImage(int id)
 		{
-			DAL.UpdateSet("propertyimage = null", "Property", "PropertyID", id);
+			BaseDAL.UpdateSet("propertyimage = null", "Property", "PropertyID", id);
 			return 0;
 		}
 
@@ -220,7 +220,7 @@ namespace StudentHousing.DAL
 			var longitudeMin = longitude - adjustment;
 			var longitudeMax = longitude + adjustment;
 			var condition = string.Format("[Latitude] >= {0} AND [Latitude] < {1} AND [Longitude] >= {2} AND [Longitude] < {3}", latitudeMin, latitudeMax, longitudeMin, longitudeMax);
-			var dataRows = DAL.SelectFrom(GetFields(), "Property", condition);
+			var dataRows = BaseDAL.SelectFrom(GetFields(), "Property", condition);
 
 			var properties = new List<Property>();
 			foreach (System.Data.DataRow row in dataRows)
@@ -230,6 +230,8 @@ namespace StudentHousing.DAL
 			}
 			return properties;
 		}
+
+
 
 	}
 }

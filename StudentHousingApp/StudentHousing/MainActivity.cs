@@ -22,6 +22,7 @@ namespace StudentHousing
         Location _currentLocation;
         LocationManager _locationManager;
         string _locationProvider;
+        WebApi _webApi;
         String[] menuItems = { "Hello world", "Click me!" };
         DrawerLayout mDrawerLayout;
         ListView mDrawerList;
@@ -29,7 +30,7 @@ namespace StudentHousing
         protected override void OnCreate(Bundle savedInstanceState)
         {
             base.OnCreate(savedInstanceState);
-
+            _webApi = new WebApi();
             try
             {
                 // Set our view from the "main" layout resource
@@ -50,6 +51,13 @@ namespace StudentHousing
 
             MapFragment mapFrag = (MapFragment)FragmentManager.FindFragmentById(Resource.Id.map);
             mapFrag.GetMapAsync(this);
+
+            var menuButton = FindViewById<ImageButton>(Resource.Id.menuButton);
+            menuButton.Click += (o, e) =>
+            {
+                var bookmarkActivity = new Intent(this, typeof(BookmarkActivity));
+                StartActivity(bookmarkActivity);
+            };
         }
 
         // drawer item on click handler
@@ -76,7 +84,7 @@ namespace StudentHousing
 
             googleMap.InfoWindowClick += MapOnInfoWindowClick;
 
-            var response = WebApi.SendRequest("property", "43e471487/-80e599914");
+            var response = _webApi.GetItem("property", "43e471487/-80e599914");
             var properties = JsonConvert.DeserializeObject<List<PropertyDto>>(response);
             //var properties = GetPropertiesCloseBy();
             foreach (var property in properties)

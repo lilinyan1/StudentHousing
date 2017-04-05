@@ -6,9 +6,9 @@ using Utility;
 
 namespace StudentHousing.DAL
 {
-	public class DAL
+	public class BaseDAL
 	{
-		//private const string CONNECTION_STRING = @"Server=localhost;Database=StudentHousing;User Id=admin;Password=admin2017;";
+		//private const string CONNECTION_STRING = @"Server=localhost;Database=StudentHousing;User Id=admin;Password=admin;";
 		private const string CONNECTION_STRING = @"Server=tcp:studenthousingdb.database.windows.net,1433;Initial Catalog = StudentHousingDB; Persist Security Info=False;User ID = HouseAdmin; Password=Secret@5; MultipleActiveResultSets=False;Encrypt=True;TrustServerCertificate=False;Connection Timeout = 30;";
 
         public static EnumerableRowCollection<DataRow> SelectFrom(string selectFields, string tableName, string condition)
@@ -89,7 +89,42 @@ namespace StudentHousing.DAL
 			}
 		}
 
-		public static string ToString(object obj)
+        public static bool Delete(string tableName, string condition)
+        {
+
+            using (SqlConnection conn = new SqlConnection())
+            {
+                try
+                {
+                    conn.ConnectionString = CONNECTION_STRING;
+                    conn.Open();
+                    SqlCommand command = new SqlCommand(string.Format("DELETE FROM {0} WHERE {1}", tableName, condition), conn);
+                    command.ExecuteNonQuery();
+                }
+                catch (Exception e)
+                {
+                    Logging.Log("DAL", "Delete", e.Message, false);
+                    return false;
+                }
+                return true;
+            }
+        }
+        public static string GetProperties(Type type)
+        {
+            var properties = string.Empty;
+            foreach (var property in type.GetProperties())
+            {
+                properties = string.Format("{0}[{1}],", properties, property.Name);
+            }
+            if (properties != string.Empty)
+            {
+                properties = properties.TrimEnd(',');
+            }
+            return properties;
+           
+        }
+
+        public static string ToString(object obj)
 		{
 			if (obj == DBNull.Value)
 				return string.Empty;

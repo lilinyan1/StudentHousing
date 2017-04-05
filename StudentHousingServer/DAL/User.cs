@@ -42,13 +42,43 @@ namespace StudentHousing.DAL
 				fieldsValue = fieldsValue.TrimEnd(',');
 			}
 
-			var ret = DAL.InsertInto(fieldsName, "Users", fieldsValue);
+			var ret = BaseDAL.InsertInto(fieldsName, "Users", fieldsValue);
 
 			return ret;
 		}
 
-		// using email address to login
-		public static User Login(string inEmail, string inPass)
+        public static User GetByID(int id)
+        {
+            string fieldsName = BaseDAL.GetProperties(typeof(UserDto));
+            var dataRows = BaseDAL.SelectFrom(fieldsName, "Users", string.Format("[id] = {0}", id));
+
+            if (dataRows != null && dataRows.Any())
+            {
+                var row = dataRows.First();
+                return Load(row);
+            }
+            else
+            {
+                return null;
+            }
+        }
+
+        private static User Load(System.Data.DataRow row)
+        {
+            return new User
+            {
+                ID = (int)row["id"],
+                roleID = (int)row["roleID"],
+                firstName = (string)row["firstName"],
+                lastName = (string)row["lastName"],
+                phone = BaseDAL.ToString(row["phone"]),
+                email = (string)row["email"],
+                pass = (string)row["pass"]
+            };
+        }
+
+        // using email address to login
+        public static User Login(string inEmail, string inPass)
 		{
 			var fieldsName = string.Empty;
 			var ur = new User();
@@ -64,7 +94,7 @@ namespace StudentHousing.DAL
 				fieldsName = fieldsName.TrimEnd(',');
 			}
 
-			var dataRows = DAL.SelectFrom(fieldsName, "Users", string.Format("[email] = '{0}'", inEmail));
+			var dataRows = BaseDAL.SelectFrom(fieldsName, "Users", string.Format("[email] = '{0}'", inEmail));
 
 			if (dataRows != null && dataRows.Any())
 			{
@@ -118,7 +148,7 @@ namespace StudentHousing.DAL
 
 			fieldsValue = string.Format("'{0}','{1}','{2}','{3}'", this.ID, propertyID, sqlFormattedDate, comment);
 
-			var ret = DAL.InsertInto(fieldsName, "Bookmark", fieldsValue);
+			var ret = BaseDAL.InsertInto(fieldsName, "Bookmark", fieldsValue);
 
 			return ret;
 		}
@@ -129,7 +159,7 @@ namespace StudentHousing.DAL
 
 			fieldsName = "*";
 
-			var dataRows = DAL.SelectFrom(fieldsName, "Bookmark", string.Format("[UserID] = '{0}'", this.ID));
+			var dataRows = BaseDAL.SelectFrom(fieldsName, "Bookmark", string.Format("[UserID] = '{0}'", this.ID));
 
 			if (dataRows != null)
 			{

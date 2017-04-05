@@ -16,13 +16,17 @@ namespace StudentHousing
     {
         GoogleMap _googleMap;
         PropertyDto _property;
+        WebApi _webApi;
+        int _userId = 1;  //TODO to be replaced by the user in storage;
+
         private RatingBar ratingBar;
 
         public const string PROPERTY_ID = "PropertyId";
         protected override void OnCreate(Bundle savedInstanceState)
         {
-            base.OnCreate(savedInstanceState);            
+            base.OnCreate(savedInstanceState);
             SetContentView(Resource.Layout.Property);
+            _webApi = new WebApi();
 
             MapFragment mapFrag = (MapFragment)FragmentManager.FindFragmentById(Resource.Id.propertyMap);
             mapFrag.GetMapAsync(this);
@@ -56,6 +60,39 @@ namespace StudentHousing
                 AddDrawable(Resource.Drawable.wheelChair, amentitiesView);
             if (_property.IsPetFriendly)
                 AddDrawable(Resource.Drawable.petFriendly, amentitiesView);
+
+            var bookmark = FindViewById<ToggleButton>(Resource.Id.bookmark);
+
+            
+            var response = _webApi.GetItem("Bookmark", GetUserAndPropertyParam(propertyId));
+            var isBookmarked = JsonConvert.DeserializeObject<bool>(response);
+            if (isBookmarked)
+            {
+                bookmark.Checked = true;
+            }
+            else
+            {
+                bookmark.Checked = false;
+            }
+
+
+            bookmark.Click += async (o, e) =>
+            {
+                var param = GetUserAndPropertyParam(propertyId);
+                if (bookmark.Checked)
+                {
+                    await _webApi.SaveAsync("bookmark", param);
+                }
+                else
+                {
+                    await _webApi.DeleteAsync("bookmark", param);
+                }
+            };
+        }
+
+        private string GetUserAndPropertyParam(int propertyId)
+        {
+            return string.Format(Constant.USER_PROPERTY_PARAM, _userId, propertyId);
         }
 
         public void AddListenerOnRatingBar()
@@ -84,7 +121,7 @@ namespace StudentHousing
 
         private PropertyDto GetProertyById(int id)
         {
-            var response = WebApi.SendRequest("property", id.ToString());
+            var response = _webApi.GetItem("property", id.ToString());
             return JsonConvert.DeserializeObject<PropertyDto>(response);
 
             //return new PropertyDto

@@ -25,6 +25,12 @@ namespace WebApi
                 routeTemplate: "api/{controller}/{lat}/{lng}",
                 defaults: new { lat = RouteParameter.Optional, lng = RouteParameter.Optional }
             );
+
+            config.Routes.MapHttpRoute(
+            name: "bookmark",
+            routeTemplate: "api/{controller}/{action}/{userId}",
+            defaults: new { userId = RouteParameter.Optional });
+
         }
     }
 }

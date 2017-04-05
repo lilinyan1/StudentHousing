@@ -53,8 +53,9 @@
     <AndroidUseSharedRuntime>false</AndroidUseSharedRuntime>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="Dto">
-      <HintPath>dll\Dto.dll</HintPath>
+    <Reference Include="Dto, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\StudentHousingServer\Dto\bin\Debug\Dto.dll</HintPath>
     </Reference>
     <Reference Include="Newtonsoft.Json, Version=9.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
       <HintPath>..\packages\Newtonsoft.Json.9.0.1\lib\portable-net45+wp80+win8+wpa81\Newtonsoft.Json.dll</HintPath>
@@ -108,6 +109,8 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="BookmarkActivity.cs" />
+    <Compile Include="Constant.cs" />
     <Compile Include="PropertyActivity.cs" />
     <Compile Include="MainActivity.cs" />
     <Compile Include="Resources\Resource.designer.cs" />
@@ -123,6 +126,9 @@
     </None>
     <None Include="Assets\AboutAssets.txt" />
     <AndroidResource Include="Resources\layout\Property.axml">
+      <SubType>Designer</SubType>
+    </AndroidResource>
+    <AndroidResource Include="Resources\layout\Bookmark.axml">
       <SubType>Designer</SubType>
     </AndroidResource>
   </ItemGroup>
@@ -178,8 +184,11 @@
   <ItemGroup>
     <AndroidResource Include="Resources\drawable\bookmarkButton.xml" />
   </ItemGroup>
-    <ItemGroup>
+  <ItemGroup>
     <AndroidResource Include="Resources\layout\drawer_list_item.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\drawable\property.jpg" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\Android\Xamarin.Android.CSharp.targets" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
