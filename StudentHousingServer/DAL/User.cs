@@ -15,14 +15,12 @@ namespace StudentHousing.DAL
 
 			foreach (var p in this.GetType().GetProperties())
 			{
-				// manually inserting id at the moment
-				//if (p.Name != "ID")
+				if (p.Name != "ID")
 				{
 					fieldsName += "[" + p.Name + "],";
 
 					var tmp = p.GetValue(this, null).ToString();
 
-					// what if the value is number's minvalue or date's minvalue
 					if (tmp == string.Empty)
 					{
 						tmp = "null";
@@ -112,11 +110,22 @@ namespace StudentHousing.DAL
 
 				if (inPass != user.pass)
 				{
-					// password does not match, maybe return sth else here
-					return null;
+                    // password does not match
+                    var user2 = new User
+                    {
+                        ID = 0,
+                        roleID = 0,
+                        firstName = null,
+                        lastName = null,
+                        phone = null,
+                        email = null,
+                        pass = null
+                    };
+                    return user2;
 				}
 				else
 				{
+                    // return the found user
 					return user;
 				}
 			}

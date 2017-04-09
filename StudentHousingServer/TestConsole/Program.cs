@@ -18,12 +18,12 @@ namespace TestConsole
             //Console.WriteLine(Property.GetRating(1));
             //Console.ReadLine();
             byte[] img = File.ReadAllBytes("test1.png");
-            DAL.AddImage(1, "test!", img);
+            BaseDAL.AddImage(1, "test!", img);
             img = File.ReadAllBytes("test2.jpg");
-            DAL.AddImage(1, "testing!", img);
+            BaseDAL.AddImage(1, "testing!", img);
 
-            List<byte[]> outImg = DAL.GetImage(1);
-            for(int i = 0; i < outImg.Count; i++)
+            List<byte[]> outImg = BaseDAL.GetImage(1);
+            for (int i = 0; i < outImg.Count; i++)
             {
                 File.WriteAllBytes("testOut" + i + ".jpg", outImg[i]);
             }
@@ -33,42 +33,48 @@ namespace TestConsole
 
         //static void Main(string[] args)
         //{
-        //	Console.WriteLine("Property ID: ");
-        //	var id = Convert.ToInt32(Console.ReadLine());
-        //	var email = "test@test.com";
-        //	var pass = "password";
+        //Console.WriteLine("Property ID: ");
+        //var id = Convert.ToInt32(Console.ReadLine());
+        //var email = "test@test.com";
+        //var pass = "password";
 
-        //	//var id = 1;
-        //	try
-        //	{
-        //		var user = new User
-        //		{
-        //			firstName = "Becky",
-        //			//ID = 1,
-        //			email = email,
-        //			pass = pass
-        //		};
-        //		var userRet = user.Create();
+        ////var id = 1;
+        //try
+        //{
+        //    var user = new User
+        //    {
+        //        firstName = "Becky",
+        //        //ID = 1,
+        //        email = email,
+        //        pass = pass
+        //    };
+        //    var userRet = user.Create();
 
-        //		var ret = user.CreateBookmark(1, "Test comment");
-        //		var userLogin = User.Login(email, pass);
+        //    var ret = user.CreateBookmark(1, "Test comment");
+        //    var userLogin = User.Login(email, pass);
 
-        //		//    Property.GetByID(id);
-        //		//foreach (var prop in typeof(Property).GetFields())
-        //		//{
-        //		//    Console.WriteLine("{0} = {1}", prop.Name, prop.GetValue(property));
-        //		//}
+        //    //    Property.GetByID(id);
+        //    //foreach (var prop in typeof(Property).GetFields())
+        //    //{
+        //    //    Console.WriteLine("{0} = {1}", prop.Name, prop.GetValue(property));
+        //    //}
 
-        //		var properties = Property.SearchCloseByProperties(43.471487, -80.599914);
-        //	}
-        //	catch (Exception e)
-        //	{
-        //		Console.WriteLine(e.Message);
-        //	}
-        //	Console.ReadLine();
+        //    var properties = Property.SearchCloseByProperties(43.471487, -80.599914);
+        //}
+        //catch (Exception e)
+        //{
+        //    Console.WriteLine(e.Message);
+        //}
+        //Console.ReadLine();
 
-        //	// the usage of these functions
-        //	//dal_test_demo();
+        // the usage of these functions
+        //dal_test_demo();
+        //}
+
+        //static void Main(string[] args)
+        //{
+        //    the usage of these functions
+        //    dal_test_demo();
         //}
 
         private static void update_property_test()

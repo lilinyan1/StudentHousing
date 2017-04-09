@@ -69,7 +69,7 @@ namespace StudentHousing.DAL
 			foreach (var p in typeof(Property).GetProperties())
 			{
 				// manually inserting id at the moment
-				//if (p.Name != "ID")
+				if (p.Name != "ID")
 				{
 					fieldsName += "[" + p.Name + "],";
 

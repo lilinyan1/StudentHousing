@@ -10,29 +10,34 @@ using StudentHousing.Dto;
 
 namespace WebApi.Controllers
 {
+    [RoutePrefix("api/user")]
     public class UserController : ApiController
     {
-		// GET: api/Db/5
-		[Route("{id}")]
-		public User Get(int id)
-		{
-			return StudentHousing.DAL.User.GetByID(id);
-		}
+        public User Get(int id)
+        {
+            return StudentHousing.DAL.User.GetByID(id);
+        }
 
-        //public bool Get(int userId, int propertyId)
-        //{
-        //    return Bookmark.IsBookmarked(userId, propertyId);
-        //}
-        
-        //public int Post(int userId, int propertyId)
-        //{
-        //    var user = StudentHousing.DAL.User.GetByID(userId);
-        //    return user.CreateBookmark(propertyId, string.Empty);
-        //}
+        public User Get(string email, string pass)
+        {
+            return StudentHousing.DAL.User.Login(email, pass);
+        }
 
-        //public bool Delete(int userId, int propertyId)
-        //{
-        //    return Bookmark.Delete(userId, propertyId);
-        //}
+        public int Post(string fn, string ln, string ph, string em, string pa, int rid)
+        {
+            User user = new User
+            {
+                ID = 0,
+                firstName = fn,
+                lastName = ln,
+                phone = ph,
+                email = em,
+                pass = pa,
+                roleID = rid
+            };
+
+            return user.Create();
+        }
+
     }
 }

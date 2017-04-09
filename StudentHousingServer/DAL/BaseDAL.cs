@@ -49,8 +49,9 @@ namespace StudentHousing.DAL
 					SqlCommand command;
 					if (tableName == "Users" || tableName == "Property")
 					{
-						command = new SqlCommand(string.Format("SET IDENTITY_INSERT {0} ON;INSERT INTO {0} ({1}) VALUES ({2});SET IDENTITY_INSERT {0} OFF;", tableName, insertFields, fieldsValue), conn);
-						command.ExecuteNonQuery();
+						//command = new SqlCommand(string.Format("SET IDENTITY_INSERT {0} ON;INSERT INTO {0} ({1}) VALUES ({2});SET IDENTITY_INSERT {0} OFF;", tableName, insertFields, fieldsValue), conn);
+                        command = new SqlCommand(string.Format("INSERT INTO {0} ({1}) VALUES ({2});", tableName, insertFields, fieldsValue), conn);
+                        command.ExecuteNonQuery();
 					}
 					else
 					{
