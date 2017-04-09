@@ -178,6 +178,8 @@ namespace StudentHousing.DAL
             {
                 values = string.Format("rating = {0}", rating);
 				BaseDAL.UpdateSet(values, "PropertyRating", "[userID]", uid);
+                values = string.Format("comment = '{0}'", comment);
+                BaseDAL.UpdateSet(values, "PropertyRating", "[userID]", uid);
             }
             // if no rating for property by user, add it
             else
