@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+    <TextView
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/textView7"
+        android:text="First Name:" />
+    <EditText
+        android:inputType="textPersonName"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/etFName" />
+    <TextView
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/textView8"
+        android:text="Last Name:" />
+    <EditText
+        android:inputType="textPersonName"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/etLName" />
+    <TextView
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/textView9"
+        android:text="Phone Number: " />
+    <EditText
+        android:inputType="phone"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/etPhone" />
+    <TextView
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/textView10"
+        android:text="Email Address:" />
+    <EditText
+        android:inputType="textEmailAddress"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/etEmail" />
+    <TextView
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/textView11"
+        android:text="Password: " />
+    <EditText
+        android:inputType="textPassword"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/etPass" />
+    <TextView
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/textView12"
+        android:text="Please Select:" />
+    <RadioGroup
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/radioGroup1">
+        <RadioButton
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:checked="true"
+            android:id="@+id/rbRenter"
+            android:text="I'd like to rent a room" />
+        <RadioButton
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/rbPoster"
+            android:text="I'd like to post a room" />
+    </RadioGroup>
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/btnCreateAcc"
+        android:text="Create" />
+</LinearLayout>

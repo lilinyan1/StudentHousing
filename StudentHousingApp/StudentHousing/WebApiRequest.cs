@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -67,7 +67,7 @@ namespace StudentHousing
             return string.Empty;
         }
 
-        public async Task SaveAsync(string webApiName, string param)
+        public async Task<int> SaveAsync(string webApiName, string param)
         {
             var uri = new Uri(string.Format(URL, webApiName, param));
             //var content = new StringContent(json, Encoding.UTF8, "application/json");
@@ -75,10 +75,15 @@ namespace StudentHousing
             HttpResponseMessage response = null;
             response = await client.PostAsync(uri, content);
 
-            if (response.IsSuccessStatusCode)
-            {
-                Console.WriteLine(@"            Item successfully saved.");
-            }
+	    if (response.IsSuccessStatusCode)
+	    {
+	    	Console.WriteLine(@"            Item successfully saved.");
+		return 0;
+	    }
+	    else
+	    {
+	        return 1;
+    	    }
         }
 
         public async Task DeleteAsync(string webApiName, string param)
