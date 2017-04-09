@@ -33,6 +33,15 @@ namespace WebApi.Controllers
             return Property.GetRating(id);
         }
 
+        [System.Web.Http.AcceptVerbs("GET", "POST")]
+        [Route("addrating/{uid}/{pid}/{rating}/{comment}")]
+        public int SetRating(int uid, int pid, double rating, string comment)
+        {
+            int newRating = Convert.ToInt32(rating);
+            Property.AddRating(uid, pid, newRating, comment);
+            return 1;
+        }
+
         // POST: api/Db
         public void Post([FromBody]string value)
         {

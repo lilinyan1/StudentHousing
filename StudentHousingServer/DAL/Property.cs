@@ -168,7 +168,7 @@ namespace StudentHousing.DAL
 			return ret;
 		}
 
-        public static void AddRating(int uid, int pid, int rating, string comment)
+        public static void AddRating(int uid, int pid, double rating, string comment)
         {
             string values = string.Format("'{0}'" + ", " + "'{1}'" + ", " + "'{2}'" + ", " + "'{3}'", uid, pid, rating, comment);
 			var dataRows = BaseDAL.SelectFrom("userid, propertyid", "PropertyRating", string.Format("[propertyID] = {0} AND [userID] = {1}", pid, uid));
