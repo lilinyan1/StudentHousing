@@ -73,12 +73,12 @@
             android:layout_height="wrap_content"
             android:checked="true"
             android:id="@+id/rbRenter"
-            android:text="I'd like to rent a room" />
+            android:text="I'd like to rent a property" />
         <RadioButton
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:id="@+id/rbPoster"
-            android:text="I'd like to post a room" />
+            android:text="I'd like to post a property" />
     </RadioGroup>
     <Button
         android:layout_width="match_parent"

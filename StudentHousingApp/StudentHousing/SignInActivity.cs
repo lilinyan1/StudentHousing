@@ -80,55 +80,63 @@ namespace StudentHousing
 			EditText etEmail = FindViewById<EditText>(Resource.Id.etEmail);
 			EditText etPass = FindViewById<EditText>(Resource.Id.etPass);
 
-			if (etEmail.Text != "")
+			try
 			{
-				if (etPass.Text != "")
+				if (etEmail.Text != "")
 				{
-					try
+					if (etPass.Text != "")
 					{
-						_webApi = new WebApi();
-						var response = _webApi.GetItem("user", string.Format(Constant.USER_SIGNIN_PARAM, etEmail.Text, etPass.Text));
-						StudentHousing.Dto.UserDto user = JsonConvert.DeserializeObject<UserDto>(response);
-						//http://studenthousingapi2.azurewebsites.net/api/user/?email=test@admin.com&pass=testPass
-
-						if (user != null)
+						try
 						{
-							if (user.pass == null) 
+							// issue: crash when internet is disconnected here
+							_webApi = new WebApi();
+							var response = _webApi.GetItem("user", string.Format(Constant.USER_SIGNIN_PARAM, etEmail.Text, etPass.Text));
+							StudentHousing.Dto.UserDto user = JsonConvert.DeserializeObject<UserDto>(response);
+							//http://studenthousingapi2.azurewebsites.net/api/user/?email=test@admin.com&pass=testPass
+
+							if (user != null)
 							{
-								Toast.MakeText(Application.Context, "Password incorrect, please try again.", ToastLength.Long).Show();
-								etPass.Text = "";
+								if (user.pass == null)
+								{
+									Toast.MakeText(Application.Context, "Password incorrect, please try again.", ToastLength.Long).Show();
+									etPass.Text = "";
+								}
+								else
+								{
+									SignIn.SaveCredentials(user.email, user.pass);
+									Toast.MakeText(Application.Context, "Login successfully.", ToastLength.Long).Show();
+									StartActivity(typeof(MainActivity));
+								}
 							}
 							else
 							{
-								SignIn.SaveCredentials(user.email, user.pass);
-								Toast.MakeText(Application.Context, "Login successfully.", ToastLength.Long).Show();
-								StartActivity(typeof(MainActivity));
+								Toast.MakeText(Application.Context, "Could not find your account, please try again.", ToastLength.Long).Show();
+								etPass.Text = "";
+								etEmail.RequestFocus();
 							}
 						}
-						else
+						catch
 						{
 							Toast.MakeText(Application.Context, "Could not find your account, please try again.", ToastLength.Long).Show();
 							etPass.Text = "";
 							etEmail.RequestFocus();
 						}
 					}
-					catch
+					else
 					{
-						Toast.MakeText(Application.Context, "Could not find your account, please try again.", ToastLength.Long).Show();
-						etPass.Text = "";
-						etEmail.RequestFocus();
+						Toast.MakeText(Application.Context, "Please enter your password.", ToastLength.Long).Show();
+						etPass.RequestFocus();
 					}
 				}
 				else
 				{
-					Toast.MakeText(Application.Context, "Please enter your password.", ToastLength.Long).Show();
-					etPass.RequestFocus();
+					Toast.MakeText(Application.Context, "Please enter your email address.", ToastLength.Long).Show();
+					etEmail.RequestFocus();
 				}
 			}
-			else
+			catch
 			{
-				Toast.MakeText(Application.Context, "Please enter your email address.", ToastLength.Long).Show();
-				etEmail.RequestFocus();
+				Toast.MakeText(Application.Context, "Could not connect to internet, please try again.", ToastLength.Long).Show();
 			}
 
 		}
