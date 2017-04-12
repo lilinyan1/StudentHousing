@@ -25,7 +25,7 @@ namespace StudentHousing
         protected override void OnCreate(Bundle savedInstanceState)
         {
             base.OnCreate(savedInstanceState);
-            SetContentView(Resource.Layout.Property);
+            SetContentView(Resource.Layout.PropertyReview);
             _webApi = new WebApi();
 
             MapFragment mapFrag = (MapFragment)FragmentManager.FindFragmentById(Resource.Id.propertyMap);

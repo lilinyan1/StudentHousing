@@ -17,5 +17,6 @@ namespace StudentHousing
         public const string BOOKMARK = "bookmark";
         public const string PROPERTY = "property";
         public const string USER_PROPERTY_PARAM = "?userid={0}&propertyid={1}";
+        public const string PROPERTY_ID = "PropertyId";
     }
 }

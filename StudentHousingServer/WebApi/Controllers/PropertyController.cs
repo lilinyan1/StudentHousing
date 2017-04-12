@@ -6,6 +6,7 @@ using System.Net.Http;
 using System.Web.Http;
 using StudentHousing.DAL;
 using System.Web.UI;
+using Newtonsoft.Json;
 
 namespace WebApi.Controllers
 {
@@ -34,8 +35,10 @@ namespace WebApi.Controllers
         }
 
         // POST: api/Db
-        public void Post([FromBody]string value)
+        public void Post(string sProperty, int userId)
         {
+            var property = JsonConvert.DeserializeObject<Property>(sProperty);
+            property.Create(userId);
         }
 
         // PUT: api/Db/5
