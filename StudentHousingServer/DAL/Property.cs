@@ -107,7 +107,10 @@ namespace StudentHousing.DAL
 							tmp = "NULL";
 						}
 					}
-
+                    else if (p.PropertyType == typeof(bool))
+                    {
+                        tmp = string.Compare(tmp, "true", true) == 0 ? "1" : "0";
+                    }
 					// how can we pass the user id in, parameter?
 					if (p.Name == "PostedBy")
 					{
@@ -168,7 +171,7 @@ namespace StudentHousing.DAL
 			return ret;
 		}
 
-        public static void AddRating(int uid, int pid, int rating, string comment)
+        public static void AddRating(int uid, int pid, double rating, string comment)
         {
             string values = string.Format("'{0}'" + ", " + "'{1}'" + ", " + "'{2}'" + ", " + "'{3}'", uid, pid, rating, comment);
 			var dataRows = BaseDAL.SelectFrom("userid, propertyid", "PropertyRating", string.Format("[propertyID] = {0} AND [userID] = {1}", pid, uid));
@@ -178,6 +181,8 @@ namespace StudentHousing.DAL
             {
                 values = string.Format("rating = {0}", rating);
 				BaseDAL.UpdateSet(values, "PropertyRating", "[userID]", uid);
+                values = string.Format("comment = '{0}'", comment);
+                BaseDAL.UpdateSet(values, "PropertyRating", "[userID]", uid);
             }
             // if no rating for property by user, add it
             else

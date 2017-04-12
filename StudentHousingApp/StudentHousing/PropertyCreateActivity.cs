@@ -17,7 +17,7 @@ namespace StudentHousing
     {
         PropertyDto _property;
         WebApi _webApi;
-        int _userId = 1;  //TODO to be replaced by the user in storage;
+        int _userId;  //TODO to be replaced by the user in storage;
 
 
         protected override void OnCreate(Bundle savedInstanceState)
@@ -25,7 +25,7 @@ namespace StudentHousing
             base.OnCreate(savedInstanceState);
             SetContentView(Resource.Layout.PropertyCreate);
             _webApi = new WebApi();
-
+            _userId = SignIn.UserId != 0 ? SignIn.UserId : 0;
             //MapFragment mapFrag = (MapFragment)FragmentManager.FindFragmentById(Resource.Id.propertyMap);
             //mapFrag.GetMapAsync(this);  
 
@@ -34,27 +34,49 @@ namespace StudentHousing
    
             var saveButton = FindViewById<Button>(Resource.Id.SaveButton);
             saveButton.Click += async (o, e) =>
-            {          
-                _property.pAddress = FindViewById<EditText>(Resource.Id.addressInput).Text;
-                _property.Price = Convert.ToInt32(FindViewById<EditText>(Resource.Id.priceInput).Text);
-                _property.OccupancyDate = Convert.ToDateTime(FindViewById<EditText>(Resource.Id.occupancyDateInput).Text);
-                _property.PropertyDescription = FindViewById<EditText>(Resource.Id.descriptionInput).Text;
-                _property.Comment = FindViewById<EditText>(Resource.Id.notes).Text;
-                _property.IsAirConditioning = FindViewById<CheckBox>(Resource.Id.acCheckbox).Checked;
-                _property.IsBusroute = FindViewById<CheckBox>(Resource.Id.busCheckbox).Checked;
-                _property.IsDishwasher = FindViewById<CheckBox>(Resource.Id.dishWasherCheckbox).Checked;
-                _property.IsParking = FindViewById<CheckBox>(Resource.Id.parkingCheckbox).Checked;
-                _property.IsLaundry = FindViewById<CheckBox>(Resource.Id.laundryCheckbox).Checked;
-                _property.IsFurnished = FindViewById<CheckBox>(Resource.Id.furnishedCheckbox).Checked;
-                _property.IsStove = FindViewById<CheckBox>(Resource.Id.stoveCheckbox).Checked;
-                _property.IsWheelChair = FindViewById<CheckBox>(Resource.Id.wheelChairCheckbox).Checked;
-                _property.IsPetFriendly = FindViewById<CheckBox>(Resource.Id.petFriendlyCheckbox).Checked;
+            {
 
-                var address = GetLocationFromAddress(_property.pAddress);
-                _property.Latitude = address.Latitude;
-                _property.Longitude = address.Longitude;
+                try
+                {
+                    _property = new PropertyDto();
+                    _property.pAddress = this.FindViewById<EditText>(Resource.Id.addreesInput).Text;
+                    _property.Price = Convert.ToInt32(this.FindViewById<EditText>(Resource.Id.priceInput).Text);
+                    _property.School = this.FindViewById<EditText>(Resource.Id.schoolInput).Text;
+                    _property.City = this.FindViewById<EditText>(Resource.Id.cityInput).Text;
+                    _property.Province = this.FindViewById<EditText>(Resource.Id.provinceInput).Text;
+                    _property.PostalCode = this.FindViewById<EditText>(Resource.Id.postalCodeInput).Text;
+                    _property.Country = this.FindViewById<EditText>(Resource.Id.countryInput).Text;
+                    _property.OccupancyDate = Convert.ToDateTime(this.FindViewById<EditText>(Resource.Id.occupancyDateInput).Text);
+                    _property.PropertyDescription = this.FindViewById<EditText>(Resource.Id.descriptionInput).Text;
+                    _property.Comment = this.FindViewById<EditText>(Resource.Id.notesInput).Text;
+                    _property.IsAirConditioning = this.FindViewById<CheckBox>(Resource.Id.acCheckbox).Checked;
+                    _property.IsBusroute = this.FindViewById<CheckBox>(Resource.Id.busCheckbox).Checked;
+                    _property.IsDishwasher = this.FindViewById<CheckBox>(Resource.Id.dishWasherCheckbox).Checked;
+                    _property.IsParking = this.FindViewById<CheckBox>(Resource.Id.parkingCheckbox).Checked;
+                    _property.IsLaundry = this.FindViewById<CheckBox>(Resource.Id.laundryCheckbox).Checked;
+                    _property.IsFurnished = this.FindViewById<CheckBox>(Resource.Id.furnishedCheckbox).Checked;
+                    _property.IsStove = this.FindViewById<CheckBox>(Resource.Id.stoveCheckbox).Checked;
+                    _property.IsWheelChair = this.FindViewById<CheckBox>(Resource.Id.wheelChairCheckbox).Checked;
+                    _property.IsPetFriendly = this.FindViewById<CheckBox>(Resource.Id.petFriendlyCheckbox).Checked;
 
-                await _webApi.SaveAsync(Constant.PROPERTY, string.Format("?sProperty={0}&userId={1}", JsonConvert.SerializeObject(_property), _userId));
+                    var address = GetLocationFromAddress(string.Format("{0}, {1}, {2}", _property.pAddress, _property.City, _property.Province));
+                    if (address != null)
+                    {
+                        _property.Latitude = address.Latitude;
+                        _property.Longitude = address.Longitude;
+                    }
+                    
+                    var ret = await _webApi.SaveAsync(Constant.PROPERTY, string.Format("?userId={0}", _userId), _property);
+                    if (ret == 0)
+                    {
+                        Toast.MakeText(Application.Context, "New property created.", ToastLength.Long).Show();
+                        StartActivity(typeof(MainActivity));
+                    }
+                }
+                catch (Exception exception)
+                {
+                    Console.WriteLine(exception.Message);
+                }
             };
         }
 

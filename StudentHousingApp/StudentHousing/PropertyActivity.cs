@@ -17,7 +17,7 @@ namespace StudentHousing
         GoogleMap _googleMap;
         PropertyDto _property;
         WebApi _webApi;
-        int _userId = 1;  //TODO to be replaced by the user in storage;
+        int _userId;  
 
         private RatingBar ratingBar;
 
@@ -27,6 +27,7 @@ namespace StudentHousing
             base.OnCreate(savedInstanceState);
             SetContentView(Resource.Layout.PropertyReview);
             _webApi = new WebApi();
+            _userId = SignIn.UserId != 0 ? SignIn.UserId : 0;
 
             MapFragment mapFrag = (MapFragment)FragmentManager.FindFragmentById(Resource.Id.propertyMap);
             mapFrag.GetMapAsync(this);
@@ -98,8 +99,11 @@ namespace StudentHousing
         public void AddListenerOnRatingBar()
         {
             ratingBar = FindViewById<RatingBar>(Resource.Id.ratingBar);
+            var response = _webApi.GetItem("property/rating", "1");
+            ratingBar.Rating = JsonConvert.DeserializeObject<float>(response);
             ratingBar.RatingBarChange += (o, e) => {
                 Toast.MakeText(this, "New Rating: " + ratingBar.Rating.ToString(), ToastLength.Short).Show();
+                _webApi.SaveAsync("property/addrating", string.Format("{0}/{1}/{2}/{3}", 1, _property.ID.ToString(), ratingBar.Rating, "noComment"));
             };
         }
         private void AddDrawable(int drawableId, LinearLayout amentitiesView)

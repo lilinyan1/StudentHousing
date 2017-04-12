@@ -16,13 +16,14 @@ namespace StudentHousing
     public class BookmarkActivity : Activity
     {
         WebApi _webapi;
-        int _userId = 1;
+        int _userId;
 
         protected override void OnCreate(Bundle savedInstanceState)
         {
             base.OnCreate(savedInstanceState);            
             SetContentView(Resource.Layout.Bookmark);
             _webapi = new WebApi();
+            _userId = SignIn.UserId != 0 ? SignIn.UserId : 0;
 
             var bookmarksView = FindViewById<LinearLayout>(Resource.Id.bookmarks);
             var bookmarks = JsonConvert.DeserializeObject<List<BookmarkDto>>(_webapi.GetItem(Constant.BOOKMARK, string.Format("?userid={0}", _userId)));

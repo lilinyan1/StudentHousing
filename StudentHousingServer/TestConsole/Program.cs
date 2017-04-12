@@ -2,6 +2,9 @@
 using System.Collections.Generic;
 using StudentHousing.DAL;
 using StudentHousing.Dto;
+using StudentHousing;
+using Newtonsoft.Json;
+
 using System.IO;
 namespace TestConsole
 {
@@ -9,27 +12,56 @@ namespace TestConsole
 	{
         static void Main(string[] args)
         {
-            //Property.AddRating(1, 1, 5, "Pretty cool place.");
-            //Property.AddRating(2, 1, 4, "Pretty cool place.");
-            //Property.AddRating(1, 1, 3, "Pretty cool place.");
-            //Property.AddRating(2, 1, 1, "Pretty cool place.");
 
-
-            //Console.WriteLine(Property.GetRating(1));
-            //Console.ReadLine();
-            byte[] img = File.ReadAllBytes("test1.png");
-            BaseDAL.AddImage(1, "test!", img);
-            img = File.ReadAllBytes("test2.jpg");
-            BaseDAL.AddImage(1, "testing!", img);
-
-            List<byte[]> outImg = BaseDAL.GetImage(1);
-            for (int i = 0; i < outImg.Count; i++)
-            {
-                File.WriteAllBytes("testOut" + i + ".jpg", outImg[i]);
-            }
-            var property = Property.GetByID(1);
+            send();
 
         }
+
+        static async void send()
+        {
+            var _webApi = new WebApi();
+            var _property = new PropertyDto
+            {       
+                pAddress = "990 Creekside Dr, Waterloo, ON N2V 2W3",
+                Price = 500,
+                Latitude = 43.471487,
+                Longitude = -80.599914,
+                //[School],[City],[Province],[Country],[PostalCode],
+                School = "University of Waterloo",
+                City = "Waterloo",
+                Province = "Ontario",
+                Country = "Canada", 
+                PostalCode = "123456",
+                OccupancyDate = new DateTime(2017, 9, 1),
+                IsAirConditioning = true,
+                PropertyDescription = "Spacious room, close to the grocery store.",
+                Comment = "Woman preferred"
+            };
+            await _webApi.SaveAsync(Constant.PROPERTY, string.Format("?userId={0}", 1), _property);
+        }
+        //static void Main(string[] args)
+        //{
+        //    //Property.AddRating(1, 1, 5, "Pretty cool place.");
+        //    //Property.AddRating(2, 1, 4, "Pretty cool place.");
+        //    //Property.AddRating(1, 1, 3, "Pretty cool place.");
+        //    //Property.AddRating(2, 1, 1, "Pretty cool place.");
+
+
+        //    //Console.WriteLine(Property.GetRating(1));
+        //    //Console.ReadLine();
+        //    byte[] img = File.ReadAllBytes("test1.png");
+        //    BaseDAL.AddImage(1, "test!", img);
+        //    img = File.ReadAllBytes("test2.jpg");
+        //    BaseDAL.AddImage(1, "testing!", img);
+
+        //    List<byte[]> outImg = BaseDAL.GetImage(1);
+        //    for (int i = 0; i < outImg.Count; i++)
+        //    {
+        //        File.WriteAllBytes("testOut" + i + ".jpg", outImg[i]);
+        //    }
+        //    var property = Property.GetByID(1);
+
+        //}
 
         //static void Main(string[] args)
         //{

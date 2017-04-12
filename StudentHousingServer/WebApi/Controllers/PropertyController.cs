@@ -34,10 +34,20 @@ namespace WebApi.Controllers
             return Property.GetRating(id);
         }
 
-        // POST: api/Db
-        public void Post(string sProperty, int userId)
+        [System.Web.Http.AcceptVerbs("GET", "POST")]
+        [Route("addrating/{uid}/{pid}/{rating}/{comment}")]
+        public int SetRating(int uid, int pid, double rating, string comment)
         {
-            var property = JsonConvert.DeserializeObject<Property>(sProperty);
+            int newRating = Convert.ToInt32(rating);
+            Property.AddRating(uid, pid, newRating, comment);
+            return 1;
+        }
+
+        // POST: api/Db
+        public void Post(int userId)
+        {
+            
+            var property = JsonConvert.DeserializeObject<Property>(this.Request.Content.ReadAsStringAsync().Result);
             property.Create(userId);
         }
 

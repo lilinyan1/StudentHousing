@@ -26,6 +26,8 @@ namespace StudentHousing
 		
 		public static void UpdateIdValues()
 		{
+			global::PCLCrypto.Resource.String.ApplicationName = global::StudentHousing.Resource.String.ApplicationName;
+			global::PCLCrypto.Resource.String.Hello = global::StudentHousing.Resource.String.Hello;
 		}
 		
 		public partial class Attribute
@@ -292,26 +294,20 @@ namespace StudentHousing
 		public partial class Id
 		{
 			
-			// aapt resource value: 0x7f080031
-			public const int SaveButton = 2131230769;
+			// aapt resource value: 0x7f08002f
+			public const int SaveButton = 2131230767;
 			
-			// aapt resource value: 0x7f080026
-			public const int acCheckbox = 2131230758;
+			// aapt resource value: 0x7f080024
+			public const int acCheckbox = 2131230756;
 			
-			// aapt resource value: 0x7f080011
-			public const int actionPenal = 2131230737;
+			// aapt resource value: 0x7f080015
+			public const int addreesInput = 2131230741;
 			
-			// aapt resource value: 0x7f08001d
-			public const int addreesInput = 2131230749;
+			// aapt resource value: 0x7f080032
+			public const int address = 2131230770;
 			
-			// aapt resource value: 0x7f080034
-			public const int address = 2131230772;
-			
-			// aapt resource value: 0x7f080013
-			public const int addressInput = 2131230739;
-			
-			// aapt resource value: 0x7f08001c
-			public const int addressLable = 2131230748;
+			// aapt resource value: 0x7f080014
+			public const int addressLable = 2131230740;
 			
 			// aapt resource value: 0x7f080005
 			public const int adjust_height = 2131230725;
@@ -319,23 +315,17 @@ namespace StudentHousing
 			// aapt resource value: 0x7f080006
 			public const int adjust_width = 2131230726;
 			
-			// aapt resource value: 0x7f080015
-			public const int advancePanel = 2131230741;
+			// aapt resource value: 0x7f080023
+			public const int amentities = 2131230755;
 			
-			// aapt resource value: 0x7f080017
-			public const int advanceSearchButton = 2131230743;
-			
-			// aapt resource value: 0x7f080025
-			public const int amentities = 2131230757;
-			
-			// aapt resource value: 0x7f080024
-			public const int amentityLabel = 2131230756;
+			// aapt resource value: 0x7f080022
+			public const int amentityLabel = 2131230754;
 			
 			// aapt resource value: 0x7f08000a
 			public const int auto = 2131230730;
 			
-			// aapt resource value: 0x7f080033
-			public const int bookmark = 2131230771;
+			// aapt resource value: 0x7f080031
+			public const int bookmark = 2131230769;
 			
 			// aapt resource value: 0x7f08000e
 			public const int bookmarks = 2131230734;
@@ -343,32 +333,56 @@ namespace StudentHousing
 			// aapt resource value: 0x7f08000d
 			public const int bookmarsScroll = 2131230733;
 			
-			// aapt resource value: 0x7f080027
-			public const int busCheckbox = 2131230759;
+			// aapt resource value: 0x7f08003e
+			public const int btnCreateAcc = 2131230782;
+			
+			// aapt resource value: 0x7f08003c
+			public const int btnLogin = 2131230780;
+			
+			// aapt resource value: 0x7f080025
+			public const int busCheckbox = 2131230757;
+			
+			// aapt resource value: 0x7f08001a
+			public const int cityInput = 2131230746;
+			
+			// aapt resource value: 0x7f08001d
+			public const int countryInput = 2131230749;
 			
 			// aapt resource value: 0x7f08000b
 			public const int dark = 2131230731;
 			
-			// aapt resource value: 0x7f080038
-			public const int description = 2131230776;
+			// aapt resource value: 0x7f080036
+			public const int description = 2131230774;
 			
-			// aapt resource value: 0x7f080023
-			public const int descriptionInput = 2131230755;
+			// aapt resource value: 0x7f080021
+			public const int descriptionInput = 2131230753;
 			
-			// aapt resource value: 0x7f080022
-			public const int descriptionLabel = 2131230754;
+			// aapt resource value: 0x7f080020
+			public const int descriptionLabel = 2131230752;
 			
-			// aapt resource value: 0x7f080028
-			public const int dishWasherCheckbox = 2131230760;
+			// aapt resource value: 0x7f080026
+			public const int dishWasherCheckbox = 2131230758;
 			
 			// aapt resource value: 0x7f08000f
 			public const int drawer_layout = 2131230735;
 			
-			// aapt resource value: 0x7f08002b
-			public const int furnishedCheckbox = 2131230763;
+			// aapt resource value: 0x7f080039
+			public const int etEmail = 2131230777;
 			
-			// aapt resource value: 0x7f080014
-			public const int goButton = 2131230740;
+			// aapt resource value: 0x7f080040
+			public const int etFName = 2131230784;
+			
+			// aapt resource value: 0x7f080042
+			public const int etLName = 2131230786;
+			
+			// aapt resource value: 0x7f08003b
+			public const int etPass = 2131230779;
+			
+			// aapt resource value: 0x7f080044
+			public const int etPhone = 2131230788;
+			
+			// aapt resource value: 0x7f080029
+			public const int furnishedCheckbox = 2131230761;
 			
 			// aapt resource value: 0x7f080000
 			public const int hybrid = 2131230720;
@@ -376,26 +390,20 @@ namespace StudentHousing
 			// aapt resource value: 0x7f080007
 			public const int icon_only = 2131230727;
 			
-			// aapt resource value: 0x7f08002a
-			public const int laundryCheckbox = 2131230762;
+			// aapt resource value: 0x7f080028
+			public const int laundryCheckbox = 2131230760;
 			
-			// aapt resource value: 0x7f080019
-			public const int left_drawer = 2131230745;
+			// aapt resource value: 0x7f080011
+			public const int left_drawer = 2131230737;
 			
 			// aapt resource value: 0x7f08000c
 			public const int light = 2131230732;
 			
-			// aapt resource value: 0x7f08001b
-			public const int linearLayout2 = 2131230747;
+			// aapt resource value: 0x7f080013
+			public const int linearLayout2 = 2131230739;
 			
 			// aapt resource value: 0x7f080010
-			public const int linearLayout4 = 2131230736;
-			
-			// aapt resource value: 0x7f080018
-			public const int map = 2131230744;
-			
-			// aapt resource value: 0x7f080012
-			public const int menuButton = 2131230738;
+			public const int map = 2131230736;
 			
 			// aapt resource value: 0x7f080001
 			public const int none = 2131230721;
@@ -403,65 +411,110 @@ namespace StudentHousing
 			// aapt resource value: 0x7f080002
 			public const int normal = 2131230722;
 			
-			// aapt resource value: 0x7f080039
-			public const int notes = 2131230777;
-			
-			// aapt resource value: 0x7f080030
-			public const int notesInput = 2131230768;
-			
-			// aapt resource value: 0x7f08002f
-			public const int notesLabel = 2131230767;
-			
 			// aapt resource value: 0x7f080037
-			public const int occupancyDate = 2131230775;
-			
-			// aapt resource value: 0x7f080021
-			public const int occupancyDateInput = 2131230753;
-			
-			// aapt resource value: 0x7f080020
-			public const int occupancyDateLabel = 2131230752;
-			
-			// aapt resource value: 0x7f080029
-			public const int parkingCheckbox = 2131230761;
+			public const int notes = 2131230775;
 			
 			// aapt resource value: 0x7f08002e
-			public const int petFriendlyCheckbox = 2131230766;
+			public const int notesInput = 2131230766;
 			
-			// aapt resource value: 0x7f08001f
-			public const int priceInput = 2131230751;
-			
-			// aapt resource value: 0x7f08001e
-			public const int priceLable = 2131230750;
-			
-			// aapt resource value: 0x7f080036
-			public const int priceValue = 2131230774;
-			
-			// aapt resource value: 0x7f080032
-			public const int propertyMap = 2131230770;
+			// aapt resource value: 0x7f08002d
+			public const int notesLabel = 2131230765;
 			
 			// aapt resource value: 0x7f080035
-			public const int ratingBar = 2131230773;
+			public const int occupancyDate = 2131230773;
+			
+			// aapt resource value: 0x7f08001f
+			public const int occupancyDateInput = 2131230751;
+			
+			// aapt resource value: 0x7f08001e
+			public const int occupancyDateLabel = 2131230750;
+			
+			// aapt resource value: 0x7f080027
+			public const int parkingCheckbox = 2131230759;
+			
+			// aapt resource value: 0x7f08002c
+			public const int petFriendlyCheckbox = 2131230764;
+			
+			// aapt resource value: 0x7f08001c
+			public const int postalCodeInput = 2131230748;
+			
+			// aapt resource value: 0x7f080017
+			public const int priceInput = 2131230743;
+			
+			// aapt resource value: 0x7f080016
+			public const int priceLable = 2131230742;
+			
+			// aapt resource value: 0x7f080034
+			public const int priceValue = 2131230772;
+			
+			// aapt resource value: 0x7f080030
+			public const int propertyMap = 2131230768;
+			
+			// aapt resource value: 0x7f08001b
+			public const int provinceInput = 2131230747;
+			
+			// aapt resource value: 0x7f080048
+			public const int radioGroup1 = 2131230792;
+			
+			// aapt resource value: 0x7f080033
+			public const int ratingBar = 2131230771;
+			
+			// aapt resource value: 0x7f08004a
+			public const int rbPoster = 2131230794;
+			
+			// aapt resource value: 0x7f080049
+			public const int rbRenter = 2131230793;
 			
 			// aapt resource value: 0x7f080003
 			public const int satellite = 2131230723;
 			
-			// aapt resource value: 0x7f08001a
-			public const int scrollView2 = 2131230746;
+			// aapt resource value: 0x7f080019
+			public const int schoolInput = 2131230745;
 			
-			// aapt resource value: 0x7f080016
-			public const int space1 = 2131230742;
+			// aapt resource value: 0x7f080018
+			public const int schoolLable = 2131230744;
+			
+			// aapt resource value: 0x7f080012
+			public const int scrollView2 = 2131230738;
 			
 			// aapt resource value: 0x7f080008
 			public const int standard = 2131230728;
 			
-			// aapt resource value: 0x7f08002c
-			public const int stoveCheckbox = 2131230764;
+			// aapt resource value: 0x7f08002a
+			public const int stoveCheckbox = 2131230762;
 			
 			// aapt resource value: 0x7f080004
 			public const int terrain = 2131230724;
 			
-			// aapt resource value: 0x7f08002d
-			public const int wheelChairCheckbox = 2131230765;
+			// aapt resource value: 0x7f080038
+			public const int textView1 = 2131230776;
+			
+			// aapt resource value: 0x7f080045
+			public const int textView10 = 2131230789;
+			
+			// aapt resource value: 0x7f080046
+			public const int textView11 = 2131230790;
+			
+			// aapt resource value: 0x7f080047
+			public const int textView12 = 2131230791;
+			
+			// aapt resource value: 0x7f08003a
+			public const int textView2 = 2131230778;
+			
+			// aapt resource value: 0x7f08003d
+			public const int textView3 = 2131230781;
+			
+			// aapt resource value: 0x7f08003f
+			public const int textView7 = 2131230783;
+			
+			// aapt resource value: 0x7f080041
+			public const int textView8 = 2131230785;
+			
+			// aapt resource value: 0x7f080043
+			public const int textView9 = 2131230787;
+			
+			// aapt resource value: 0x7f08002b
+			public const int wheelChairCheckbox = 2131230763;
 			
 			// aapt resource value: 0x7f080009
 			public const int wide = 2131230729;
@@ -510,6 +563,12 @@ namespace StudentHousing
 			// aapt resource value: 0x7f040004
 			public const int PropertyReview = 2130968580;
 			
+			// aapt resource value: 0x7f040005
+			public const int SignIn = 2130968581;
+			
+			// aapt resource value: 0x7f040006
+			public const int SignUp = 2130968582;
+			
 			static Layout()
 			{
 				global::Android.Runtime.ResourceIdManager.UpdateIdValues();
@@ -539,11 +598,17 @@ namespace StudentHousing
 		public partial class String
 		{
 			
-			// aapt resource value: 0x7f060013
-			public const int StudentHousing = 2131099667;
-			
 			// aapt resource value: 0x7f060012
-			public const int app_name = 2131099666;
+			public const int ApplicationName = 2131099666;
+			
+			// aapt resource value: 0x7f060011
+			public const int Hello = 2131099665;
+			
+			// aapt resource value: 0x7f060015
+			public const int StudentHousing = 2131099669;
+			
+			// aapt resource value: 0x7f060014
+			public const int app_name = 2131099668;
 			
 			// aapt resource value: 0x7f060000
 			public const int common_google_play_services_enable_button = 2131099648;
@@ -596,11 +661,11 @@ namespace StudentHousing
 			// aapt resource value: 0x7f06000f
 			public const int common_signin_button_text_long = 2131099663;
 			
-			// aapt resource value: 0x7f060014
-			public const int google_maps_key = 2131099668;
+			// aapt resource value: 0x7f060016
+			public const int google_maps_key = 2131099670;
 			
-			// aapt resource value: 0x7f060011
-			public const int hello = 2131099665;
+			// aapt resource value: 0x7f060013
+			public const int hello = 2131099667;
 			
 			static String()
 			{

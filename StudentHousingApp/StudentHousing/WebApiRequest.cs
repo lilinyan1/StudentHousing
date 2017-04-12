@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -18,9 +18,10 @@ using System.IO;
 
 namespace StudentHousing
 {
-    class WebApi
+    public class WebApi
     {
         static string URL = @"http://studenthousingapi2.azurewebsites.net/api/{0}/{1}";
+        //static string URL = @"http://localhost:37097/api/{0}/{1}";
         HttpClient client;
 
         public WebApi()
@@ -34,8 +35,8 @@ namespace StudentHousing
         {
             try
             {
-                var request = HttpWebRequest.Create(string.Format(@"http://10.10.0.226:37097/api/{0}/{1}", webApiName, param));
-                //var request = HttpWebRequest.Create(string.Format(URL, webApiName, param));
+                //var request = HttpWebRequest.Create(string.Format(@"http://10.10.0.226:37097/api/{0}/{1}", webApiName, param));
+                var request = HttpWebRequest.Create(string.Format(URL, webApiName, param));
                 request.ContentType = "application/json";
                 request.Method = "GET";
 
@@ -62,23 +63,29 @@ namespace StudentHousing
             catch (HttpRequestException ex)
             {
                 Console.WriteLine(ex.InnerException.Message);
+		return string.Empty;
             }
 
             return string.Empty;
         }
 
-        public async Task SaveAsync(string webApiName, string param)
+        public async Task<int> SaveAsync(string webApiName, string param, object postObject = null)
         {
             var uri = new Uri(string.Format(URL, webApiName, param));
-            //var content = new StringContent(json, Encoding.UTF8, "application/json");
-            var content = new StringContent(string.Empty);
             HttpResponseMessage response = null;
+            var contentString = postObject == null ? string.Empty : JsonConvert.SerializeObject(postObject);
+            var content = new StringContent(JsonConvert.SerializeObject(postObject), Encoding.UTF8, "application/json");
             response = await client.PostAsync(uri, content);
 
-            if (response.IsSuccessStatusCode)
-            {
-                Console.WriteLine(@"            Item successfully saved.");
-            }
+	    if (response.IsSuccessStatusCode)
+	    {
+	    	Console.WriteLine(@"            Item successfully saved.");
+		return 0;
+	    }
+	    else
+	    {
+	        return 1;
+    	    }
         }
 
         public async Task DeleteAsync(string webApiName, string param)
