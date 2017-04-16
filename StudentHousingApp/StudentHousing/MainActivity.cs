@@ -121,7 +121,7 @@ namespace StudentHousing
                     if (SignIn.UserId == 0)
                     { Toast.MakeText(Application.Context, "Pleae Login first.", ToastLength.Long).Show(); }
                     else
-                    { StartActivity(typeof(PropertyCreateActivity)); }
+                    { StartActivity(typeof(PostsActivity)); }
                     
                 }
 			}
@@ -149,10 +149,16 @@ namespace StudentHousing
 			//var properties = GetPropertiesCloseBy();
 			foreach (var property in properties)
 			{
-				googleMap.AddMarker(new MarkerOptions()
-				.SetPosition(new LatLng(property.Latitude, property.Longitude))
-				.SetTitle(property.pAddress)
-				.SetSnippet(string.Format("$ {0}", property.Price))).Tag = property.ID;
+                //uncomment the IF block to prevent unlisted properties from showing on the map
+
+                //if (property.StatusID != 1)
+                //{
+                //    continue;
+                //}
+                googleMap.AddMarker(new MarkerOptions()
+                .SetPosition(new LatLng(property.Latitude, property.Longitude))
+                .SetTitle(property.pAddress)
+                .SetSnippet(string.Format("$ {0}", property.Price))).Tag = property.ID;	
 			}
 		}
 
