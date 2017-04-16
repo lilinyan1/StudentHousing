@@ -43,6 +43,15 @@ namespace WebApi.Controllers
             return 1;
         }
 
+        [System.Web.Http.AcceptVerbs("GET", "POST")]
+        [Route("setActive/{pid}/{active}")]
+        public int UpdateActive(int pid, int active)
+        {
+            string s = string.Format("statusId={0}", active);
+            int i = BaseDAL.UpdateSet(s, "property", "id", pid.ToString());
+            return 1;
+        }
+
         // POST: api/Db
         public void Post(int userId)
         {

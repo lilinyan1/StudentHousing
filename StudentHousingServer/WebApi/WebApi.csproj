@@ -155,6 +155,7 @@
     <None Include="Properties\PublishProfiles\azure.pubxml" />
     <None Include="Properties\PublishProfiles\custom.pubxml" />
     <None Include="Properties\PublishProfiles\localhost.pubxml" />
+    <None Include="Properties\PublishProfiles\StudentHousingApi2 - Web Deploy.pubxml" />
     <None Include="Properties\PublishProfiles\WebDeploy.pubxml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
