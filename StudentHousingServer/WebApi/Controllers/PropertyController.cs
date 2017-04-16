@@ -52,6 +52,12 @@ namespace WebApi.Controllers
             return 1;
         }
 
+        [Route("getPosts/{uid}")]
+        public List<Property> GetPosts(int uid)
+        {
+            return Property.GetPosts(uid);
+        }
+
         // POST: api/Db
         public void Post(int userId)
         {
