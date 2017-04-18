@@ -8,179 +8,195 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:id="@+id/linearLayout2">
+        <TextView
+            android:text="Address"
+            android:id="@+id/addressLable"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:minWidth="200px" />
+        <EditText
+            android:id="@+id/addreesInput"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+        <TextView
+            android:text="Price"
+            android:id="@+id/priceLable"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:minWidth="200px" />
+        <EditText
+            android:inputType="number"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/priceInput" />
+        <TextView
+            android:text="School"
+            android:id="@+id/schoolLable"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:minWidth="200px" />
+        <EditText
+            android:id="@+id/schoolInput"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+        <TextView
+            android:text="City"
+            android:id="@+id/addressLable"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:minWidth="200px" />
+        <EditText
+            android:id="@+id/cityInput"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+        <TextView
+            android:text="Province"
+            android:id="@+id/addressLable"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:minWidth="200px" />
+        <EditText
+            android:id="@+id/provinceInput"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+        <TextView
+            android:text="Postal Code"
+            android:id="@+id/addressLable"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:minWidth="200px" />
+        <EditText
+            android:id="@+id/postalCodeInput"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+        <TextView
+            android:text="Country"
+            android:id="@+id/addressLable"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:minWidth="200px" />
+        <EditText
+            android:id="@+id/countryInput"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+        <TextView
+            android:text="Occupancy Date"
+            android:id="@+id/occupancyDateLabel"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:minWidth="200px" />
+        <DatePicker
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/occupancyDateInput" />
+        <TextView
+            android:id="@+id/descriptionLabel"
+            android:text="Description"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:minWidth="200px" />
+        <EditText
+            android:id="@+id/descriptionInput"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+        <TextView
+            android:text="Amentities"
+            android:id="@+id/amentityLabel"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10px" />
+        <LinearLayout
+            android:orientation="vertical"
+            android:id="@+id/amentities"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10px">
+            <CheckBox
+                android:text="Air Conditioner"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/acCheckbox" />
+            <CheckBox
+                android:text="Bus"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/busCheckbox" />
+            <CheckBox
+                android:text="Dish Washer"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/dishWasherCheckbox" />
+            <CheckBox
+                android:text="Parking"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/parkingCheckbox" />
+            <CheckBox
+                android:text="Laundry"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/laundryCheckbox" />
+            <CheckBox
+                android:text="Furnished"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/furnishedCheckbox" />
+            <CheckBox
+                android:text="Stove"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/stoveCheckbox" />
+            <CheckBox
+                android:text="Wheel Chair"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/wheelChairCheckbox" />
+            <CheckBox
+                android:text="Pet Friendly"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/petFriendlyCheckbox" />
+        </LinearLayout>
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/linearLayout2"
+            android:layout_marginTop="10px">
             <TextView
-                android:text="Address"
-                android:id="@+id/addressLable"
+                android:id="@+id/notesLabel"
+                android:text="Notes"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:minWidth="200px" />
             <EditText
-                android:id="@+id/addreesInput"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content" />
-            <TextView
-                android:text="Price"
-                android:id="@+id/priceLable"
+                android:id="@+id/notesInput"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:minWidth="200px" />
-            <EditText
-                android:inputType="number"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:id="@+id/priceInput" />
-            <TextView
-                android:text="School"
-                android:id="@+id/schoolLable"
+                android:minWidth="300px" />
+        </LinearLayout>
+        <Button
+            android:id="@+id/addPhotoButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Add Photos" />
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/imagesContainer">
+            <ImageView
+                android:id="@+id/photoView"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:minWidth="200px" />
-            <EditText
-                android:id="@+id/schoolInput"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content" />
-            <TextView
-                android:text="City"
-                android:id="@+id/addressLable"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:minWidth="200px" />
-            <EditText
-                android:id="@+id/cityInput"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content" />
-            <TextView
-                android:text="Province"
-                android:id="@+id/addressLable"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:minWidth="200px" />
-            <EditText
-                android:id="@+id/provinceInput"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content" />
-            <TextView
-                android:text="Postal Code"
-                android:id="@+id/addressLable"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:minWidth="200px" />
-            <EditText
-                android:id="@+id/postalCodeInput"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content" />
-            <TextView
-                android:text="Country"
-                android:id="@+id/addressLable"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:minWidth="200px" />
-            <EditText
-                android:id="@+id/countryInput"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content" />
-            <TextView
-                android:text="Occupancy Date"
-                android:id="@+id/occupancyDateLabel"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:minWidth="200px" />
-            <EditText
-                android:inputType="date"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:id="@+id/occupancyDateInput" />
-            <TextView
-                android:id="@+id/descriptionLabel"
-                android:text="Description"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:minWidth="200px" />
-            <EditText
-                android:id="@+id/descriptionInput"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content" />
-            <TextView
-                android:text="Amentities"
-                android:id="@+id/amentityLabel"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="10px" />
-            <LinearLayout
-                android:orientation="vertical"
-                android:id="@+id/amentities"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="10px">
-                <CheckBox
-                    android:text="Air Conditioner"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:id="@+id/acCheckbox" />
-                <CheckBox
-                    android:text="Bus"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:id="@+id/busCheckbox" />
-                <CheckBox
-                    android:text="Dish Washer"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:id="@+id/dishWasherCheckbox" />
-                <CheckBox
-                    android:text="Parking"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:id="@+id/parkingCheckbox" />
-                <CheckBox
-                    android:text="Laundry"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:id="@+id/laundryCheckbox" />
-                <CheckBox
-                    android:text="Furnished"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:id="@+id/furnishedCheckbox" />
-                <CheckBox
-                    android:text="Stove"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:id="@+id/stoveCheckbox" />
-                <CheckBox
-                    android:text="Wheel Chair"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:id="@+id/wheelChairCheckbox" />
-                <CheckBox
-                    android:text="Pet Friendly"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:id="@+id/petFriendlyCheckbox" />
-            </LinearLayout>
-            <LinearLayout
-                android:orientation="horizontal"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:id="@+id/linearLayout2"
-                android:layout_marginTop="10px">
-                <TextView
-                    android:id="@+id/notesLabel"
-                    android:text="Notes"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:minWidth="200px" />
-                <EditText
-                    android:id="@+id/notesInput"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:minWidth="300px" />
-            </LinearLayout>
-            <Button
-                android:text="Save"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:id="@+id/SaveButton"            
-                android:gravity="center"/>
+                android:maxWidth="500px"
+                android:maxHeight="300px" />
+        </LinearLayout>
+        <Button
+            android:text="Save"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/SaveButton"
+            android:gravity="center" />
     </LinearLayout>
 </ScrollView>

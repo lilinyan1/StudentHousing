@@ -8,6 +8,8 @@ using System.Threading.Tasks;
 using Newtonsoft.Json;
 using Android.Gms.Maps;
 using Android.Gms.Maps.Model;
+using Android.Graphics;
+using System.Collections.Generic;
 
 namespace StudentHousing
 {
@@ -61,10 +63,8 @@ namespace StudentHousing
                 AddDrawable(Resource.Drawable.wheelChair, amentitiesView);
             if (_property.IsPetFriendly)
                 AddDrawable(Resource.Drawable.petFriendly, amentitiesView);
-
             var bookmark = FindViewById<ToggleButton>(Resource.Id.bookmark);
 
-            
             var response = _webApi.GetItem("Bookmark", GetUserAndPropertyParam(propertyId));
             var isBookmarked = JsonConvert.DeserializeObject<bool>(response);
             if (isBookmarked)
@@ -76,19 +76,35 @@ namespace StudentHousing
                 bookmark.Checked = false;
             }
 
-
-            bookmark.Click += async (o, e) =>
+            try
             {
-                var param = GetUserAndPropertyParam(propertyId);
-                if (bookmark.Checked)
+                bookmark.Click += async (o, e) =>
                 {
-                    await _webApi.SaveAsync("bookmark", param);
-                }
-                else
+                    var param = GetUserAndPropertyParam(propertyId);
+                    if (bookmark.Checked)
+                    {
+                        await _webApi.SaveAsync("bookmark", param);
+                    }
+                    else
+                    {
+                        await _webApi.DeleteAsync("bookmark", param);
+                    }
+                };
+
+                var bytes = JsonConvert.DeserializeObject<List<Byte[]>>(_webApi.GetItem("property/getphoto", _property.ID.ToString()));
+                if (bytes != null && bytes.Count > 0)
                 {
-                    await _webApi.DeleteAsync("bookmark", param);
+                    var imageByte = bytes[0];
+                    var imageBitmap = BitmapFactory.DecodeByteArray(imageByte, 0, imageByte.Length);
+                    var imageView = FindViewById<ImageView>(Resource.Id.photoView_PropertyView);
+                    imageView.SetImageBitmap(imageBitmap);
                 }
-            };
+            }
+            catch(Exception exception)
+            {
+                Console.WriteLine(exception.Message);
+            }
+            
         }
 
         private string GetUserAndPropertyParam(int propertyId)

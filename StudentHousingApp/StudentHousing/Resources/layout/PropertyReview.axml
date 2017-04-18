@@ -117,6 +117,24 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="20px" />
+            <TextView
+                android:text="Photos"
+                android:id="@+id/photoLabel"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10px" />
+            <LinearLayout
+                android:orientation="vertical"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/imagesContainer">
+                <ImageView
+                    android:id="@+id/photoView_PropertyView"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:maxWidth="500px"
+                    android:maxHeight="300px" />
+            </LinearLayout>
         </LinearLayout>
     </LinearLayout>
 </ScrollView>

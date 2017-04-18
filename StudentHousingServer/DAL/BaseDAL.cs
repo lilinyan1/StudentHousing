@@ -42,31 +42,24 @@ namespace StudentHousing.DAL
 
 			using (SqlConnection conn = new SqlConnection())
 			{
-				try
+                var ret = int.MinValue;
+                try
 				{
 					conn.ConnectionString = CONNECTION_STRING;
 					conn.Open();
 					SqlCommand command;
-					if (tableName == "Users" || tableName == "Property")
-					{
-						//command = new SqlCommand(string.Format("SET IDENTITY_INSERT {0} ON;INSERT INTO {0} ({1}) VALUES ({2});SET IDENTITY_INSERT {0} OFF;", tableName, insertFields, fieldsValue), conn);
-                        command = new SqlCommand(string.Format("INSERT INTO {0} ({1}) VALUES ({2});", tableName, insertFields, fieldsValue), conn);
-                        command.ExecuteNonQuery();
-					}
-					else
-					{
-						command = new SqlCommand(string.Format("INSERT INTO {0} ({1}) VALUES ({2});", tableName, insertFields, fieldsValue), conn);
-						command.ExecuteNonQuery();
-					}
-					return 0;
-				}
+
+                    //command = new SqlCommand(string.Format("SET IDENTITY_INSERT {0} ON;INSERT INTO {0} ({1}) VALUES ({2});SET IDENTITY_INSERT {0} OFF;", tableName, insertFields, fieldsValue), conn);
+                    command = new SqlCommand(string.Format("INSERT INTO {0} ({1}) output INSERTED.ID VALUES ({2});", tableName, insertFields, fieldsValue), conn);
+                    ret = (int)command.ExecuteScalar();
+
+                }
 				catch (Exception e)
 				{
 					Logging.Log("DAL", "InsertInto", e.Message, false);
 
 				}
-				return 1;
-
+				return ret;
 			}
 		}
 
@@ -75,19 +68,19 @@ namespace StudentHousing.DAL
 
 			using (SqlConnection conn = new SqlConnection())
 			{
-				try
+                try
 				{
 					conn.ConnectionString = CONNECTION_STRING;
 					conn.Open();
 					SqlCommand command = new SqlCommand(string.Format("UPDATE {0} SET {1} WHERE {2} = {3}", tableName, updateValues, conditionColumnName, conditionValue), conn);
-					command.ExecuteNonQuery();
-					return 0;
-				}
+                    command.ExecuteNonQuery();
+                    return 0;
+                }
 				catch (Exception e)
 				{
 					Logging.Log("DAL", "UpdateSet", e.Message, false);
 				}
-				return 1;
+				return int.MinValue;
 			}
 		}
 
@@ -154,7 +147,7 @@ namespace StudentHousing.DAL
                 {
                     Logging.Log("DAL", "GetImage", e.Message, false);
                 }
-                return 1;
+                return int.MinValue;
             }
         }
 

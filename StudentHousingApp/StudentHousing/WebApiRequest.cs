@@ -63,7 +63,7 @@ namespace StudentHousing
             catch (HttpRequestException ex)
             {
                 Console.WriteLine(ex.InnerException.Message);
-		return string.Empty;
+		        return string.Empty;
             }
 
             return string.Empty;
@@ -72,20 +72,28 @@ namespace StudentHousing
         public async Task<int> SaveAsync(string webApiName, string param, object postObject = null)
         {
             var uri = new Uri(string.Format(URL, webApiName, param));
-            HttpResponseMessage response = null;
             var contentString = postObject == null ? string.Empty : JsonConvert.SerializeObject(postObject);
             var content = new StringContent(JsonConvert.SerializeObject(postObject), Encoding.UTF8, "application/json");
-            response = await client.PostAsync(uri, content);
+            var response = await client.PostAsync(uri, content);
 
-	    if (response.IsSuccessStatusCode)
-	    {
-	    	Console.WriteLine(@"            Item successfully saved.");
-		return 0;
-	    }
-	    else
-	    {
-	        return 1;
-    	    }
+
+            if (response.StatusCode != HttpStatusCode.OK)
+            {
+                Console.Out.WriteLine("Error fetching data. Server returned status code: {0}", response.StatusCode);
+            }
+            else
+            {
+                var ret = response.Content.ReadAsStringAsync();
+                if (string.IsNullOrWhiteSpace(ret.Result))
+                {
+                    Console.Out.WriteLine("Response contained empty body...");
+                }
+                else
+                {
+                    return Convert.ToInt32(ret.Result);
+                }
+            }
+            return int.MinValue;
         }
 
         public async Task DeleteAsync(string webApiName, string param)

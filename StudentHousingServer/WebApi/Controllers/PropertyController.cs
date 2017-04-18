@@ -43,12 +43,27 @@ namespace WebApi.Controllers
             return 1;
         }
 
+        [System.Web.Http.AcceptVerbs("GET", "POST")]
+        [Route("AddPhoto/{pid}")]
+        public int AddPhoto(int pid)
+        {
+            var img = JsonConvert.DeserializeObject<byte[]>(this.Request.Content.ReadAsStringAsync().Result);
+            return BaseDAL.AddImage(pid, string.Empty, img);
+        }
+
+        [System.Web.Http.AcceptVerbs("GET", "POST")]
+        [Route("GetPhoto/{pid}")]
+        public List<Byte[]> GetPhoto(int pid)
+        {
+            return BaseDAL.GetImage(pid);
+        }
+
         // POST: api/Db
-        public void Post(int userId)
+        public int Post(int userId)
         {
             
             var property = JsonConvert.DeserializeObject<Property>(this.Request.Content.ReadAsStringAsync().Result);
-            property.Create(userId);
+            return property.Create(userId);
         }
 
         // PUT: api/Db/5
