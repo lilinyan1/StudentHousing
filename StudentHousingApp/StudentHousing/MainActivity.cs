@@ -26,9 +26,10 @@ namespace StudentHousing
 		//LocationManager _locationManager;
 		//string _locationProvider;
 		WebApi _webApi;
-		String[] menuItems = { "Sign in", "Bookmarks", "Posts" };
+		String[] menuItems = { "Sign in", "Bookmarks", "Posts", "Refresh Map" };
 		DrawerLayout mDrawerLayout;
 		ListView mDrawerList;
+        bool isUpdateAll = true;
 
 		protected override void OnCreate(Bundle savedInstanceState)
 		{
@@ -47,7 +48,8 @@ namespace StudentHousing
 					menuItems[0] = "Sign out";
 					menuItems[1] = "Bookmarks";
 					menuItems[2] = "Posts";
-				}
+                    menuItems[3] = "Refresh Map";
+                }
 				else if (SignIn.AutoSignIn() == 2) 
 				{
 					menuItems[0] = "Sign out";
@@ -71,17 +73,22 @@ namespace StudentHousing
 				Console.WriteLine(e.Message);
 			}
 
-			try
-			{
-				MapFragment mapFrag = (MapFragment)FragmentManager.FindFragmentById(Resource.Id.map);
-				mapFrag.GetMapAsync(this);
-
-			}
-			catch
-			{
-
-			}
+			
+            SetMap();
 		}
+
+        public void SetMap()
+        {
+            try
+            {
+                MapFragment mapFrag = (MapFragment)FragmentManager.FindFragmentById(Resource.Id.map);
+                mapFrag.GetMapAsync(this);
+            }
+            catch(Exception e)
+            {
+                Console.WriteLine(e.Message);
+            }
+        }
 
 		// drawer item on click handler
 		void mDrawerClick(object sender, AdapterView.ItemClickEventArgs e)
@@ -121,40 +128,72 @@ namespace StudentHousing
                     if (SignIn.UserId == 0)
                     { Toast.MakeText(Application.Context, "Pleae Login first.", ToastLength.Long).Show(); }
                     else
-                    { StartActivity(typeof(PropertyCreateActivity)); }
+                    {
+                        var postActivity = new Intent(this, typeof(PostsActivity));
+                        StartActivity(postActivity);
+                    }
                     
                 }
 			}
-		}
+            else if (e.Id == 3)
+            {
+                if (menuItems[e.Id] == "Refresh Map")
+                {
+                    if (SignIn.UserId == 0)
+                    { Toast.MakeText(Application.Context, "Pleae Login first.", ToastLength.Long).Show(); }
+                    else
+                    {
+                        isUpdateAll = true;
+                        SetMap();
+                    }
+
+                }
+            }
+        }
 
 		public void OnMapReady(GoogleMap googleMap)
 		{
 			googleMap.MyLocationEnabled = true;
 			_googleMap = googleMap;
+            _googleMap.Clear();
 
-			googleMap.MyLocationChange += (s, e) =>
-			{
-				if (_currentLocation == null)
-				{
-					var latlng = new LatLng(e.Location.Latitude, e.Location.Longitude);
-					_googleMap.MoveCamera(CameraUpdateFactory.NewLatLngZoom(latlng, 15));
-				}
-				_currentLocation = e.Location;
-			};
+            try
+            {
+                _googleMap.MyLocationChange += (s, e) =>
+                {
+                    if (_currentLocation == null)
+                    {
+                        var latlng = new LatLng(e.Location.Latitude, e.Location.Longitude);
+                        _googleMap.MoveCamera(CameraUpdateFactory.NewLatLngZoom(latlng, 15));
+                    }
+                    else if (_currentLocation != null && isUpdateAll)
+                    {
+                        isUpdateAll = false;
+                        var response = _webApi.GetItem("property", string.Format("{0}/{1}",
+                            _currentLocation.Latitude.ToString().Replace('.', 'e'),
+                            _currentLocation.Longitude.ToString().Replace('.', 'e')));
 
-			googleMap.InfoWindowClick += MapOnInfoWindowClick;
+                        var properties = JsonConvert.DeserializeObject<List<PropertyDto>>(response);
+                        //var properties = GetPropertiesCloseBy();
+                        foreach (var property in properties)
+                        {
+                            googleMap.AddMarker(new MarkerOptions()
+                            .SetPosition(new LatLng(property.Latitude, property.Longitude))
+                            .SetTitle(property.pAddress)
+                            .SetSnippet(string.Format("$ {0}", property.Price))).Tag = property.ID;
+                        }
+                    }
+                    _currentLocation = e.Location;
+                };
 
-			var response = _webApi.GetItem("property", "43e471487/-80e599914");
-			var properties = JsonConvert.DeserializeObject<List<PropertyDto>>(response);
-			//var properties = GetPropertiesCloseBy();
-			foreach (var property in properties)
-			{
-				googleMap.AddMarker(new MarkerOptions()
-				.SetPosition(new LatLng(property.Latitude, property.Longitude))
-				.SetTitle(property.pAddress)
-				.SetSnippet(string.Format("$ {0}", property.Price))).Tag = property.ID;
-			}
+                googleMap.InfoWindowClick += MapOnInfoWindowClick;
+            }
+			catch (Exception e)
+            {
+                Console.WriteLine(e.Message);
+            }
 		}
+
 
 		private void MapOnInfoWindowClick(object sender, GoogleMap.InfoWindowClickEventArgs infoWindowClickEventArgs)
 		{
@@ -166,28 +205,6 @@ namespace StudentHousing
             else
             { StartActivity(propertyActivity); }
             
-		}
-
-		private List<PropertyDto> GetPropertiesCloseBy()
-		{
-			var properties = new List<PropertyDto>();
-			properties.Add(new PropertyDto
-			{
-				ID = 1,
-				Latitude = 43.471487,
-				Longitude = -80.599914,
-				Price = 500,
-				pAddress = "990 Creekside Dr, Waterloo, ON N2V 2W3"
-			});
-			properties.Add(new PropertyDto
-			{
-				ID = 2,
-				Latitude = 43.391943,
-				Longitude = -80.408000,
-				Price = 510,
-				pAddress = "5 Orchard Mill Crescent, Kitchener, ON N2P 1T2"
-			});
-			return properties;
 		}
 
 	}

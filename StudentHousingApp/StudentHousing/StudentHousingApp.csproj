@@ -131,6 +131,7 @@
   <ItemGroup>
     <Compile Include="BookmarkActivity.cs" />
     <Compile Include="Constant.cs" />
+    <Compile Include="PostsActivity.cs" />
     <Compile Include="PropertyCreateActivity.cs" />
     <Compile Include="PropertyActivity.cs" />
     <Compile Include="Resources\Resource.designer.cs" />
@@ -160,6 +161,7 @@
     <AndroidResource Include="Resources\layout\PropertyCreate.axml">
       <SubType>Designer</SubType>
     </AndroidResource>
+    <AndroidResource Include="Resources\layout\Posts.axml" />
   </ItemGroup>
   <ItemGroup>
     <AndroidResource Include="Resources\layout\Main.axml">

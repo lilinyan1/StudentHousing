@@ -60,7 +60,7 @@ namespace StudentHousing
                     }
                 }
             }
-            catch (HttpRequestException ex)
+            catch (Exception ex)
             {
                 Console.WriteLine(ex.InnerException.Message);
 		        return string.Empty;

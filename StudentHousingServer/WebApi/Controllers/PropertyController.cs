@@ -58,6 +58,21 @@ namespace WebApi.Controllers
             return BaseDAL.GetImage(pid);
         }
 
+        [System.Web.Http.AcceptVerbs("GET", "POST")]
+        [Route("setActive/{pid}/{active}")]
+        public int UpdateActive(int pid, int active)
+        {
+            string s = string.Format("statusId={0}", active);
+            int i = BaseDAL.UpdateSet(s, "property", "id", pid.ToString());
+            return 1;
+        }
+
+        [Route("getPosts/{uid}")]
+        public List<Property> GetPosts(int uid)
+        {
+            return Property.GetPosts(uid);
+        }
+
         // POST: api/Db
         public int Post(int userId)
         {

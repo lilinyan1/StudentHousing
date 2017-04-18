@@ -234,14 +234,28 @@ namespace StudentHousing.DAL
 			return 0;
 		}
 
-		public static List<Property> SearchCloseByProperties(double latitude, double longitude)
+        public static List<Property> GetPosts(int id)
+        {
+            string fieldsName = GetFields();
+            var dataRows = BaseDAL.SelectFrom(fieldsName, "Property", string.Format("[postedBy] = {0}", id));
+
+            var properties = new List<Property>();
+            foreach (System.Data.DataRow row in dataRows)
+            {
+                var property = LoadProperty(row);
+                properties.Add(property);
+            }
+            return properties;
+        }
+
+        public static List<Property> SearchCloseByProperties(double latitude, double longitude)
 		{
 			var adjustment = 0.3;
 			var latitudeMin = latitude - adjustment;
 			var latitudeMax = latitude + adjustment;
 			var longitudeMin = longitude - adjustment;
 			var longitudeMax = longitude + adjustment;
-			var condition = string.Format("[Latitude] >= {0} AND [Latitude] < {1} AND [Longitude] >= {2} AND [Longitude] < {3}", latitudeMin, latitudeMax, longitudeMin, longitudeMax);
+			var condition = string.Format("[Latitude] >= {0} AND [Latitude] < {1} AND [Longitude] >= {2} AND [Longitude] < {3} AND [statusID] = 1", latitudeMin, latitudeMax, longitudeMin, longitudeMax);
 			var dataRows = BaseDAL.SelectFrom(GetFields(), "Property", condition);
 
 			var properties = new List<Property>();
