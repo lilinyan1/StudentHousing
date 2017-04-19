@@ -40,18 +40,25 @@ namespace StudentHousing
 					menuItems[0] = "Sign in";
 					menuItems[1] = "";
 					menuItems[2] = "";
+					menuItems[3] = "";
 				}
 				else if (SignIn.AutoSignIn() == 1)
 				{
 					menuItems[0] = "Sign out";
 					menuItems[1] = "Bookmarks";
 					menuItems[2] = "Posts";
+<<<<<<< HEAD
                 }
+=======
+                    			menuItems[3] = "Refresh Map";
+                		}
+>>>>>>> 39d32d5... Add the encryption of the password while storing locally and before sending to the web api
 				else if (SignIn.AutoSignIn() == 2) 
 				{
 					menuItems[0] = "Sign out";
 					menuItems[1] = "Bookmarks";
 					menuItems[2] = "";
+					menuItems[3] = "";
 				}
 
 				// Set our view from the "main" layout resource
@@ -103,6 +110,7 @@ namespace StudentHousing
 					menuItems[0] = "Sign in";
 					menuItems[1] = "";
 					menuItems[2] = "";
+					menuItems[3] = "";
 					//mDrawerList.
 					mDrawerList.SetAdapter(new ArrayAdapter<String>(this, Resource.Layout.drawer_list_item, menuItems));
 				}

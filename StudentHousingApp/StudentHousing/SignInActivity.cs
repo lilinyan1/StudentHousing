@@ -90,7 +90,7 @@ namespace StudentHousing
 						{
 							// issue: crash when internet is disconnected here
 							_webApi = new WebApi();
-							var response = _webApi.GetItem("user", string.Format(Constant.USER_SIGNIN_PARAM, etEmail.Text, etPass.Text));
+							var response = _webApi.GetItem("user", string.Format(Constant.USER_SIGNIN_PARAM, etEmail.Text, Utility.EncryptString(etPass.Text)));
 							StudentHousing.Dto.UserDto user = JsonConvert.DeserializeObject<UserDto>(response);
 							//http://studenthousingapi2.azurewebsites.net/api/user/?email=test@admin.com&pass=testPass
 

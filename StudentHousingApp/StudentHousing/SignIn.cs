@@ -7,7 +7,7 @@ namespace StudentHousing
 {
 	public static class SignIn
 	{
-        public static int UserId = 0;
+        	public static int UserId = 0;
 
 		public static void SaveCredentials(string userName, string password)
 		{
@@ -67,7 +67,7 @@ namespace StudentHousing
 				}
 				else
 				{
-                    UserId = user.ID;
+                    			UserId = user.ID;
 					retcode = user.roleID;
 				}
 			}
@@ -81,7 +81,7 @@ namespace StudentHousing
 
 		public static void DeleteCredentials()
 		{
-            UserId = 0;
+            		UserId = 0;
 			var account = AccountStore.Create(Android.App.Application.Context).FindAccountsForService("StudentHousingA").FirstOrDefault();
 			if (account != null)
 			{

@@ -70,7 +70,8 @@ namespace StudentHousing
 										rid = 2;
 									}
 
-									string param = string.Format(Constant.USER_CREATE_PARAM, etFName.Text, etLName.Text, etPhone.Text, etEmail.Text, etPass.Text, rid);
+									string param = string.Format(Constant.USER_CREATE_PARAM, etFName.Text, etLName.Text, etPhone.Text, etEmail.Text, Utility.EncryptString(etPass.Text), rid);
+									//string param = string.Format(Constant.USER_CREATE_PARAM, etFName.Text, etLName.Text, etPhone.Text, etEmail.Text, etPass.Text, rid);
 
 									// sending data to webapi to store the new account info into the database
 									SendToWebapi(param);
@@ -114,15 +115,15 @@ namespace StudentHousing
 			try
 			{
 				_webApi = new WebApi();
-				if (await _webApi.SaveAsync("user", param) == 0)
+				if (await _webApi.SaveAsync("user", param) == int.MinValue)
+				{
+					Toast.MakeText(Application.Context, "Could not create a new account, please try again.", ToastLength.Long).Show();
+				}
+				else
 				{
 					Toast.MakeText(Application.Context, "Create a new account successfully.", ToastLength.Long).Show();
 					// go back to sign in page
 					StartActivity(typeof(SignInActivity));
-				}
-				else
-				{
-					Toast.MakeText(Application.Context, "Could not create a new account, please try again.", ToastLength.Long).Show();
 				}
 			}
 			catch

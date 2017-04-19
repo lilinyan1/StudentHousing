@@ -9,7 +9,7 @@
     <OutputType>Library</OutputType>
     <RootNamespace>StudentHousing</RootNamespace>
     <AssemblyName>StudentHousing</AssemblyName>
-    <TargetFrameworkVersion>v7.0</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v6.0</TargetFrameworkVersion>
     <AndroidApplication>True</AndroidApplication>
     <AndroidResgenFile>Resources\Resource.designer.cs</AndroidResgenFile>
     <AndroidResgenClass>Resource</AndroidResgenClass>
@@ -51,6 +51,7 @@
     <Reference Include="Dto, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\StudentHousingServer\Dto\bin\Debug\Dto.dll</HintPath>
+      <Private>True</Private>
     </Reference>
     <Reference Include="Newtonsoft.Json, Version=9.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
       <HintPath>..\packages\Newtonsoft.Json.9.0.1\lib\portable-net45+wp80+win8+wpa81\Newtonsoft.Json.dll</HintPath>
@@ -142,6 +143,7 @@
     <Compile Include="MainActivity.cs" />
     <Compile Include="SignIn.cs" />
     <Compile Include="SignUpActivity.cs" />
+    <Compile Include="Blowfish.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
