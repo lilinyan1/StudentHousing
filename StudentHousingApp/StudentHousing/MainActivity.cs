@@ -23,13 +23,11 @@ namespace StudentHousing
 	{
 		GoogleMap _googleMap;
 		Location _currentLocation;
-		//LocationManager _locationManager;
-		//string _locationProvider;
+        public static List<PropertyDto> properties = null;
 		WebApi _webApi;
-		String[] menuItems = { "Sign in", "Bookmarks", "Posts", "Refresh Map" };
+		String[] menuItems = { "Sign in", "Bookmarks", "Posts"};
 		DrawerLayout mDrawerLayout;
 		ListView mDrawerList;
-        bool isUpdateAll = true;
 
 		protected override void OnCreate(Bundle savedInstanceState)
 		{
@@ -48,7 +46,6 @@ namespace StudentHousing
 					menuItems[0] = "Sign out";
 					menuItems[1] = "Bookmarks";
 					menuItems[2] = "Posts";
-                    menuItems[3] = "Refresh Map";
                 }
 				else if (SignIn.AutoSignIn() == 2) 
 				{
@@ -135,27 +132,13 @@ namespace StudentHousing
                     
                 }
 			}
-            else if (e.Id == 3)
-            {
-                if (menuItems[e.Id] == "Refresh Map")
-                {
-                    if (SignIn.UserId == 0)
-                    { Toast.MakeText(Application.Context, "Pleae Login first.", ToastLength.Long).Show(); }
-                    else
-                    {
-                        isUpdateAll = true;
-                        SetMap();
-                    }
-
-                }
-            }
         }
 
 		public void OnMapReady(GoogleMap googleMap)
 		{
 			googleMap.MyLocationEnabled = true;
 			_googleMap = googleMap;
-            _googleMap.Clear();
+            
 
             try
             {
@@ -166,15 +149,15 @@ namespace StudentHousing
                         var latlng = new LatLng(e.Location.Latitude, e.Location.Longitude);
                         _googleMap.MoveCamera(CameraUpdateFactory.NewLatLngZoom(latlng, 15));
                     }
-                    else if (_currentLocation != null && isUpdateAll)
+                    else if (properties == null && _currentLocation != null)
                     {
-                        isUpdateAll = false;
+                        _googleMap.Clear();
+
                         var response = _webApi.GetItem("property", string.Format("{0}/{1}",
                             _currentLocation.Latitude.ToString().Replace('.', 'e'),
                             _currentLocation.Longitude.ToString().Replace('.', 'e')));
 
-                        var properties = JsonConvert.DeserializeObject<List<PropertyDto>>(response);
-                        //var properties = GetPropertiesCloseBy();
+                        properties = JsonConvert.DeserializeObject<List<PropertyDto>>(response);
                         foreach (var property in properties)
                         {
                             googleMap.AddMarker(new MarkerOptions()
