@@ -93,6 +93,7 @@ namespace StudentHousing
                         _property.Longitude = address.Longitude;
                     }
 
+                    if (_imageBytes != null && _imageBytes.Length >= 409600)
                     {
                         ShowToast("Photo has to be less than 400 KB");
                         return;
