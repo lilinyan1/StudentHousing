@@ -11,6 +11,8 @@ using Android.Gms.Maps.Model;
 using Android.Locations;
 using Android.Content;
 using System.IO;
+using System.Text.RegularExpressions;
+using Android.Util;
 
 namespace StudentHousing
 {
@@ -45,12 +47,31 @@ namespace StudentHousing
                 try
                 {
                     _property = new PropertyDto();
-                    _property.pAddress = this.FindViewById<EditText>(Resource.Id.addreesInput).Text;
-                    _property.Price = Convert.ToInt32(this.FindViewById<EditText>(Resource.Id.priceInput).Text);
+                    var input = this.FindViewById<EditText>(Resource.Id.addreesInput);
+                    var isAddressValid = ValidateText(input, "^.{1,100}$", "Address is required, the max length is 100 letters");
+                    if (isAddressValid) _property.pAddress = input.Text;
+
+                    input = this.FindViewById<EditText>(Resource.Id.priceInput);
+                    var isPriceValid = ValidateText(input, "^[0-9]{1,5}$", "Price is required, range: 0 to 99999");
+                    if (isPriceValid) _property.Price = Convert.ToInt32(input.Text);
+
+                    input = this.FindViewById<EditText>(Resource.Id.cityInput);
+                    var isCityValid = ValidateText(input, "^.{1,20}$", "City is required, the max length is 20 letters");
+                    if (isCityValid) _property.City = input.Text;
+
+                    input = this.FindViewById<EditText>(Resource.Id.provinceInput);
+                    var isProvinceValid = ValidateText(input, "^.{1,2}$", "Province is required, the max length is 2 letters");
+                    if (isProvinceValid) _property.Province = input.Text;
+
+                    input = this.FindViewById<EditText>(Resource.Id.postalCodeInput);
+                    var isPostalCodeValid = ValidateText(input, "^.{1,6}$", "Postal Code is required, the max length is 6 letters");
+                    if (isPostalCodeValid) _property.PostalCode = input.Text;
+
+                    if (!isAddressValid || !isPriceValid || !isCityValid || !isProvinceValid || !isPostalCodeValid)
+                    {
+                        return;
+                    }
                     _property.School = this.FindViewById<EditText>(Resource.Id.schoolInput).Text;
-                    _property.City = this.FindViewById<EditText>(Resource.Id.cityInput).Text;
-                    _property.Province = this.FindViewById<EditText>(Resource.Id.provinceInput).Text;
-                    _property.PostalCode = this.FindViewById<EditText>(Resource.Id.postalCodeInput).Text;
                     _property.Country = this.FindViewById<EditText>(Resource.Id.countryInput).Text;
                     _property.OccupancyDate = this.FindViewById<DatePicker>(Resource.Id.occupancyDateInput).DateTime;
                     _property.PropertyDescription = this.FindViewById<EditText>(Resource.Id.descriptionInput).Text;
@@ -72,6 +93,12 @@ namespace StudentHousing
                         _property.Longitude = address.Longitude;
                     }
 
+                    if (_imageBytes != null && _imageBytes.Length >= 409600)
+                    {
+                        ShowToast("Photo has to be less than 400 KB");
+                        return;
+                    }
+
                     var isError = true;
                     var propertyId = await _webApi.SaveAsync(Constant.PROPERTY, string.Format("?userId={0}", _userId), _property);
                     
@@ -84,16 +111,20 @@ namespace StudentHousing
                             var ret = await _webApi.SaveAsync("property/addphoto", propertyId.ToString(), _imageBytes);
                             if (ret != int.MinValue)
                             {
-                                ShowToast("Photo added.");
+                                ShowToast("Photo added");
                                 isError = false;
                             }
+                                                      
                         }
-
-                        isError = false;
+                        else
+                        {
+                            isError = false;
+                        }                        
                     }
 
                     if (!isError)
                     {
+                        MainActivity.properties = null;
                         StartActivity(typeof(MainActivity));
                     }                  
                 }
@@ -103,6 +134,21 @@ namespace StudentHousing
                 }
             };
 
+        }
+
+        protected bool ValidateText(EditText input, string pattern, string invalidMessage)
+        {
+            var text = input.Text;
+            var regex = new Regex(pattern);
+            Log.Debug("V", regex.IsMatch(text).ToString());
+            var isMatch = regex.IsMatch(text);
+
+            if (!isMatch)
+            {
+                input.Error = invalidMessage;
+                return false;
+            }
+            return true;
         }
 
         private static void ShowToast(string message)

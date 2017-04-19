@@ -88,6 +88,7 @@ namespace StudentHousing
                 string s = string.Format("{0}/2", x.Id);
                 var ret = _webapi.SaveAsync("property/setActive", s);
             }
+            MainActivity.properties = null;
             
         }
     }
