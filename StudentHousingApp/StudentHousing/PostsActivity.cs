@@ -1,13 +1,9 @@
-using Android.App;
+﻿using Android.App;
 using Android.Widget;
 using Android.OS;
 using System;
 using StudentHousing.Dto;
-using System.Net.Http;
-using System.Threading.Tasks;
 using Newtonsoft.Json;
-using Android.Gms.Maps;
-using Android.Gms.Maps.Model;
 using System.Collections.Generic;
 
 namespace StudentHousing

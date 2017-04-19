@@ -8,6 +8,7 @@ namespace StudentHousing
 	public static class SignIn
 	{
         	public static int UserId = 0;
+		private static string SavedAppName = "StudentHousingApp";
 
 		public static void SaveCredentials(string userName, string password)
 		{
@@ -18,7 +19,7 @@ namespace StudentHousing
 					Username = userName
 				};
 				account.Properties.Add("Password", password);
-				AccountStore.Create(Android.App.Application.Context).Save(account, "StudentHousingA");
+				AccountStore.Create(Android.App.Application.Context).Save(account, SavedAppName);
 			}
 		}
 
@@ -26,7 +27,7 @@ namespace StudentHousing
 		{
 			get
 			{
-				var account = AccountStore.Create(Android.App.Application.Context).FindAccountsForService("StudentHousingA").FirstOrDefault();
+				var account = AccountStore.Create(Android.App.Application.Context).FindAccountsForService(SavedAppName).FirstOrDefault();
 				return (account != null) ? account.Username : null;
 			}
 		}
@@ -35,7 +36,7 @@ namespace StudentHousing
 		{
 			get
 			{
-				var account = AccountStore.Create(Android.App.Application.Context).FindAccountsForService("StudentHousingA").FirstOrDefault();
+				var account = AccountStore.Create(Android.App.Application.Context).FindAccountsForService(SavedAppName).FirstOrDefault();
 				return (account != null) ? account.Properties["Password"] : null;
 			}
 		}
@@ -82,10 +83,10 @@ namespace StudentHousing
 		public static void DeleteCredentials()
 		{
             		UserId = 0;
-			var account = AccountStore.Create(Android.App.Application.Context).FindAccountsForService("StudentHousingA").FirstOrDefault();
+			var account = AccountStore.Create(Android.App.Application.Context).FindAccountsForService(SavedAppName).FirstOrDefault();
 			if (account != null)
 			{
-				AccountStore.Create(Android.App.Application.Context).Delete(account, "StudentHousingA");
+				AccountStore.Create(Android.App.Application.Context).Delete(account, SavedAppName);
 			}
 		}
 

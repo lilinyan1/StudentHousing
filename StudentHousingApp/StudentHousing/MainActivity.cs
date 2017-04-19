@@ -13,7 +13,6 @@ using Android.Gms.Maps.Model;
 using Android.Locations;
 using System.Collections.Generic;
 using Android.Content;
-using System.Linq;
 using Newtonsoft.Json;
 
 namespace StudentHousing
@@ -40,21 +39,18 @@ namespace StudentHousing
 					menuItems[0] = "Sign in";
 					menuItems[1] = "";
 					menuItems[2] = "";
-					menuItems[3] = "";
 				}
 				else if (SignIn.AutoSignIn() == 1)
 				{
 					menuItems[0] = "Sign out";
 					menuItems[1] = "Bookmarks";
 					menuItems[2] = "Posts";
-                    			menuItems[3] = "Refresh Map";
                 		}
 				else if (SignIn.AutoSignIn() == 2) 
 				{
 					menuItems[0] = "Sign out";
 					menuItems[1] = "Bookmarks";
 					menuItems[2] = "";
-					menuItems[3] = "";
 				}
 
 				// Set our view from the "main" layout resource
@@ -91,51 +87,52 @@ namespace StudentHousing
         }
 
 		// drawer item on click handler
-		void mDrawerClick(object sender, AdapterView.ItemClickEventArgs e)
+	void mDrawerClick(object sender, AdapterView.ItemClickEventArgs e)
+	{
+		if (e.Id == 0)
 		{
-			if (e.Id == 0)
+			if (menuItems[e.Id] == "Sign in")
 			{
-				if (menuItems[e.Id] == "Sign in")
-				{
-					StartActivity(typeof(SignInActivity));
-				}
-				else if (menuItems[e.Id] == "Sign out")
-				{
-					// logout
-					SignIn.SignOut();
-					menuItems[0] = "Sign in";
-					menuItems[1] = "";
-					menuItems[2] = "";
-					menuItems[3] = "";
-					//mDrawerList.
-					mDrawerList.SetAdapter(new ArrayAdapter<String>(this, Resource.Layout.drawer_list_item, menuItems));
-				}
+				StartActivity(typeof(SignInActivity));
 			}
-			else if (e.Id == 1)
+			else if (menuItems[e.Id] == "Sign out")
 			{
-				if (menuItems[e.Id] == "Bookmarks")
-				{
-                    if (SignIn.UserId == 0)
-                    { Toast.MakeText(Application.Context, "Pleae Login first.", ToastLength.Long).Show(); }
-                    else
-                    { StartActivity(typeof(BookmarkActivity)); }
-                }
-                
-            }
-			else if (e.Id == 2) 
-			{
-				if (menuItems[e.Id] == "Posts")
-				{
-                    if (SignIn.UserId == 0)
-                    { Toast.MakeText(Application.Context, "Pleae Login first.", ToastLength.Long).Show(); }
-                    else
-                    {
-                        var postActivity = new Intent(this, typeof(PostsActivity));
-                        StartActivity(postActivity);
-                    }
-                    
-                }
+				// logout
+				SignIn.SignOut();
+				menuItems[0] = "Sign in";
+				menuItems[1] = "";
+				menuItems[2] = "";
+				//mDrawerList.
+				mDrawerList.SetAdapter(new ArrayAdapter<String>(this, Resource.Layout.drawer_list_item, menuItems));
 			}
+		}
+		else if (e.Id == 1)
+		{
+			if (menuItems[e.Id] == "Bookmarks")
+			{
+	                    if (SignIn.UserId == 0)
+	                    { 
+				 Toast.MakeText(Application.Context, "Pleae Login first.", ToastLength.Long).Show(); }
+	                    else
+	                    { StartActivity(typeof(BookmarkActivity)); }
+        		}
+        
+    		}
+		else if (e.Id == 2) 
+		{
+			if (menuItems[e.Id] == "Posts")
+			{
+	                    if (SignIn.UserId == 0)
+	                    { Toast.MakeText(Application.Context, "Pleae Login first.", ToastLength.Long).Show(); }
+	                    else
+	                    {
+	                        var postActivity = new Intent(this, typeof(PostsActivity));
+	                        StartActivity(postActivity);
+	                    }
+            
+        		}
+		}
+
         }
 
 		public void OnMapReady(GoogleMap googleMap)
