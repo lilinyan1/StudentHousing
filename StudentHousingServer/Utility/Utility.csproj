@@ -46,6 +46,8 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Blowfish.cs" />
+    <Compile Include="Decryption.cs" />
     <Compile Include="FileIO.cs" />
     <Compile Include="Log.cs" />
     <Compile Include="Program.cs" />

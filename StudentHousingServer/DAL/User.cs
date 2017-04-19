@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Data;
 using StudentHousing.Dto;
 using System.Linq;
+using Utility;
 
 namespace StudentHousing.DAL
 {
@@ -108,7 +109,10 @@ namespace StudentHousing.DAL
 					pass = (string)row["pass"]
 				};
 
-				if (inPass != user.pass)
+                string decryptedUP = Utility.Decryption.DecryptString(user.pass);
+                string decryptedIP = Utility.Decryption.DecryptString(inPass);
+
+                if (decryptedIP != decryptedUP)
 				{
                     // password does not match
                     var user2 = new User
