@@ -47,12 +47,8 @@ namespace StudentHousing
 					menuItems[0] = "Sign out";
 					menuItems[1] = "Bookmarks";
 					menuItems[2] = "Posts";
-<<<<<<< HEAD
-                }
-=======
                     			menuItems[3] = "Refresh Map";
                 		}
->>>>>>> 39d32d5... Add the encryption of the password while storing locally and before sending to the web api
 				else if (SignIn.AutoSignIn() == 2) 
 				{
 					menuItems[0] = "Sign out";
