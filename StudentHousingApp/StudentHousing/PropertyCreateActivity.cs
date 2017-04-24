@@ -62,15 +62,28 @@ namespace StudentHousing
                     var isPostalCodeValid = ValidateText(input, "^.{1,6}$", "Postal Code is required, the max length is 6 letters");
                     if (isPostalCodeValid) _property.PostalCode = input.Text;
 
-                    if (!isAddressValid || !isPriceValid || !isCityValid || !isProvinceValid || !isPostalCodeValid)
+                    input = this.FindViewById<EditText>(Resource.Id.schoolInput);
+                    var isSchoolValid = ValidateText(input, "^.{0,40}$", "The max length of School is 40 letters");
+                    if (isSchoolValid) _property.School = input.Text;
+
+                    input = this.FindViewById<EditText>(Resource.Id.countryInput);
+                    var isCountryValid = ValidateText(input, "^.{0,10}$", "The max length of Country is 10 letters");
+                    if (isCountryValid) _property.Country = input.Text;
+
+                    input = this.FindViewById<EditText>(Resource.Id.descriptionInput);
+                    var isDescriptionValid = ValidateText(input, "^.{0,512}$", "The max length of Description is 512 letters");
+                    if (isDescriptionValid) _property.PropertyDescription = input.Text;
+
+                    input = this.FindViewById<EditText>(Resource.Id.notesInput);
+                    var isNoteValid = ValidateText(input, "^.{0,512}$", "The max length of Comment is 512 letters");
+                    if (isNoteValid) _property.Comment = input.Text;
+
+                    if (!isAddressValid || !isPriceValid || !isCityValid || !isProvinceValid || !isPostalCodeValid || !isSchoolValid || !isCountryValid  || !isDescriptionValid || !isNoteValid)
                     {
                         return;
                     }
-                    _property.School = this.FindViewById<EditText>(Resource.Id.schoolInput).Text;
-                    _property.Country = this.FindViewById<EditText>(Resource.Id.countryInput).Text;
+
                     _property.OccupancyDate = this.FindViewById<DatePicker>(Resource.Id.occupancyDateInput).DateTime;
-                    _property.PropertyDescription = this.FindViewById<EditText>(Resource.Id.descriptionInput).Text;
-                    _property.Comment = this.FindViewById<EditText>(Resource.Id.notesInput).Text;
                     _property.IsAirConditioning = this.FindViewById<CheckBox>(Resource.Id.acCheckbox).Checked;
                     _property.IsBusroute = this.FindViewById<CheckBox>(Resource.Id.busCheckbox).Checked;
                     _property.IsDishwasher = this.FindViewById<CheckBox>(Resource.Id.dishWasherCheckbox).Checked;
@@ -119,13 +132,13 @@ namespace StudentHousing
 
                     if (!isError)
                     {
-                        MainActivity.properties = null;
                         StartActivity(typeof(MainActivity));
                     }                  
                 }
                 catch (Exception exception)
                 {
                     Console.WriteLine(exception.Message);
+                    ShowToast("Property was not created because error occured");
                 }
             };
 

@@ -32,6 +32,8 @@ namespace StudentHousing
 		{
 			base.OnCreate(savedInstanceState);
 			_webApi = new WebApi();
+            properties = null;
+
 			try
 			{
 				if (SignIn.AutoSignIn() == 0)

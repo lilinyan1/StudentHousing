@@ -51,6 +51,7 @@
     <Reference Include="Dto, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\StudentHousingServer\Dto\bin\Debug\Dto.dll</HintPath>
+      <Private>True</Private>
     </Reference>
     <Reference Include="Newtonsoft.Json, Version=9.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
       <HintPath>..\packages\Newtonsoft.Json.9.0.1\lib\portable-net45+wp80+win8+wpa81\Newtonsoft.Json.dll</HintPath>
@@ -131,6 +132,7 @@
   <ItemGroup>
     <Compile Include="BookmarkActivity.cs" />
     <Compile Include="Constant.cs" />
+    <Compile Include="PostsActivity.cs" />
     <Compile Include="PropertyCreateActivity.cs" />
     <Compile Include="PropertyActivity.cs" />
     <Compile Include="Resources\Resource.designer.cs" />
@@ -141,6 +143,7 @@
     <Compile Include="MainActivity.cs" />
     <Compile Include="SignIn.cs" />
     <Compile Include="SignUpActivity.cs" />
+    <Compile Include="Blowfish.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
@@ -160,6 +163,7 @@
     <AndroidResource Include="Resources\layout\PropertyCreate.axml">
       <SubType>Designer</SubType>
     </AndroidResource>
+    <AndroidResource Include="Resources\layout\Posts.axml" />
   </ItemGroup>
   <ItemGroup>
     <AndroidResource Include="Resources\layout\Main.axml">
