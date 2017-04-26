@@ -1,4 +1,13 @@
-﻿using System;
+﻿/*
+* FILE:             SignUpActivity.cs
+* PROJECT:          PROG2020 - Project Development - Capstone
+* PROGRAMMER:       Xingguang Zhen
+* AVAILABLE DATE:   26-4-2017
+* DESCRIPTION:      This file includes the main method of SignUp and the method to swithch
+* 		    back to SignIn page.
+*/
+
+using System;
 using Android.App;
 using Android.OS;
 using Android.Widget;

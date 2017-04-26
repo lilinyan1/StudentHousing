@@ -1,4 +1,13 @@
-﻿using System;
+﻿/*
+* FILE:             SignInActivity.cs
+* PROJECT:          PROG2020 - Project Development - Capstone
+* PROGRAMMER:       Xingguang Zhen
+* AVAILABLE DATE:   26-4-2017
+* DESCRIPTION:      This file includes the main method of login and the method to swithch
+* 		    to SignUp page.
+*/
+
+using System;
 using Android.App;
 using Android.OS;
 using Android.Widget;
@@ -31,41 +40,6 @@ namespace StudentHousing
 		void SignUpMain(object sender, EventArgs ea)
 		{
 			StartActivity(typeof(SignUpActivity));
-		}
-
-		// test user class
-		class User
-		{
-			public string email;
-			public string password;
-		}
-
-		void CreateAccTest(object sender, EventArgs ea)
-		{
-			EditText etEmail = FindViewById<EditText>(Resource.Id.etEmail);
-			EditText etPass = FindViewById<EditText>(Resource.Id.etPass);
-
-			User u = new User();
-
-			if (etEmail.Text != "")
-			{
-				if (etPass.Text != "")
-				{
-					u.email = etEmail.Text;
-					u.password = etPass.Text;
-					Toast.MakeText(Application.Context, "New account created.", ToastLength.Long).Show();
-					//etEmailAddr.Text = "";
-					//etPass.Text = "";
-				}
-				else
-				{
-					Toast.MakeText(Application.Context, "Please enter your password.", ToastLength.Long).Show();
-				}
-			}
-			else
-			{
-				Toast.MakeText(Application.Context, "Please enter your email address.", ToastLength.Long).Show();
-			}
 		}
 
 		void SignInMain(object sender, EventArgs ea)

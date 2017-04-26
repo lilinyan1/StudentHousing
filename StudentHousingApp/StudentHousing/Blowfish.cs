@@ -1,17 +1,12 @@
-﻿//Blowfish encryption (ECB and CBC MODE) as defined by Bruce Schneier here: http://www.schneier.com/paper-blowfish-fse.html
-//Complies with test vectors found here: http://www.schneier.com/code/vectors.txt
-//non-standard mode profided to be usable with the javascript crypto library found here: http://etherhack.co.uk/symmetric/blowfish/blowfish.html
-//By FireXware, 1/7/1010, Contact: firexware@hotmail.com
-//Code is partly adopted from the javascript crypto library by Daniel Rench
-
-
-//USAGE:
-//BlowFish b = new BlowFish("04B915BA43FEB5B6");
-//string plainText = "The quick brown fox jumped over the lazy dog.";
-//string cipherText = b.Encrypt_CBC(plainText);
-//MessageBox.Show(cipherText);
-//plainText = b.Decrypt_CBC(cipherText);
-//MessageBox.Show(plainText);
+﻿/*
+* FILE:             Blowfish.cs
+* DESCRIPTION:      The main encryption method for the password in this application.
+* NOTES:	    Blowfish encryption (ECB and CBC MODE) as defined by Bruce Schneier here: http://www.schneier.com/paper-blowfish-fse.html
+*		    Complies with test vectors found here: http://www.schneier.com/code/vectors.txt
+*	      	    non-standard mode profided to be usable with the javascript crypto library found here: http://etherhack.co.uk/symmetric/blowfish/blowfish.html
+*		    By FireXware, 1/7/1010, Contact: firexware@hotmail.com
+*		    Code is partly adopted from the javascript crypto library by Daniel Rench
+*/
 
 using System;
 using System.Text;

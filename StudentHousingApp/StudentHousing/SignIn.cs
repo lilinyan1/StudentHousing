@@ -1,4 +1,13 @@
-﻿using Xamarin.Auth;
+﻿/*
+* FILE:             SignIn.cs
+* PROJECT:          PROG2020 - Project Development - Capstone
+* PROGRAMMER:       Xingguang Zhen
+* AVAILABLE DATE:   26-4-2017
+* DESCRIPTION:      This file includes the methods of automatically login, storing the 
+* 	   	    the account locally and logout.
+*/
+
+using Xamarin.Auth;
 using System.Linq;
 using Newtonsoft.Json;
 using StudentHousing.Dto;
