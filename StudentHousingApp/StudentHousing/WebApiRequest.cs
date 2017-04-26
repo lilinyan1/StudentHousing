@@ -1,4 +1,11 @@
-﻿using System;
+﻿/*
+* FILE:             WebApiRequest.cs
+* PROJECT:          PROG2020 - Project Development - Capstone
+* PROGRAMMER:       Becky Linyan Li, Xingguang Zhen
+* AVAILABLE DATE:   26-4-2017
+* DESCRIPTION:      A web service handler which send GET, POST and DELETE requests 
+*/
+using System;
 using System.Text;
 using System.Net.Http;
 using Newtonsoft.Json;
@@ -11,7 +18,6 @@ namespace StudentHousing
     public class WebApi
     {
         static string URL = @"http://studenthousingapi2.azurewebsites.net/api/{0}/{1}";
-        //static string URL = @"http://localhost:37097/api/{0}/{1}";
         HttpClient client;
 
         public WebApi()
@@ -20,7 +26,12 @@ namespace StudentHousing
             client.MaxResponseContentBufferSize = 256000;
         }
 
-        //This one should talk to the database
+        /// <summary>
+        /// Send GET request to web service
+        /// </summary>
+        /// <param name="webApiName"></param>
+        /// <param name="param"></param>
+        /// <returns></returns>
         public string GetItem(string webApiName, string param)
         {
             try
@@ -59,6 +70,13 @@ namespace StudentHousing
             return string.Empty;
         }
 
+        /// <summary>
+        /// Send POST request to web service
+        /// </summary>
+        /// <param name="webApiName"></param>
+        /// <param name="param"></param>
+        /// <param name="postObject"></param>
+        /// <returns></returns>
         public async Task<int> SaveAsync(string webApiName, string param, object postObject = null)
         {
             var uri = new Uri(string.Format(URL, webApiName, param));
@@ -86,6 +104,12 @@ namespace StudentHousing
             return int.MinValue;
         }
 
+        /// <summary>
+        /// Send DELETE request to web service
+        /// </summary>
+        /// <param name="webApiName"></param>
+        /// <param name="param"></param>
+        /// <returns></returns>
         public async Task DeleteAsync(string webApiName, string param)
         {
             var uri = new Uri(string.Format(URL, webApiName, param));

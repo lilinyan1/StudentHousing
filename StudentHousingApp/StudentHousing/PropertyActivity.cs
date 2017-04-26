@@ -1,4 +1,14 @@
-﻿using Android.App;
+﻿/*
+* FILE:             PropertyActivity.cs
+* PROJECT:          PROG2020 - Project Development - Capstone
+* PROGRAMMER:       Becky Linyan Li
+* AVAILABLE DATE:   26-4-2017
+* DESCRIPTION:      The Android activity which populates the interface to allow user to 
+*                   view the property listing details including bookmark status, 
+*                   rating bar, address, amentities, image attachments etc.
+*/
+
+using Android.App;
 using Android.Widget;
 using Android.OS;
 using System;
@@ -18,10 +28,9 @@ namespace StudentHousing
         PropertyDto _property;
         WebApi _webApi;
         int _userId;  
-
         private RatingBar ratingBar;
-
         public const string PROPERTY_ID = "PropertyId";
+
         protected override void OnCreate(Bundle savedInstanceState)
         {
             base.OnCreate(savedInstanceState);
@@ -105,6 +114,11 @@ namespace StudentHousing
             
         }
 
+        /// <summary>
+        /// construct parameters for the get bookmark for property web API
+        /// </summary>
+        /// <param name="propertyId"></param>
+        /// <returns></returns>
         private string GetUserAndPropertyParam(int propertyId)
         {
             return string.Format(Constant.USER_PROPERTY_PARAM, _userId, propertyId);
@@ -120,6 +134,7 @@ namespace StudentHousing
                 _webApi.SaveAsync("property/addrating", string.Format("{0}/{1}/{2}/{3}", 1, _property.ID.ToString(), ratingBar.Rating, "noComment"));
             };
         }
+
         private void AddDrawable(int drawableId, LinearLayout amentitiesView)
         {
             var imageView = new ImageView(this);
@@ -127,9 +142,12 @@ namespace StudentHousing
             amentitiesView.AddView(imageView);
         }
 
+        /// <summary>
+        /// set map location using the device's location
+        /// </summary>
+        /// <param name="googleMap"></param>
         public void OnMapReady(GoogleMap googleMap)
         {
-            //googleMap.MyLocationEnabled = true;
             _googleMap = googleMap;
 
             googleMap.AddMarker(new MarkerOptions()
@@ -141,19 +159,6 @@ namespace StudentHousing
         {
             var response = _webApi.GetItem("property", id.ToString());
             return JsonConvert.DeserializeObject<PropertyDto>(response);
-
-            //return new PropertyDto
-            //{
-            //    ID = 1,
-            //    Latitude = 43.471487,
-            //    Longitude = -80.599914,
-            //    Price = 500,
-            //    pAddress = "990 Creekside Dr, Waterloo, ON N2V 2W3",
-            //    OccupancyDate = new DateTime(2017, 9,  1),
-            //    IsAirConditioning = true,
-            //    PropertyDescription = "Spacious room, close to the grocery store.",
-            //    Comment = "Woman preferred"
-            //};
         }
         
     }

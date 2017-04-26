@@ -1,4 +1,13 @@
-﻿using Android.App;
+﻿/*
+* FILE:             BookmarkActivity.cs
+* PROJECT:          PROG2020 - Project Development - Capstone
+* PROGRAMMER:       Becky Linyan Li
+* AVAILABLE DATE:   26-4-2017
+* DESCRIPTION:      An Android activity which creates a list of properties
+*                   that the logged in user has bookmarked
+*/
+
+using Android.App;
 using Android.Widget;
 using Android.OS;
 using StudentHousing.Dto;

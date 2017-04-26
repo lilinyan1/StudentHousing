@@ -1,5 +1,13 @@
+/*
+* FILE:             MainActivity.cs
+* PROJECT:          PROG2020 - Project Development - Capstone
+* PROGRAMMER:       Becky Linyan Li, Xingguang Zhen, Matthew Cocca
+* AVAILABLE DATE:   26-4-2017
+* DESCRIPTION:      The main Android activity which populates the menu items, 
+*                   the Google Map, and property markers 
+*/
 
-﻿#pragma warning disable CS0618
+#pragma warning disable CS0618
 
 using Android.App;
 using Android.Widget;
@@ -88,7 +96,7 @@ namespace StudentHousing
             }
         }
 
-		// drawer item on click handler
+	/// drawer item on click handler
 	void mDrawerClick(object sender, AdapterView.ItemClickEventArgs e)
 	{
 		if (e.Id == 0)
@@ -137,12 +145,15 @@ namespace StudentHousing
 
         }
 
+        /// <summary>
+        /// update google map with property marker
+        /// </summary>
+        /// <param name="googleMap"></param>
 		public void OnMapReady(GoogleMap googleMap)
 		{
 			googleMap.MyLocationEnabled = true;
 			_googleMap = googleMap;
             
-
             try
             {
                 _googleMap.MyLocationChange += (s, e) =>
@@ -180,7 +191,11 @@ namespace StudentHousing
             }
 		}
 
-
+        /// <summary>
+        /// add click handler on property markers
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="infoWindowClickEventArgs"></param>
 		private void MapOnInfoWindowClick(object sender, GoogleMap.InfoWindowClickEventArgs infoWindowClickEventArgs)
 		{
 			var currentMarker = infoWindowClickEventArgs.Marker;

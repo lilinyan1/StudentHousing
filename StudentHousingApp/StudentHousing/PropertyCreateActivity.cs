@@ -1,4 +1,14 @@
-﻿using Android.App;
+﻿/*
+* FILE:             PropertyCreateActivity.cs
+* PROJECT:          PROG2020 - Project Development - Capstone
+* PROGRAMMER:       Becky Linyan Li
+* AVAILABLE DATE:   26-4-2017
+* DESCRIPTION:      The Android activity which populates the interface to allow user to 
+*                   post a new property listing with details including:
+*                   - address, price, occupancy date, description, 
+*                   - amentities, image attachments
+*/
+using Android.App;
 using Android.Widget;
 using Android.OS;
 using System;
@@ -144,6 +154,13 @@ namespace StudentHousing
 
         }
 
+        /// <summary>
+        /// Validate user input using regex
+        /// </summary>
+        /// <param name="input"></param>
+        /// <param name="pattern"></param>
+        /// <param name="invalidMessage"></param>
+        /// <returns></returns>
         protected bool ValidateText(EditText input, string pattern, string invalidMessage)
         {
             var text = input.Text;
@@ -158,12 +175,18 @@ namespace StudentHousing
             }
             return true;
         }
-
+        
         private static void ShowToast(string message)
         {
             Toast.MakeText(Application.Context, message, ToastLength.Long).Show();
         }
 
+        /// <summary>
+        /// Handle actions to add an image attachment
+        /// </summary>
+        /// <param name="requestCode"></param>
+        /// <param name="resultCode"></param>
+        /// <param name="data"></param>
         protected override void OnActivityResult(int requestCode, Result resultCode, Intent data)
         {
             base.OnActivityResult(requestCode, resultCode, data);
@@ -191,6 +214,11 @@ namespace StudentHousing
             }
         }
 
+        /// <summary>
+        /// Get latitude and longitude from address using Google Map API
+        /// </summary>
+        /// <param name="strAddress"></param>
+        /// <returns></returns>
         public Address GetLocationFromAddress(string strAddress)
         {
             Geocoder coder = new Geocoder(this);

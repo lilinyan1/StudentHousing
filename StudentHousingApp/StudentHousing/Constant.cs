@@ -1,4 +1,12 @@
-﻿namespace StudentHousing
+﻿/*
+* FILE:             Constant.cs
+* PROJECT:          PROG2020 - Project Development - Capstone
+* PROGRAMMER:       Becky Linyan Li
+* AVAILABLE DATE:   26-4-2017
+* DESCRIPTION:      A container for constants
+*/
+
+namespace StudentHousing
 {
     public class Constant
     {
