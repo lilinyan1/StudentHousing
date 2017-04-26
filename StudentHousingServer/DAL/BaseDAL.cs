@@ -136,6 +136,7 @@ namespace StudentHousing.DAL
 				return (string)obj;
 		}
 
+        // Store a byte array & description for a property
         public static int AddImage(int id, string description, byte[] img)
         {
             using (SqlConnection conn = new SqlConnection())
@@ -160,6 +161,7 @@ namespace StudentHousing.DAL
             }
         }
 
+        // Read all images for a property id and return them as byte arrays
 		public static List<byte[]> GetImage(int id)
 		{
 			using (SqlConnection conn = new SqlConnection())

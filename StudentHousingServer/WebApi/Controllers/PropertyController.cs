@@ -26,12 +26,14 @@ namespace WebApi.Controllers
     public class PropertyController : ApiController
     {
 
-        // GET: api/Db/5
+        // Search a property by its id
         [Route("{id}")]
         public Property Get(int id)
         {
             return Property.GetByID(id);
         }
+
+        // Search properties by GPS position
         [Route("{lat}/{lng}")]
         public List<Property> Get(string lat, string lng)
         {
@@ -40,12 +42,14 @@ namespace WebApi.Controllers
             return Property.SearchCloseByProperties(dLat, dLng);
         }
 
+        // Get average rating of a property by its id
         [Route("rating/{id}")]
         public double GetRating(int id)
         {
             return Property.GetRating(id);
         }
 
+        // Set a user rating for a property
         [System.Web.Http.AcceptVerbs("GET", "POST")]
         [Route("addrating/{uid}/{pid}/{rating}/{comment}")]
         public int SetRating(int uid, int pid, double rating, string comment)
@@ -55,6 +59,7 @@ namespace WebApi.Controllers
             return 1;
         }
 
+        // Add a picture to a property
         [System.Web.Http.AcceptVerbs("GET", "POST")]
         [Route("AddPhoto/{pid}")]
         public int AddPhoto(int pid)
@@ -63,6 +68,7 @@ namespace WebApi.Controllers
             return BaseDAL.AddImage(pid, string.Empty, img);
         }
 
+        // Get a picture of a property
         [System.Web.Http.AcceptVerbs("GET", "POST")]
         [Route("GetPhoto/{pid}")]
         public List<Byte[]> GetPhoto(int pid)
@@ -70,6 +76,7 @@ namespace WebApi.Controllers
             return BaseDAL.GetImage(pid);
         }
 
+        // Set the active state of a property
         [System.Web.Http.AcceptVerbs("GET", "POST")]
         [Route("setActive/{pid}/{active}")]
         public int UpdateActive(int pid, int active)
@@ -79,13 +86,14 @@ namespace WebApi.Controllers
             return 1;
         }
 
+        // Get listings made by a user
         [Route("getPosts/{uid}")]
         public List<Property> GetPosts(int uid)
         {
             return Property.GetPosts(uid);
         }
 
-        // POST: api/Db
+        // Create a new property
         public int Post(int userId)
         {
             

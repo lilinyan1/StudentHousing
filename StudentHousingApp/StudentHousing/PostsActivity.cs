@@ -1,4 +1,12 @@
-﻿
+﻿/*
+* FILE:             MainActivity.cs
+* PROJECT:          PROG2020 - Project Development - Capstone
+* PROGRAMMER:       Matthew Cocca
+* AVAILABLE DATE:   26-4-2017
+* DESCRIPTION:      The landlord's listed properties screen. Contains
+*                   details about posted properties and an option to
+*                   unlist them.
+*/
 using Android.App;
 using Android.Widget;
 using Android.OS;
@@ -32,21 +40,26 @@ namespace StudentHousing
             // populate the view with all properties the user has listed
             foreach (PropertyDto p in userPosts)
             {                
+                // outer rectangle for the listing
                 var nPostView = new LinearLayout(this);
                 postsView.AddView(nPostView);             
 
+                // image, left side
                 var imageView = new ImageView(this);
                 imageView.SetImageResource(Resource.Drawable.property);
                 nPostView.AddView(imageView);
 
+                // layout containing text and checkbox
                 LinearLayout sidePostView = new LinearLayout(this);
                 sidePostView.Orientation = Orientation.Vertical;
                 nPostView.AddView(sidePostView);
-            
+                
+                // text view
                 var postText = new TextView(this);
                 postText.Text = string.Format("${0}\n{1}", p.Price, p.pAddress);
                 sidePostView.AddView(postText);
 
+                // checkbox
                 var active = new CheckBox(this);
                 if (p.StatusID == 1)
                 {
@@ -66,11 +79,13 @@ namespace StudentHousing
             }
         }
 
+        // Launch the property creation activity
         private void addProperty(object sender, EventArgs e)
         {
             StartActivity(typeof(PropertyCreateActivity));
         }
 
+        // Toggle the active state of the property when its checkbox is changed
         private void ActiveChecked(object sender, EventArgs e)
         {
             CheckBox x = (CheckBox)sender;

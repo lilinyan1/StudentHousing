@@ -182,6 +182,7 @@ namespace StudentHousing.DAL
 			return ret;
 		}
 
+        // Add a rating by uid to property pid
         public static void AddRating(int uid, int pid, double rating, string comment)
         {
             string values = string.Format("'{0}'" + ", " + "'{1}'" + ", " + "'{2}'" + ", " + "'{3}'", uid, pid, rating, comment);
@@ -241,6 +242,7 @@ namespace StudentHousing.DAL
 			return 0;
 		}
 
+        // Get all properties posted by user id
         public static List<Property> GetPosts(int id)
         {
             string fieldsName = GetFields();
