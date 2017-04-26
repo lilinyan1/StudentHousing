@@ -1,4 +1,13 @@
-﻿using System;
+﻿/*
+* FILE:             BookmarkController.cs
+* PROJECT:          PROG2020 - Project Development - Capstone
+* PROGRAMMER:       Becky Linyan Li, Matthew Cocca
+* AVAILABLE DATE:   26-4-2017
+* DESCRIPTION:      Contains reusable web service request handler that 
+*                   - GET, POST or DELETE bookmarks               
+*/
+
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Net;

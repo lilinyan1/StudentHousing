@@ -1,4 +1,16 @@
-﻿using System;
+﻿/*
+* FILE:             PropertyController.cs
+* PROJECT:          PROG2020 - Project Development - Capstone
+* PROGRAMMER:       Becky Linyan Li, Matthew Cocca
+* AVAILABLE DATE:   26-4-2017
+* DESCRIPTION:      Contains reusable web service request handler that 
+*                   - GET, POST or DELETE properties     
+*                   - add/get image
+*                   - add/update ratings
+*                   - get closeby properties          
+*/
+
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Net;
@@ -79,11 +91,6 @@ namespace WebApi.Controllers
             
             var property = JsonConvert.DeserializeObject<Property>(this.Request.Content.ReadAsStringAsync().Result);
             return property.Create(userId);
-        }
-
-        // PUT: api/Db/5
-        public void Put(int id, [FromBody]string value)
-        {
         }
 
     }

@@ -1,4 +1,14 @@
-﻿using System;
+﻿/*
+* FILE:             BaseDAL.cs
+* PROJECT:          PROG2020 - Project Development - Capstone
+* PROGRAMMER:       Becky Linyan Li, Matthew Cocca
+* AVAILABLE DATE:   26-4-2017
+* DESCRIPTION:      Contains reusable database request handler such as 
+*                   - insert, update and delete entities
+*                   - object to string, object to int
+*                   - insert image
+*/
+using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Data.SqlClient;
@@ -48,8 +58,7 @@ namespace StudentHousing.DAL
 					conn.ConnectionString = CONNECTION_STRING;
 					conn.Open();
 					SqlCommand command;
-
-                    //command = new SqlCommand(string.Format("SET IDENTITY_INSERT {0} ON;INSERT INTO {0} ({1}) VALUES ({2});SET IDENTITY_INSERT {0} OFF;", tableName, insertFields, fieldsValue), conn);
+                    
                     command = new SqlCommand(string.Format("INSERT INTO {0} ({1}) output INSERTED.ID VALUES ({2});", tableName, insertFields, fieldsValue), conn);
                     ret = (int)command.ExecuteScalar();
 

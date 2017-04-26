@@ -1,4 +1,15 @@
-﻿using System;
+﻿/*
+* FILE:             Property.cs
+* PROJECT:          PROG2020 - Project Development - Capstone
+* PROGRAMMER:       Becky Linyan Li, Matthew Cocca
+* AVAILABLE DATE:   26-4-2017
+* DESCRIPTION:      Contains reusable database request handler that 
+*                   - create, get or update property postings
+*                   - add/update ratings
+*                   - add/update images                   
+*/
+
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Data;
@@ -216,10 +227,6 @@ namespace StudentHousing.DAL
 		public static List<byte[]> GetImage(int id)
 		{
 			List<byte[]> img = BaseDAL.GetImage(id);
-
-			//Uncomment below line to test
-			//File.WriteAllBytes("test.img", img);
-
 			return img;
 		}
 

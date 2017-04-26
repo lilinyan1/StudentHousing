@@ -1,4 +1,14 @@
-﻿using System;
+﻿/*
+* FILE:             User.cs
+* PROJECT:          PROG2020 - Project Development - Capstone
+* PROGRAMMER:       Becky Linyan Li, Matthew Cocca
+* AVAILABLE DATE:   26-4-2017
+* DESCRIPTION:      Contains reusable database request handler that 
+*                   - create, get users
+*                   - add/update bookmarks              
+*/
+
+using System;
 using System.Collections.Generic;
 using System.Data;
 using StudentHousing.Dto;

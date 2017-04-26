@@ -1,4 +1,12 @@
-﻿using System;
+﻿/*
+* FILE:             Bookmark.cs
+* PROJECT:          PROG2020 - Project Development - Capstone
+* PROGRAMMER:       Becky Linyan Li
+* AVAILABLE DATE:   26-4-2017
+* DESCRIPTION:      Contains reusable database request handler such as 
+*                   - Get or update bookmark status for properties
+*/
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Data;
