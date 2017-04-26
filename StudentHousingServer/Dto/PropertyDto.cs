@@ -1,4 +1,12 @@
-﻿using System;
+﻿/*
+* FILE:             PropertyDto.cs
+* PROJECT:          PROG2020 - Project Development - Capstone
+* PROGRAMMER:       Becky Linyan Li, Matthew Cocca, Xingguang Zhen
+* AVAILABLE DATE:   26-4-2017
+* DESCRIPTION:      Contains the attributes for the Property object
+*/
+
+using System;
 
 namespace StudentHousing.Dto
 {

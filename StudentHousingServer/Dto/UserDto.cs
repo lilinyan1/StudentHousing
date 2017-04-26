@@ -1,4 +1,10 @@
-﻿using System;
+﻿/*
+* FILE:             UserDto.cs
+* PROJECT:          PROG2020 - Project Development - Capstone
+* PROGRAMMER:       Becky Linyan Li, Matthew Cocca, Xingguang Zhen
+* AVAILABLE DATE:   26-4-2017
+* DESCRIPTION:      Contains the attributes for the User object
+*/
 
 namespace StudentHousing.Dto
 {

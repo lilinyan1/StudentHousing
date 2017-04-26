@@ -1,7 +1,7 @@
 ﻿/*
 * FILE:             User.cs
 * PROJECT:          PROG2020 - Project Development - Capstone
-* PROGRAMMER:       Becky Linyan Li, Matthew Cocca
+* PROGRAMMER:       Becky Linyan Li, Matthew Cocca, Xingguang Zhen
 * AVAILABLE DATE:   26-4-2017
 * DESCRIPTION:      Contains reusable database request handler that 
 *                   - create, get users
